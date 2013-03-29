@@ -1,0 +1,31 @@
+global:
+  - debian:
+    - git
+    - nano
+
+webserver:
+  - debian:
+    - apache2
+
+stillalive:
+  - source: 'https://github.com/countervandalism/stillalive'
+  - debian:
+    - php5-cli
+
+CVNBot:
+  - source: 'https://github.com/countervandalism/CVNBot'
+  - debian:
+    - mono-complete
+
+CVNClerkBot:
+  - source: 'https://github.com/countervandalism/CVNClerkBot'
+  - debian:
+    - python@2.7.3
+    - subversion
+    - mysql-server
+    - mysql-client
+    - python-twisted-words
+    - python-mysqldb
+  - raw:
+    - 'https://www.mediawiki.org/wiki/Manual:Pywikipediabot'
+    - 'https://github.com/Krinkle/ts-krinkle-pywiki'
