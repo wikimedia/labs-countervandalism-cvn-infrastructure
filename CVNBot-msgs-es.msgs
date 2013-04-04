@@ -1,0 +1,246 @@
+# Messages used by the bot, note all messages should be 5 digit number with leading zeroes
+# Note: this file is for CVNBot.
+#
+# Msgs-ID: v2.03-es-r10
+# Description: Spanish translation, for #cvn-wp-es
+# Author: [[m:User:Manuelt15]]
+# Author: [[m:User:Dferg]]
+# Last-Modified: 2013-04-05
+#
+# ${var} = variables to be substituted
+# %cnn[,nn] = mIRC colour nn,nn
+# %b = Toggle bolding
+#
+# 0 = Reporting (largely compatible with CVUBot) / 9 = CVNBot-only reporting / 1 = Formatted / 2 = Interface
+00000=2.03
+
+00020=Anonymous user
+00021=Named user
+
+#This is the highlighting for the size of large additions
+00100=%b%c07
+#This is the highlighting for the size of large removals
+00101=%b%c04
+# These are the corresponding "undo" for the above
+00102=%b
+00103=%b
+
+00120=Necesitas tener voice para hacer eso
+00122=Necesitas ser operador para hacer eso
+
+05000=%c10Lista blanca%c14 [[${editor}]] %c10ha creado%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05001=%c04%bLista negra%b%c14 [[${editor}]] %c04%bha creado%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05002=%c14Administrador%c14 [[${editor}]] %c14ha creado%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05003=%c03%bIP%b%c14 [[${editor}]] %c03%bha creado%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05004=%c13Usuario%c14 [[${editor}]] %c13ha creado%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05005=%c14Bot [[${editor}]] %c14ha creado%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05006=%c07Lista gris%c14 [[${editor}]] %c07ha creado%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+05010=%c10Lista blanca%c14 [[${editor}]] %c10Creacion extensa%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05011=%c04%bLista negra%b%c14 [[${editor}]] %c04%bCopyvio?%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05012=%c14Administrador%c14 [[${editor}]] %c14Creacion extensa%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05013=%c03%bIP%b%c14 [[${editor}]] %c03%bCopyvio?%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05014=%c13Usuario%c14 [[${editor}]] %c13Copyvio?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05015=%c14Bot%c14 [[${editor}]] %c14Creacion extensa%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05016=%c07Lista gris%c14 [[${editor}]] %c07Copyvio?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+05020=%c10Lista blanca%c14 [[${editor}]] %c10Creacion reducida%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05021=%c04%bLista negra%c14%b [[${editor}]] %c04%bCreacion reducida%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05022=%c14Administrador%c14 [[${editor}]] %c14Creacion reducida%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05023=%c03%bIP%c14%b [[${editor}]] %c03%bCreacion reducida%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05024=%c13Usuario%c14 [[${editor}]] %c13Creacion reducida%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05025=%c14Bot%c14 [[${editor}]] %c14Creacion reducida%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05026=%c07Lista gris%c14 [[${editor}]] %c07Creacion reducida%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+05030=%c10Lista blanca%c14 [[${editor}]] %c10creo el articulo en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05031=%c04%bLista negra%c14%b [[${editor}]] %c04%bcreo el articulo en vigilancia%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05032=%c14Administrador%c14 [[${editor}]] %c14creo el articulo en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05033=%c03%bIP%c14%b [[${editor}]] %c03%bcreo el articulo en vigilancia%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05034=%c13Usuario%c14 [[${editor}]] %c13creo el articulo en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05035=%c14Bot%c14 [[${editor}]] %c14creo el articulo en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05036=%c07Lista gris%c14 [[${editor}]] %c07creo el articulo en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+05040=%c10Lista blanca%c14 [[${editor}]] %c10creo conteniendo palabra en vigilancia "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05041=%c04%bLista negra%c14%b [[${editor}]] %c04%bcreo conteniendo palabra en vigilancia "${watchword}"%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05042=%c14Administrador%c14 [[${editor}]] %c14creo conteniendo palabra en vigilancia "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05043=%c03%bIP%c14%b [[${editor}]] %c03%bcreo conteniendo palabra en vigilancia "${watchword}"%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05044=%c13Usuario%c14 [[${editor}]] %c13creo conteniendo palabra en vigilancia "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05045=%c14Bot%c14 [[${editor}]] %c14creo conteniendo palabra en vigilancia "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+05046=%c07Lista gris%c14 [[${editor}]] %c07creo conteniendo palabra en vigilancia "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+05100=%c10Lista blanca%c14 [[${editor}]] %c10edito%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05101=%c04%bLista negra%b%c14 [[${editor}]] %c04%bedito%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05102=%c14Administrador%c14 [[${editor}]] %c14edito%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05103=%c03%bIP%b%c14 [[${editor}]] %c03%bedito%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05104=%c13Usuario%c14 [[${editor}]] %c13edito%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05105=%c14Bot%c14 [[${editor}]] %c14edito%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05106=%c07Lista gris%c14 [[${editor}]] %c07edito%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+
+05110=%c10Lista blanca%c14 [[${editor}]] %c10Adicion extensa de contenido%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05111=%c04%bLista negra%b%c14 [[${editor}]] %c04%bPossible gibberish?%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05112=%c14Administrador%c14 [[${editor}]] %c14Adicion extensa de contenido%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}" 
+05113=%c03%bIP%b%c14 [[${editor}]] %c03%bPossible gibberish?%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05114=%c13Usuario%c14 [[${editor}]] %c13Possible gibberish?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05115=%c14Bot%c14 [[${editor}]] %c14Adicion extensa de contenido%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}" 
+05116=%c07Lista gris%c14 [[${editor}]] %c07Possible gibberish?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+
+05120=%c10Lista blanca%c14 [[${editor}]] %c10Remocion extensa de contenido%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05121=%c04%bLista negra%b [[${editor}]] %bRemocion extensa de contenido%b [[${article}]] ${sizeattrib}(${size})${sizereset} %c10Diff:%c12 ${url}%c14%c04"${reason}"
+05122=%c14Administrador%c14 [[${editor}]] %c14Remocion extensa de contenido%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14reason "${reason}"
+05123=%c03%bIP%b [[${editor}]] %bRemocion extensa de contenido%b [[${article}]] ${sizeattrib}(${size})${sizereset} %c10Diff:%c12 ${url}%c14%c03"${reason}"
+05124=%c13Usuario%c14 [[${editor}]] %c13Remocion extensa de contenido%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05125=%c14Bot%c14 [[${editor}]] %c14Remocion extensa de contenido%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14reason "${reason}"
+05126=%c07Lista gris%c14 [[${editor}]] %c07Remocion extensa de contenido, blanking?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset} %c10Diff:%c12 ${url}%c14%c04"${reason}"
+
+05130=%c10Lista blanca%c14 [[${editor}]] %c10edito la pagina en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05131=%c04%bLista negra%b%c14 [[${editor}]] %c04%bedito la pagina en vigilancia%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05132=%c14Administrador%c14 [[${editor}]] %c14edito la pagina en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05133=%c03%bIP%b%c14 [[${editor}]] %c03%bedito la pagina en vigilancia%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05134=%c13Usuario%c14 [[${editor}]] %c13edito la pagina en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05135=%c14Bot%c14 [[${editor}]] %c14edito la pagina en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+05136=%c07Lista gris%c14 [[${editor}]] %c07edito la pagina en vigilancia%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12  ${url}%c14 "${reason}"
+
+05200=%c14Usuario nuevo [[${editor}]] creado. Bloquear: ${blockurl}
+05201=%c14Usuario nuevo [[${editor}]] %c04conteniendo la palabra en vigilancia "${watchword}" ("${wwreason}"). Bloquear: ${blockurl}
+
+05210=%c14Usuario nuevo [[${editor}]] creado por [[${creator}]]. Bloquear: ${blockurl}
+05211=%c14Usuario nuevo [[${editor}]] creado por [[${creator}]] %c04conteniendo la palabra en vigilancia "${watchword}" ("${wwreason}"). Bloquear: ${blockurl}
+
+05300=%c14[[${editor}]] borro el articulo [[${article}]] "${reason}" %c12${url}
+05301=%c04[[${editor}]] borro el articulo en vigilancia [[${article}]] "${reason}" %c12${url}
+
+05400=%c06Usuario bloqueado %c14 [[${blockname}]] %c06bloqueado por el administrador%c14 [[${editor}]] Duracion: ${length} "${reason}"
+05401=%c06Rango bloqueado ${blockname} por el administrador%c14 [[${editor}]] Duracion: ${length} "${reason}"
+
+05500=%c10Lista blanca%c14 [[${editor}]] %c10Ha trasladado%c14 [[${fromname}]] hacia [[${toname}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05501=%c04%bLista negra%b%c14 [[${editor}]] %c04%bHa trasladado%b%c14 [[${fromname}]] hacia [[${toname}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05502=%c14Administrador%c14 [[${editor}]] %c14Ha trasladado%c14 [[${fromname}]] hacia [[${toname}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05503=%c03%bIP%b%c14 [[${editor}]] %c03%bHa trasladado%b%c14 [[${fromname}]] hacia [[${toname}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05504=%c13Usuario%c14 [[${editor}]] %c13Ha trasladado%c14 [[${fromname}]] hacia [[${toname}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05505=%c14Bot%c14 [[${editor}]] %c14Ha trasladado%c14 [[${fromname}]] hacia [[${toname}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05506=%c07Lista gris%c14 [[${editor}]] %c07Ha trasladado%c14 [[${fromname}]] hacia [[${toname}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+05600=%c10Lista blanca%c14 [[${editor}]] %c10Ha subido%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05601=%c04%bLista negra%b%c14 [[${editor}]] %c04%bHa subido%b%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05602=%c14Administrador%c14 [[${editor}]] %c14Ha subido%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05603=%c03%bIP%b%c14 [[${editor}]] %c03%bHa subido%b%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05604=%c13Usuario%c14 [[${editor}]] %c13Ha subido%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05605=%c14Bot%c14 [[${editor}]] %c14Ha subido%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05606=%c07Lista gris%c14 [[${editor}]] %c07Ha subido%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+05610=%c10Lista blanca%c14 [[${editor}]] %c10uploaded watched item%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05611=%c04%bLista negra%b%c14 [[${editor}]] %c04%buploaded watched item%b%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05612=%c14Administrador%c14 [[${editor}]] %c14uploaded watched item%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05613=%c03%bIP%b%c14 [[${editor}]] %c03%buploaded watched item%b%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05614=%c13Usuario%c14 [[${editor}]] %c13uploaded watched item%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05615=%c14Bot%c14 [[${editor}]] %c14uploaded watched item%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+05616=%c07Lista gris%c14 [[${editor}]] %c07uploaded watched item%c14 [[${uploaditem}]] %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+95620=%c10Lista blanca%c14 [[${editor}]] %c10uploaded%c14 [[${uploaditem}]] "${reason}" %c04%bCoincide con%b "${watchword}" (${lmreason})%c ${url}
+95621=%c04%bLista negra%b%c14 [[${editor}]] %c04%buploaded%b%c14 [[${uploaditem}]] "${reason}" %c04%bCoincide con%b "${watchword}" (${lmreason})%c ${url}
+95622=%c14Administrador%c14 [[${editor}]] %c14uploaded%c14 [[${uploaditem}]] "${reason}" %bCoincide con%b "${watchword}" (${lmreason}) ${url}
+95623=%c03%bIP%b%c14 [[${editor}]] %c03%buploaded%b%c14 [[${uploaditem}]] "${reason}" %c04%bCoincide con%b "${watchword}" (${lmreason})%c ${url}
+95624=%c13Usuario%c14 [[${editor}]] %c13uploaded%c14 [[${uploaditem}]] "${reason}" %c04%bCoincide con%b "${watchword}" (${lmreason})%c ${url}
+95625=%c14Bot%c14 [[${editor}]] %c14uploaded%c14 [[${uploaditem}]] "${reason}" %c04%bCoincide con%b "${watchword}" (${lmreason})%c ${url}
+95626=%c04Lista gris%c14 [[${editor}]] %c04uploaded%c14 [[${uploaditem}]] "${reason}" %c04%bCoincide con%b "${watchword}" (${lmreason})%c ${url}
+
+05700=%c06Usuario desbloqueado%c14 [[${blockname}]] %c06desbloqueado por el administrador%c14 [[${editor}]] "${reason}"
+05701=%c06Rango desbloqueado ${blockname} por el administrador%c14 [[${editor}]] "${reason}"
+
+05900=%c14Administrador%c14 [[${editor}]] %c14Protegio%c14 [[${article}]] "${comment}"
+05901=%c14Administrador%c14 [[${editor}]] %c14Desprotegio%c14 [[${article}]] "${comment}" %c12${url}
+05902=%c14Administrador%c14 [[${editor}]] %c14Modified protection on%c14 [[${article}]] "${comment}"
+
+95040=%c10Lista blanca%c14 [[${editor}]] %c10used edit summary "${watchword}" in creating%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+95041=%c04%bLista negra%c14%b [[${editor}]] %c04%bused edit summary "${watchword}" in creating%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+95042=%c14Administrador%c14 [[${editor}]] %c14used edit summary "${watchword}" in creating%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+95043=%c03%bIP%c14%b [[${editor}]] %c03%bused edit summary "${watchword}" in creating%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+95044=%c13Usuario%c14 [[${editor}]] %c13used edit summary "${watchword}" in creating%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+95045=%c14Bot%c14 [[${editor}]] %c14used edit summary "${watchword}" in creating%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+95046=%c07Lista gris%c14 [[${editor}]] %c07used edit summary "${watchword}" in creating%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Enlace:%c12 ${url}%c14 "${reason}"
+
+95130=%c10Lista blanca%c14 [[${editor}]] %c10used edit summary "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+95131=%c04%bLista negra%b%c14 [[${editor}]] %c04%bused edit summary "${watchword}"%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+95132=%c14Administrador%c14 [[${editor}]] %c14used edit summary "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+95133=%c03%bIP%b%c14 [[${editor}]] %c03%bused edit summary "${watchword}"%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+95134=%c13Usuario%c14 [[${editor}]] %c13used edit summary "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+95135=%c14Bot%c14 [[${editor}]] %c14used edit summary "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+95136=%c07Lista gris%c14 [[${editor}]] %c07used edit summary "${watchword}"%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}%c14 "${reason}"
+
+96010=%c10Lista blanca%c14 [[${editor}]] %c10blanked%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96011=%c04%bLista negra%c14%b [[${editor}]] %c04%bblanked%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96012=%c14Administrador%c14 [[${editor}]] %c14blanked%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96013=%c03%bIP%c14%b [[${editor}]] %c04%bblanked%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96014=%c13Usuario%c14 [[${editor}]] %c04blanked%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96015=%c14Bot%c14 [[${editor}]] %c14blanked%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96016=%c07Lista gris%c14 [[${editor}]] %c07blanked%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+
+96020=%c10Lista blanca%c14 [[${editor}]] %c10replaced%c14 [[${article}]] with "%c10${profanity}%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96021=%c04%bLista negra%c14%b [[${editor}]] %c04%breplaced%b%c14 [[${article}]] with "%c04%b${profanity}%b%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96022=%c14Administrador%c14 [[${editor}]] %c14replaced%c14 [[${article}]] with "${profanity}" ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96023=%c03%bIP%c14%b [[${editor}]] %c03%breplaced%c14%b [[${article}]] with "%c03%b${profanity}%b%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96024=%c13Usuario%c14 [[${editor}]] %c13replaced%c14 [[${article}]] with "%c13${profanity}%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96025=%c14Bot%c14 [[${editor}]] %c14replaced%c14 [[${article}]] with "${profanity}" ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96026=%c07Lista gris%c14 [[${editor}]] %c07replaced%c14 [[${article}]] with "%c07${profanity}%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+
+96030=%c10Lista blanca%c14 [[${editor}]] %c10replaced%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96031=%c04%bLista negra%c14%b [[${editor}]] %c04%breplaced%b%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96032=%c14Administrador%c14 [[${editor}]] %c14replaced%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96033=%c03%bIP%c14%b [[${editor}]] %c03%breplaced%c14%b [[${article}]] with  new text ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96034=%c13Usuario%c14 [[${editor}]] %c13replaced%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96035=%c14Bot%c14 [[${editor}]] %c14replaced%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+96036=%c07Lista gris%c14 [[${editor}]] %c07replaced%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10Diff:%c12 ${url}
+
+# Global intel
+16000={0} is {1}
+16001={0} is not on any lists
+16002=on {0} {1}, added by {2} hasta {3} ("{4}")
+16003=Sorry, couldn't get intelligence ({0})
+
+# List commands
+16004={0} esta en la {1} {2}, anadido por {3} hasta {4} ("{5}")
+16005={0} is an unlisted anonymous usuario
+16006={0} is an unlisted registered usuario
+16007={0} esta en la {1}, anadido por {2} hasta {3} ("{4}")
+16008={0} no esta en {1}
+16009={0} no esta en {1} {2}
+16100=El usuario {0} no figura en ninguna lista {1}
+16101=Borrado {0} de {1} {2}
+16102={0} is already on {1}, cannot add to {2}
+16103=%bAnadido:%b {0}
+16104=%bActualizado:%b {0}
+16105=Borrado {0} de {1}
+16106={0} esta en la lista gris hasta {1} ({2})
+16200="{0}" matches item "{1}" on {2} ("{3}")
+16201="{0}" does not match any items on {1}
+
+# Auto-greylist
+16300=Create on [[{0}]] matched "{1}"
+16301=Created watched [[{0}]]
+16310=Used edit summary "{0}" on [[{1}]]
+16311=Blanked [[{0}]]
+16320=New user matched "{0}"
+
+# Projects
+16400=Project {0} is already registered
+16401=Project {0} is not currently registered
+
+# Friendly lists (170xx is reserved)
+17000=lista blanca
+17001=lista negra
+17002=lista administrador
+17005=lista bot
+17006=lista gris
+17010=watchlist
+17011=bad new username list
+17012=bad new article title list
+17020=bad edit summary list
+
+# Random messages
+20000=Lo siento, no entiendo tu comando :'(
+20001=There are no global admins/bots. Specify a project with the p= parameter.
+20002=Only the bad new username, bad new article title and bad edit summary lists can be tested
+20003=Tiene que especificar un nombre de usuario
+20004=Cannot guess interwiki prefix. Please specify one (e.g., en:) in the last optional parameter.
+20005=Una descripcion de los comandos: http://bit.ly/cvnbotcmds %c10Msgs-ID: %c14v2.03-es-r10
+20006=indefinidamente

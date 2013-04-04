@@ -1,0 +1,247 @@
+# Messages used by the bot, note all messages should be 5 digit number with leading zeroes
+# Note: this file is for CVNBot.
+#
+# ID: v2.03-nl-r19
+# Description: Dutch translation, for #cvn-wp-nl
+# Author: [[m:User:Krinkle]]
+# Author: [[m:User:Mathonius]]
+# Last-Modified: 2013-04-05
+#
+# ${var} = variables to be substituted
+# %cnn[,nn] = mIRC colour nn,nn
+# %b = Toggle bolding
+#
+# 0 = Reporting (largely compatible with CVUBot) / 9 = CVNBot-only reporting / 1 = Formatted / 2 = Interface
+00000=2.03
+
+00020=Anonymous user
+00021=Named user
+
+#Dit is de code voor de grootte van "veel toevoegen""
+00100=%b%c12
+#Dit is de code voor de grootte van "veel weghalen"
+00101=%b%c04
+# Dit zijn de codes na het bovenstaande respectievelijk
+00102=%b
+00103=%b
+
+00120=Je moet voiced zijn om dat te kunnen doen
+00122=Je moet operator zijn om dat te kunnen doen
+
+05000=%c03Whitelisted ${ceditor} %c14maakt pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05001=%c04%bWaarschuwing! Blacklisted ${ceditor} maakt pagina ${carticle} aan%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05002=%c10Moderator ${ceditor} %c14maakt pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05003=%c07%bIP%b ${ceditor} %c14maakt pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05004=%c06Gebruiker ${ceditor} %c14maakt pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05005=%c14Bot ${ceditor} maakt pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05006=%c05Greylisted ${ceditor} maakt pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05010=%c03Whitelisted ${ceditor} %c14maakt grote pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05011=%c04%bWaarschuwing! Blacklisted ${ceditor} maakt grote pagina ${carticle} aan%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05012=%c10Moderator ${ceditor} %c14maakt grote pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05013=%c07%bIP%b ${ceditor} %c14maakt grote pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05014=%c06Gebruiker ${ceditor} %c14maakt grote pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05015=%c14Bot ${ceditor} maakt grote pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05016=%c05Greylisted ${ceditor} maakt grote pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05020=%c03Whitelist ${ceditor} %c14maakt kleine pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05021=%c04%bWaarschuwing! Blacklisted ${ceditor} maakt kleine pagina ${carticle} aan%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05022=%c10Moderator ${ceditor} %c14maakt kleine pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05023=%c07%bIP%b ${ceditor} %c14maakt kleine pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05024=%c06Gebruiker ${ceditor} %c14maakt kleine pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05025=%c14Bot ${ceditor} maakt kleine pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05026=%c05Greylisted ${ceditor} maakt kleine pagina %b${carticle}%b aan %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05030=%c03Whitelisted ${ceditor} %c04maakt gevolgde titel %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05031=%c04%bWaarschuwing! Blacklisted ${ceditor} maakt gevolgde titel%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05032=%c10Moderator ${ceditor} %c04maakt gevolgde titel %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05033=%c07%bIP%b ${ceditor} %c04%bmaakt gevolgde titel%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05034=%c06Gebruiker ${ceditor} %c04%bmaakt gevolgde titel%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05035=%c14Bot ${ceditor} %c04maakt gevolgde titel %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05036=%c05Greylisted ${ceditor} %c04%bmaakt gevolgde titel%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05040=%c03Whitelisted ${ceditor} %c04aanmaak van %b${carticle}%b bevat gevolgd woord "${watchword}" %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05041=%c04%bWaarschuwing! Blacklisted ${ceditor}%b %c04%baanmaak van ${carticle} bevat gevolgd woord "${watchword}"%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05042=%c10Moderator ${ceditor} %c04aanmaak van %b${carticle}%b bevat gevolgd woord "${watchword}" %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05043=%c07%bIP%b ${ceditor} %c04%baanmaak van ${carticle} bevat gevolgd woord "${watchword}"%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05044=%c06Gebruiker ${ceditor} %c04%baanmaak van ${carticle} bevat gevolgd woord "${watchword}"%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05045=%c14Bot ${ceditor} %c04aanmaak van ${carticle} bevat gevolgd woord "${watchword}" %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05046=%c05Greylisted ${ceditor} %c04%baanmaak van ${carticle} bevat gevolgd woord "${watchword}"%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05100=%c03Whitelisted ${ceditor} %c14bewerkt %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05101=%c04%bWaarschuwing! Blacklisted ${ceditor} bewerkt%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05102=%c10Moderator ${ceditor} %c14bewerkt %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05103=%c07%bIP%b ${ceditor} %c14bewerkt %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05104=%c06Gebruiker ${ceditor} %c14bewerkt %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05105=%c14Bot ${ceditor} bewerkt %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05106=%c05Greylisted ${ceditor} bewerkt %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05110=%c03Whitelisted ${ceditor} %c14doet grote bewerking op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05111=%c04%bWaarschuwing! Blacklisted ${ceditor} doet grote bewerking op%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05112=%c10Moderator ${ceditor} %c14doet grote bewerking op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}" 
+05113=%c07%bIP%b ${ceditor} %c14doet grote bewerking op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05114=%c06Gebruiker ${ceditor} %c14doet grote bewerking op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05115=%c14Bot ${ceditor} doet grote bewerking op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}" 
+05116=%c05Greylisted ${ceditor} doet grote bewerking op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05120=%c03Whitelisted ${ceditor} %c14haalt veel tekst weg op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05121=%c04%bWaarschuwing! Blacklisted ${ceditor} haalt veel tekst weg op%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05122=%c10Moderator ${ceditor} %c14haalt veel tekst weg op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05123=%c07%bIP%b ${ceditor} %c14haalt veel tekst weg op %b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05124=%c06Gebruiker ${ceditor} %c14haalt veel tekst weg op %b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05125=%c14Bot ${ceditor} haalt veel tekst weg op %b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05126=%c05Greylisted ${ceditor} haalt veel tekst weg op %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05130=%c03Whitelisted ${ceditor} %c04bewerkt gevolgde pagina %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05131=%c04%bWaarschuwing! Blacklisted ${ceditor}%b %c04%bbewerkt gevolgde pagina%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05132=%c10Moderator ${ceditor} %c04bewerkt gevolgde pagina %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05133=%c07%bIP%b ${ceditor} %c04%bbewerkt gevolgde pagina%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05134=%c06Gebruiker ${ceditor} %c04%bbewerkt gevolgde pagina%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05135=%c14Bot ${ceditor} %c04bewerkt gevolgde pagina %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+05136=%c05Greylisted ${ceditor} %c04%bbewerkt gevolgde pagina%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+05200=%c13%bNieuwe gebruiker ${ceditor}%b %c14aangemaakt. %c12${talkurl}
+05201=%c13%bNieuwe gebruiker ${ceditor}%b %c04%bbevat gevolgd woord "${watchword}"%b %c14("${wwreason}"). %c12${talkurl}
+
+05210=%c13%bNieuwe gebruiker ${ceditor}%b %c14aangemaakt door ${ccreator}. %c12${talkurl}
+05211=%c13%bNieuwe gebruiker ${ceditor}%b %c14aangemaakt door ${ccreator} %c04%bbevat gevolgd woord "${watchword}"%b %c14("${wwreason}"). %c12${talkurl}
+
+05300=%c10Moderator ${ceditor} %c14verwijderde %b${carticle}%b. %c14"${reason}" %c12${url}
+05301=%c10Moderator ${ceditor} %c04verwijderde gevolgde titel ${carticle}. %c14"${reason}" %c12${url}
+
+05400=%c10Moderator ${ceditor} %c14%bblokkeert ${cblockname}. Duur: ${length}%b "${reason}"
+05401=%c10Moderator ${ceditor} %c14%bblokkeert range ${cblockname}. Duur: ${length}%b "${reason}"
+
+05500=%c03Whitelisted ${ceditor} %c14wijzigt titel van %b${cfromname}%b in %b${ctoname}%b. %c12${url} %c14"${reason}"
+05501=%c04%bWaarschuwing! Blacklisted ${ceditor} wijzigt titel van ${cfromname} in ${ctoname}%b. %c12${url} %c14"${reason}"
+05502=%c10Moderator ${ceditor} %c14wijzigt titel van %b${cfromname}%b in %b${ctoname}%b. %c12${url} %c14"${reason}"
+05503=%c07%bIP%b ${ceditor} %c14wijzigt titel van %b${cfromname}%b in %b${ctoname}%b. %c12${url} %c14"${reason}"
+05504=%c06Gebruiker ${ceditor} %c14wijzigt titel van %b${cfromname}%b in %b${ctoname}%b. %c12${url} %c14"${reason}"
+05505=%c14Bot ${ceditor} wijzigt titel van %b${cfromname}%b in %b${ctoname}%b. %c12${url} %c14"${reason}"
+05506=%c05Greylisted ${ceditor} wijzigt titel van %b${cfromname}%b in %b${ctoname}%b. %c12${url} %c14"${reason}"
+
+05600=%c03Whitelisted ${ceditor} %c14upload %b${cuploaditem}%b %c12${url} %c14"${reason}"
+05601=%c04%bWaarschuwing! Blacklisted ${ceditor} upload ${cuploaditem}%b %c12${url} %c14"${reason}"
+05602=%c10Moderator ${ceditor} %c14upload %b${cuploaditem}%b %c12${url} %c14"${reason}"
+05603=%c07%bIP%b ${ceditor} %c14upload %b${cuploaditem}%b %c12${url} %c14"${reason}"
+05604=%c06Gebruiker ${ceditor} %c14upload %b${cuploaditem}%b %c12${url} %c14"${reason}"
+05605=%c14Bot ${ceditor} upload %b${cuploaditem}%b %c12${url} %c14"${reason}"
+05606=%c05Greylisted ${ceditor} upload %c14%b${cuploaditem}%b %c12${url} %c14"${reason}"
+
+05610=%c03Whitelisted ${ceditor} %c04upload gevolgde titel %c14%b${cuploaditem}%b %c12${url} %c14"${reason}"
+05611=%c04%bWaarschuwing! Blacklisted ${ceditor} upload gevolgde titel%b %c14%b${cuploaditem}%b %c12${url} %c14"${reason}"
+05612=%c10Moderator ${ceditor} %c04upload gevolgde titel %c14%b${cuploaditem}%b %c12${url} %c14"${reason}"
+05613=%c07%bIP%b ${ceditor} %c04%bupload gevolgde titel%b %c14%b${cuploaditem}%b %c12${url} %c14"${reason}"
+05614=%c06Gebruiker ${ceditor} %c04%bupload gevolgde titel%b %c14%b${cuploaditem}%b %c12${url} %c14"${reason}"
+05615=%c14Bot ${ceditor} %c04upload gevolgde titel %c14%b${cuploaditem}%b %c12${url} %c14"${reason}"
+05616=%c05Greylisted ${ceditor} %c04%bupload gevolgde titel%b %c14%b${cuploaditem}%b %c12${url} %c14"${reason}"
+
+95620=%c03Whitelisted ${ceditor} %c14upload %b${cuploaditem}%b "${reason}" %c04Match "${watchword}" %c14(${lmreason})%c %c12${url}
+95621=%c04%bWaarschuwing! Blacklisted ${ceditor} upload ${cuploaditem}%b "${reason}" %c04Match "${watchword}" %c14(${lmreason})%c %c12${url}
+95622=%c10Moderator ${ceditor} %c14upload %b${cuploaditem}%b "${reason}" %c04Match "${watchword}" %c14(${lmreason})%c %c12${url}
+95623=%c07%bIP%b ${ceditor} %c14upload%b %b${cuploaditem}%b "${reason}" %c04Match "${watchword}" %c14(${lmreason})%c %c12${url}
+95624=%c06Gebruiker ${ceditor} %c14upload %b${cuploaditem}%b "${reason}" %c04Match "${watchword}" %c14(${lmreason})%c %c12${url}
+95625=%c14Bot ${ceditor} upload %b${cuploaditem}%b "${reason}" %c04Match "${watchword}" %c14(${lmreason})%c %c12${url}
+95626=%c04Greylisted ${ceditor} upload %c14%b${cuploaditem}%b "${reason}" %c04Match "${watchword}" %c14(${lmreason})%c %c12${url}
+
+05700=%c10Moderator ${ceditor} %c14%b heft blokkering van ${cblockname} op.%b "${reason}"
+05701=%c10Moderator ${ceditor} %c14%b heft range blokkering van ${cblockname} op.%b "${reason}"
+
+05900=%c10Moderator ${ceditor} %c14beveiligde %b${carticle}%b. "${comment}"
+05901=%c10Moderator ${ceditor} %c14heft beveiliging op %b${carticle}%b. "${comment}" %c12${url}
+05902=%c14Moderator ${ceditor} %c14veranderde beveiliging op %b${carticle} "${comment}"
+
+95040=%c03Whitelisted ${ceditor} %c04gebruikt bewerkingssamenvatting "${watchword}" bij aanmaken van %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95041=%c04%bWaarschuwing! Blacklisted ${ceditor}%b %c04%bgebruikt bewerkingssamenvatting "${watchword}" bij aanmaken van%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95042=%c10Moderator ${ceditor} %c04gebruikt bewerkingssamenvatting "${watchword}" bij aanmaken van %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95043=%c07%bIP%b ${ceditor} %c04%bgebruikt bewerkingssamenvatting "${watchword}" bij aanmaken van%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95044=%c06Gebruiker ${ceditor} %c04%bgebruikt bewerkingssamenvatting "${watchword}" bij aanmaken van%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95045=%c14Bot ${ceditor} %c04gebruikt bewerkingssamenvatting "${watchword}" bij aanmaken van%c14${carticle} %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95046=%c05Greylisted ${ceditor} %c04%bgebruikt bewerkingssamenvatting "${watchword}" bij aanmaken van%b %c14${carticle} %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+95130=%c03Whitelisted ${ceditor} %c04gebruikt bewerkingssamenvatting "${watchword}" %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95131=%c04%bWaarschuwing! Blacklisted ${ceditor} gebruikt bewerkingssamenvatting "${watchword}"%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95132=%c10Moderator ${ceditor} %c04gebruikt bewerkingssamenvatting "${watchword}" %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95133=%c07%bIP%b ${ceditor} %c04%bgebruikt bewerkingssamenvatting "${watchword}"%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95134=%c06Gebruiker ${ceditor} %c04%bgebruikt bewerkingssamenvatting "${watchword}"%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95135=%c14Bot ${ceditor} gebruikt bewerkingssamenvatting "${watchword}" %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+95136=%c05Greylisted ${ceditor} gebruikt bewerkingssamenvatting "${watchword}" %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url} %c14"${reason}"
+
+96010=%c03Whitelisted ${ceditor} %c04leeghalen %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96011=%c04%bWaarschuwing! Blacklisted ${ceditor} leeghalen%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96012=%c10Moderator ${ceditor} %c04leeghalen %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96013=%c07%bIP%b ${ceditor} %c04%bleeghalen%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96014=%c06Gebruiker ${ceditor} %c04%bleeghalen%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96015=%c14Bot ${ceditor} %c04leeghalen %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96016=%c05Greylisted ${ceditor} %c04%bleeghalen%b %c14%b${carticle}%b %c10${sizeattrib}(${size})${sizereset} %c12${url}
+
+96020=%c03Whitelisted ${ceditor} %c04vervangt %c14%b${carticle}%b met "${profanity}" %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96021=%c04%bWaarschuwing! Blacklisted ${ceditor}%b %c04%bvervangt%b %c14%b${carticle}%b met "${profanity}" %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96022=%c10Moderator ${ceditor} %c04vervangt %c14%b${carticle}%b met "${profanity}" %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96023=%c07%bIP%b ${ceditor} %c04%bvervangt%b %c14%b${carticle}%b met "${profanity}" %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96024=%c06Gebruiker ${ceditor} %c04%bvervangt%b %c14%b${carticle}%b met "${profanity}" %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96025=%c14Bot ${ceditor} %c04vervangt %c14%b${carticle}%b met "${profanity}" %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96026=%c05Greylisted ${ceditor} %c04%bvervangt%b %c14%b${carticle}%b met "${profanity}" %c10${sizeattrib}(${size})${sizereset} %c12${url}
+
+96030=%c03Whitelisted ${ceditor} %c04vervangt %c14%b${carticle}%b met tekst %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96031=%c04%bWaarschuwing! Blacklisted ${ceditor}%b %c04%bvervangt%b %c14%b${carticle}%b met tekst %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96032=%c10Moderator ${ceditor} %c04vervangt %c14%b${carticle}%b met tekst %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96033=%c07%bIP%b ${ceditor} %c04%bvervangt%b %c14%b${carticle}%b met tekst %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96034=%c06Gebruiker ${ceditor} %c04%bvervangt%b %c14%b${carticle}%b met tekst %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96035=%c14Bot ${ceditor} %c04vervangt %c14%b${carticle}%b met tekst %c10${sizeattrib}(${size})${sizereset} %c12${url}
+96036=%c05Greylisted ${ceditor} %c04%bvervangt%b %c14%b${carticle}%b met tekst %c10${sizeattrib}(${size})${sizereset} %c12${url}
+
+# Global intel
+16000={0} is {1}
+16001={0} staat op geen enkele lijst
+16002=op de {0} {1}, toegevoegd door {2} tot {3} ("{4}")
+16003=Sorry, geen intel beschikbaar ({0})
+
+# List commands
+16004={0} staat op de {1} {2}, toegevoegd door {3} tot {4} ("{5}")
+16005={0} is een ongelijste anonieme gebruiker
+16006={0} is een ongelijste geregistreerde gebruiker
+16007={0} staat op de {1}, toegevoegd door {2} tot {3} ("{4}")
+16008={0} staat niet op de {1}
+16009={0} staat niet op de {1} {2}
+16100={0} staat op geen enkele {1} lijsten
+16101={0} is verwijderd van de {1} {2}
+16102={0} staat al op de {1}, kan niet toegevoegd worden aan {2}
+16103=%bToegevoegd:%b {0}
+16104=%bBijgewerkt:%b {0}
+16105={0} is verwijderd van de {1}
+16106={0} staat op de greylist tot {1} ({2})
+16200="{0}" matched item "{1}" op {2} ("{3}")
+16201="{0}" matched geen niet items op {1}
+
+# Auto-greylist -> niet vertalen, deze worden gebruikt in de "reden" op de globale botlijsten. Moeten in elke taalversie hetzelfde zijn (namelijk Engels) zodat ze automatisch te detecteren zijn en bovendien door een breed publiek begrepen kunnen worden.
+16300=Create on [[{0}]] matched "{1}"
+16301=Created watched page [[{0}]]
+16310=Used edit summary "{0}" on [[{1}]]
+16311=Blanked [[{0}]]
+16320=New user matched "{0}"
+
+# Projects
+16400=Project {0} is al geregistreerd
+16401=Project {0} is momenteel niet geregistreerd
+
+# Friendly lists (170xx is reserved)
+17000=whitelist
+17001=blacklist
+17002=adminlijst
+17005=botlijst
+17006=greylist
+17010=volglijst
+17011=bad new user list
+17012=bad new article title list
+17020=bad edit summary list
+
+# Overige berichten
+20000=Sorry! Dat commando heb ik niet begrepen :'(
+20001=Er bestaan geen globale admins/bots. Specificeer een project met de p= parameter.
+20002=Aleen de bad new user, bad new article title en bad edit summary lijsten kunnen getest worden
+20003=Specificeer een gebruikersnaam
+20004=Interwiki voorvoegsel kan niet geraden worden. Geef er een op (bijv., nl:) in de laatste optionele parameter.
+20005=%c14Zie %c01http://bit.ly/cvnbotcmds%c14 voor een tabel met beschrijvingen van de commandos. %c10Msgs-ID: %c14v2.03-nl-r19
+// Bij Lijstcommandos, x=0 : tot "the end of time"
+20006=het eind der tijd
