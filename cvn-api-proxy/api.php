@@ -13,15 +13,19 @@
 /**
  * Configuration
  */
-
+$conf = json_decode( @file_get_contents( __DIR__ . '/config.json' ) );
+if ( !$conf ) {
+	header( 'content-type: application/json; charset=utf-8' );
+	print '{"error":"internal"}';
+	die;
+}
 $userAgent = 'cvn-api-proxy/1.0 (Countervandalism Network) – https://github.com/countervandalism';
-$baseUrl = 'http://cvn.wmflabs.org/api.php';
 
 /**
  * Input
  */
 
-$url = $baseUrl;
+$url = $conf->baseUrl;
 if ( isset( $_SERVER['QUERY_STRING'] ) ) {
 	$url .= '?' . $_SERVER['QUERY_STRING'];
 }
