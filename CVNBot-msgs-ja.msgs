@@ -1,0 +1,251 @@
+# Messages used by the bot, note all messages should be 5 digit number with leading zeroes
+# Note: this file is for CVNBot.
+#
+# Msgs-ID: v2.03-ja-r2
+# Description: Japanese translation, for #cvn-ja
+# Author: [[m:User:Hosiryuhosi]]
+# Last-Modified: 2014-02-24
+#
+# ${var} = variables to be substituted
+# %cnn[,nn] = mIRC colour nn,nn
+# %b = Toggle bolding
+#
+# 0 = Reporting (largely compatible with CVUBot) / 9 = SWMTBot-only reporting / 1 = Formatted / 2 = Interface
+00000=2.03
+
+00020=匿名利用者
+00021=登録利用者
+
+#This is the highlighting for the size of large additions
+00100=%b%c07
+#This is the highlighting for the size of large removals
+00101=%b%c04
+# These are the corresponding "undo" for the above
+00102=%b
+00103=%b
+
+00120=この操作には、チャンネル上で voiced (+v) である必要があります。
+00122=この操作には、チャンネル上で op (+o) である必要があります。
+
+05000=%c10ホワイトリスト%c14 [[${editor}]] %c10作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05001=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%b作成%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05002=%c14管理者%c14 [[${editor}]] %c14作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05003=%c03%bIP%b%c14 [[${editor}]] %c03%b作成%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05004=%c13利用者%c14 [[${editor}]] %c13作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05005=%c14ボット [[${editor}]] %c14作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05006=%c07グレーリスト%c14 [[${editor}]] %c07作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+
+05010=%c10ホワイトリスト%c14 [[${editor}]] %c10Large create%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05011=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%b著作権侵害?%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05012=%c14管理者%c14 [[${editor}]] %c14Large create%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05013=%c03%bIP%b%c14 [[${editor}]] %c03%b著作権侵害?%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05014=%c13利用者%c14 [[${editor}]] %c13著作権侵害?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05015=%c14ボット%c14 [[${editor}]] %c14Large create%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05016=%c07グレーリスト%c14 [[${editor}]] %c07著作権侵害?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+
+05020=%c10ホワイトリスト%c14 [[${editor}]] %c10短いページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05021=%c04%bブラックリスト%c14%b [[${editor}]] %c04%b短いページの作成%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05022=%c14管理者%c14 [[${editor}]] %c14短いページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05023=%c03%bIP%c14%b [[${editor}]] %c03%b短いページの作成%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05024=%c13利用者%c14 [[${editor}]] %c13短いページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05025=%c14ボット%c14 [[${editor}]] %c14短いページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05026=%c07グレーリスト%c14 [[${editor}]] %c07短いページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+
+05030=%c10ホワイトリスト%c14 [[${editor}]] %c10監視条件に一致するページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05031=%c04%bブラックリスト%c14%b [[${editor}]] %c04%b監視条件に一致するページの作成%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05032=%c14管理者%c14 [[${editor}]] %c14監視条件に一致するページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05033=%c03%bIP%c14%b [[${editor}]] %c03%b監視条件に一致するページの作成%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05034=%c13利用者%c14 [[${editor}]] %c13監視条件に一致するページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05035=%c14ボット%c14 [[${editor}]] %c14監視条件に一致するページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05036=%c07グレーリスト%c14 [[${editor}]] %c07監視条件に一致するページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+
+05040=%c10ホワイトリスト%c14 [[${editor}]] %c10監視条件に一致する文字 "${watchword}" を含むページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05041=%c04%bブラックリスト%c14%b [[${editor}]] %c04%b監視条件に一致する文字 "${watchword}" を含むページの作成%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05042=%c14管理者%c14 [[${editor}]] %c14監視条件に一致する文字 "${watchword}" を含むページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05043=%c03%bIP%c14%b [[${editor}]] %c03%b監視条件に一致する文字 "${watchword}" を含むページの作成%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05044=%c13利用者%c14 [[${editor}]] %c13監視条件に一致する文字 "${watchword}" を含むページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05045=%c14ボット%c14 [[${editor}]] %c14監視条件に一致する文字 "${watchword}" を含むページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+05046=%c07グレーリスト%c14 [[${editor}]] %c07監視条件に一致する文字 "${watchword}" を含むページの作成%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+
+05100=%c10ホワイトリスト%c14 [[${editor}]] %c10編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05101=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%b編集%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05102=%c14管理者%c14 [[${editor}]] %c14編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05103=%c03%bIP%b%c14 [[${editor}]] %c03%b編集%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05104=%c13利用者%c14 [[${editor}]] %c13編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05105=%c14ボット%c14 [[${editor}]] %c14編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05106=%c07グレーリスト%c14 [[${editor}]] %c07編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+
+05110=%c10ホワイトリスト%c14 [[${editor}]] %c10大きな編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05111=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%b不適切な編集?%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05112=%c14管理者%c14 [[${editor}]] %c14Large edit%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}" 
+05113=%c03%bIP%b%c14 [[${editor}]] %c03%b不適切な編集?%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05114=%c13利用者%c14 [[${editor}]] %c13不適切な編集?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05115=%c14ボット%c14 [[${editor}]] %c14大きな編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}" 
+05116=%c07グレーリスト%c14 [[${editor}]] %c07不適切な編集?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+
+05120=%c10ホワイトリスト%c14 [[${editor}]] %c10大幅な除去%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05121=%c04%bブラックリスト%b [[${editor}]] %b大幅な除去%b [[${article}]] ${sizeattrib}(${size})${sizereset} %c10差分:%c12 ${url}%c14%c04"${reason}"
+05122=%c14管理者%c14 [[${editor}]] %c14大幅な除去%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14reason "${reason}"
+05123=%c03%bIP%b [[${editor}]] %b大幅な除去%b [[${article}]] ${sizeattrib}(${size})${sizereset} %c10差分:%c12 ${url}%c14%c03"${reason}"
+05124=%c13利用者%c14 [[${editor}]] %c13大幅な除去%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05125=%c14ボット%c14 [[${editor}]] %c14大幅な除去%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14reason "${reason}"
+05126=%c07グレーリスト%c14 [[${editor}]] %c07大幅な除去, 白紙化?%c14 [[${article}]] ${sizeattrib}(${size})${sizereset} %c10差分:%c12 ${url}%c14%c04"${reason}"
+
+05130=%c10ホワイトリスト%c14 [[${editor}]] %c10監視条件に一致するページの編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05131=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%b監視条件に一致するページの編集%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05132=%c14管理者%c14 [[${editor}]] %c14監視条件に一致するページの編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05133=%c03%bIP%b%c14 [[${editor}]] %c03%b監視条件に一致するページの編集%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05134=%c13利用者%c14 [[${editor}]] %c13監視条件に一致するページの編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05135=%c14ボット%c14 [[${editor}]] %c14監視条件に一致するページの編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+05136=%c07グレーリスト%c14 [[${editor}]] %c07監視条件に一致するページの編集%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12  ${url}%c14 "${reason}"
+
+05200=%c14新規利用者 [[${editor}]] が作成されました。ブロック: ${blockurl}
+05201=%c14新規利用者 [[${editor}]] が作成されました。%c04条件 "${watchword}" ("${wwreason}") に一致。ブロック: ${blockurl}
+
+05210=%c14新規利用者 [[${editor}]] が [[${creator}]] によって作成されました。ブロック: ${blockurl}
+05211=%c14新規利用者 [[${editor}]] が [[${creator}]] によって作成され、%c04条件 "${watchword}" ("${wwreason}") に一致。ブロック: ${blockurl}
+
+05300=%c14[[${editor}]] は、 [[${article}]] を削除。理由:"${reason}" %c12${url}
+05301=%c04[[${editor}]] は、監視条件に一致するページ [[${article}]] を削除。"${reason}" %c12${url}
+
+05400=%c06編集者のブロック%c14 [[${blockname}]] %c06管理者%c14 [[${editor}]] による。期限: ${length} "${reason}"
+05401=%c06レンジブロック ${blockname} 管理者%c14 [[${editor}]] による。期限: ${length} "${reason}"
+
+05500=%c10ホワイトリスト%c14 [[${editor}]] %c10移動%c14 [[${fromname}]] を [[${toname}]] へ。%c10URL:%c12 ${url}%c14 "${reason}"
+05501=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%b移動%b%c14 [[${fromname}]] を [[${toname}]] へ。%c10URL:%c12 ${url}%c14 "${reason}"
+05502=%c14管理者%c14 [[${editor}]] %c14移動%c14 [[${fromname}]] を [[${toname}]] へ。%c10URL:%c12 ${url}%c14 "${reason}"
+05503=%c03%bIP%b%c14 [[${editor}]] %c03%b移動%b%c14 [[${fromname}]] を [[${toname}]] へ。%c10URL:%c12 ${url}%c14 "${reason}"
+05504=%c13利用者%c14 [[${editor}]] %c13移動%c14 [[${fromname}]] を [[${toname}]] へ。%c10URL:%c12 ${url}%c14 "${reason}"
+05505=%c14ボット%c14 [[${editor}]] %c14移動%c14 [[${fromname}]] を [[${toname}]] へ。%c10URL:%c12 ${url}%c14 "${reason}"
+05506=%c07グレーリスト%c14 [[${editor}]] %c07移動%c14 [[${fromname}]] を [[${toname}]] へ。%c10URL:%c12 ${url}%c14 "${reason}"
+
+05600=%c10ホワイトリスト%c14 [[${editor}]] %c10アップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05601=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%bアップロード%b%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05602=%c14管理者%c14 [[${editor}]] %c14アップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05603=%c03%bIP%b%c14 [[${editor}]] %c03%bアップロード%b%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05604=%c13利用者%c14 [[${editor}]] %c13アップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05605=%c14ボット%c14 [[${editor}]] %c14アップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05606=%c07グレーリスト%c14 [[${editor}]] %c07アップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+
+05610=%c10ホワイトリスト%c14 [[${editor}]] %c10監視条件に一致するアップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05611=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%b監視条件に一致するアップロード%b%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05612=%c14管理者%c14 [[${editor}]] %c14監視条件に一致するアップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05613=%c03%bIP%b%c14 [[${editor}]] %c03%b監視条件に一致するアップロード%b%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05614=%c13利用者%c14 [[${editor}]] %c13監視条件に一致するアップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05615=%c14ボット%c14 [[${editor}]] %c14監視条件に一致するアップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+05616=%c07グレーリスト%c14 [[${editor}]] %c07監視条件に一致するアップロード%c14 [[${uploaditem}]] %c10URL:%c12 ${url}%c14 "${reason}"
+
+95620=%c10ホワイトリスト%c14 [[${editor}]] %c10アップロード%c14 [[${uploaditem}]] "${reason}" %c04%bMatches%b "${watchword}" (${lmreason})%c ${url}
+95621=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%bアップロード%b%c14 [[${uploaditem}]] "${reason}" %c04%bMatches%b "${watchword}" (${lmreason})%c ${url}
+95622=%c14管理者%c14 [[${editor}]] %c14アップロード%c14 [[${uploaditem}]] "${reason}" %bMatches%b "${watchword}" (${lmreason}) ${url}
+95623=%c03%bIP%b%c14 [[${editor}]] %c03%bアップロード%b%c14 [[${uploaditem}]] "${reason}" %c04%bMatches%b "${watchword}" (${lmreason})%c ${url}
+95624=%c13利用者%c14 [[${editor}]] %c13アップロード%c14 [[${uploaditem}]] "${reason}" %c04%bMatches%b "${watchword}" (${lmreason})%c ${url}
+95625=%c14ボット%c14 [[${editor}]] %c14アップロード%c14 [[${uploaditem}]] "${reason}" %c04%bMatches%b "${watchword}" (${lmreason})%c ${url}
+95626=%c04Greylist%c14 [[${editor}]] %c04アップロード%c14 [[${uploaditem}]] "${reason}" %c04%bMatches%b "${watchword}" (${lmreason})%c ${url}
+
+05700=%c06編集者へのブロックを解除%c14 [[${blockname}]] %c06管理者%c14 [[${editor}]] によってブロックが解除。"${reason}"
+05701=%c06レンジブロックの解除 ${blockname} 管理者%c14 [[${editor}]] による。"${reason}"
+
+05900=%c14管理者%c14 [[${editor}]] %c14保護%c14 [[${article}]] "${comment}"
+05901=%c14管理者%c14 [[${editor}]] %c14保護解除%c14 [[${article}]] "${comment}" %c12${url}
+05902=%c14管理者%c14 [[${editor}]] %c14保護設定の変更%c14 [[${article}]] "${comment}"
+
+95040=%c10ホワイトリスト%c14 [[${editor}]] %c10作成時に "${watchword}" を編集要約に使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+95041=%c04%bブラックリスト%c14%b [[${editor}]] %c04%b作成時に "${watchword}" を編集要約に使用。%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+95042=%c14管理者%c14 [[${editor}]] %c14作成時に "${watchword}" を編集要約に使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+95043=%c03%bIP%c14%b [[${editor}]] %c03%b作成時に "${watchword}" を編集要約に使用%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+95044=%c13利用者%c14 [[${editor}]] %c13作成時に "${watchword}" を編集要約に使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+95045=%c14ボット%c14 [[${editor}]] %c14作成時に "${watchword}" を編集要約に使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+95046=%c07グレーリスト%c14 [[${editor}]] %c07作成時に "${watchword}" を編集要約に使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10URL:%c12 ${url}%c14 "${reason}"
+
+95130=%c10ホワイトリスト%c14 [[${editor}]] %c10編集要約に "${watchword}" を使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+95131=%c04%bブラックリスト%b%c14 [[${editor}]] %c04%b編集要約に "${watchword}" を使用。%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+95132=%c14管理者%c14 [[${editor}]] %c14編集要約に "${watchword}" を使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+95133=%c03%bIP%b%c14 [[${editor}]] %c03%b編集要約に "${watchword}" を使用。%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+95134=%c13利用者%c14 [[${editor}]] %c13編集要約に "${watchword}" を使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+95135=%c14ボット%c14 [[${editor}]] %c14編集要約に "${watchword}" を使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+95136=%c07グレーリスト%c14 [[${editor}]] %c07編集要約に "${watchword}" を使用。%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}%c14 "${reason}"
+
+96010=%c10ホワイトリスト%c14 [[${editor}]] %c10白紙化%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96011=%c04%bブラックリスト%c14%b [[${editor}]] %c04%b白紙化%b%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96012=%c14管理者%c14 [[${editor}]] %c14白紙化%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96013=%c03%bIP%c14%b [[${editor}]] %c04%b白紙化%c14%b [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96014=%c13利用者%c14 [[${editor}]] %c04白紙化%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96015=%c14ボット%c14 [[${editor}]] %c14白紙化%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96016=%c07グレーリスト%c14 [[${editor}]] %c07白紙化%c14 [[${article}]] ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+
+96020=%c10ホワイトリスト%c14 [[${editor}]] %c10置換%c14 [[${article}]] with "%c10${profanity}%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96021=%c04%bブラックリスト%c14%b [[${editor}]] %c04%b置換%b%c14 [[${article}]] with "%c04%b${profanity}%b%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96022=%c14管理者%c14 [[${editor}]] %c14置換%c14 [[${article}]] with "${profanity}" ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96023=%c03%bIP%c14%b [[${editor}]] %c03%b置換%c14%b [[${article}]] with "%c03%b${profanity}%b%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96024=%c13利用者%c14 [[${editor}]] %c13置換%c14 [[${article}]] with "%c13${profanity}%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96025=%c14ボット%c14 [[${editor}]] %c14置換%c14 [[${article}]] with "${profanity}" ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96026=%c07グレーリスト%c14 [[${editor}]] %c07置換%c14 [[${article}]] with "%c07${profanity}%c14" ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+
+96030=%c10ホワイトリスト%c14 [[${editor}]] %c10置換%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96031=%c04%bブラックリスト%c14%b [[${editor}]] %c04%b置換%b%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96032=%c14管理者%c14 [[${editor}]] %c14置換%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96033=%c03%bIP%c14%b [[${editor}]] %c03%b置換%c14%b [[${article}]] with  new text ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96034=%c13利用者%c14 [[${editor}]] %c13置換%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96035=%c14ボット%c14 [[${editor}]] %c14置換%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+96036=%c07グレーリスト%c14 [[${editor}]] %c07置換%c14 [[${article}]] with new text ${sizeattrib}(${size})${sizereset}%c14 %c10差分:%c12 ${url}
+
+# Global intel
+16000={0} は {1}
+16001={0} はどのリストにも含まれていません。
+16002={0} {1} に含まれており、{2} により追加されました。期限 {3} ("{4}")
+16003=申し訳ありません。{0} に一致する情報を取得できませんでした。
+
+# List commands
+16004={0} は、{1} {2} に含まれており、{3} により追加されました。期限 {4} ("{5}")
+16005={0} という匿名利用者は、どのリストにも含まれていません。
+16006={0} という登録利用者は、どのリストにも含まれていません。
+16007={0} は、{1} に含まれており、{2} によって追加されました。期限 {3} ("{4}")
+16008={0} は、{1} に含まれていません。
+16009={0} は、{1} {2} に含まれていません。
+16100={0} は、どの {1} リストにも含まれていません。
+16101={0} を、{1} {2} から削除しました。
+16102={0} は、既に {1} に含まれているため、{2} へ追加することはできません。
+16103=%b追加:%b {0}
+16104=%b更新:%b {0}
+16105={0} を {1} から削除。
+16106={0} はグレーリストに含まれています。期限 {1} ({2})
+16200="{0}" matches item "{1}" on {2} ("{3}")
+16201="{0}" は、 {1} 上のどのアイテムにも一致しません。
+
+# Auto-greylist (Translated)
+#16300=[[{0}]] を作成時、条件 "{1}" に一致
+#16301=監視条件に一致する [[{0}]] を作成
+#16310=編集要約に "{0}" を、[[{1}]] で使用。
+#16311=[[{0}]]を白紙化
+#16320=新規利用者が"{0}"に一致。
+# Auto-greylist
+16300=Create on [[{0}]] matched "{1}"
+16301=Created watched [[{0}]]
+16310=Used edit summary "{0}" on [[{1}]]
+16311=Blanked [[{0}]]
+16320=New user matched "{0}"
+
+# Projects
+16400=プロジェクト {0} は、既に登録されています。
+16401=プロジェクト {0} は、現在登録されていません。
+
+# Friendly lists (170xx is reserved)
+17000=ホワイトリスト
+17001=ブラックリスト
+17002=管理者リスト
+17005=ボットリスト
+17006=グレーリスト
+17010=監視リスト
+17011=不適切な新規利用者名リスト
+17012=不適切な新規記事名リスト
+17020=不適切な編集要約リスト
+
+# Random messages
+20000=申し訳ありません。指示されたコマンドを理解することができません :'(
+20001=管理者やボットのリストはグローバルなリストとして追加することができません。プロジェクト名に p= を使って指定する必要があります。
+20002=テスト用リストには「不適切な利用者名」「不適切な新規ページ名」「不適切な要約」のみが指定可能です。
+20003=特定の利用者名を指定する必要があります。
+20004=指定されたインターウィキ接頭辞を理解できません。特定の一つ (例えば en:) を最後のオプションパラメーターに指定してください。
+20005=ドキュメント: https://github.com/countervandalism/CVNBot/wiki/Documentation#wiki-commands ; (参考日本語訳:[[m:User:Hosiryuhosi/SWMTBot]])
+20006=無期限
