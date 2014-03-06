@@ -29,3 +29,11 @@ CVNClerkBot:
   - raw:
     - 'https://www.mediawiki.org/wiki/Manual:Pywikipediabot'
     - 'https://github.com/Krinkle/ts-krinkle-pywiki'
+  - backup:
+    - database:
+      - shell: |
+        mysqldump cvnclerkbot -u root -proot --extended-insert=FALSE > mysql_cvnclerkbot.sql 
+  - restore:
+    - database:
+      - shell: |
+        mysql -u root -proot cvnclerkbot < mysql_cvnclerkbot.sql 
