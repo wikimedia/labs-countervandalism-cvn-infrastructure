@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.31, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.35, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: cvnclerkbot
 -- ------------------------------------------------------
--- Server version	5.5.31-0ubuntu0.12.04.1
+-- Server version	5.5.35-0ubuntu0.12.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -38,6 +38,7 @@ INSERT INTO `channels` VALUES ('#cvn-abusefilter');
 INSERT INTO `channels` VALUES ('#cvn-blacklist');
 INSERT INTO `channels` VALUES ('#cvn-blocks');
 INSERT INTO `channels` VALUES ('#cvn-bots');
+INSERT INTO `channels` VALUES ('#cvn-brickimedia');
 INSERT INTO `channels` VALUES ('#cvn-clubpenguin');
 INSERT INTO `channels` VALUES ('#cvn-commons');
 INSERT INTO `channels` VALUES ('#cvn-commons-uploads');
@@ -126,4 +127,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-06 22:58:28
+-- Dump completed on 2014-03-27 18:22:06
