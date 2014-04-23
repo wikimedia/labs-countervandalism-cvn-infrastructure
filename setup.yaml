@@ -16,6 +16,55 @@ CVNBot:
   - source: 'https://github.com/countervandalism/CVNBot'
   - debian:
     - mono-complete
+  - install:
+    - 'https://github.com/countervandalism/CVNBot#build'
+    - 'https://github.com/countervandalism/CVNBot/wiki/Documentation#installation'
+  - setup@cvn.wmflabs:
+    # Remember that it doesn't matter on which cvn-app host you run the below commands since
+    # /data/project/cvn is a shared mount between the servers.
+    - install:
+      - ssh -A cvn-appX.eqiad.wmflabs
+      - cd /data/project/cvn/externals/CVNBot
+      - git remote origin && git checkout origin/master
+      - cd src/CVNBot
+      - xbuild CVNBot.csproj
+      - mv bin/Debug /data/project/cvn/app/MyBotName
+      - cp ../CVNBot.exe.config /data/project/cvn/app/MyBotName
+      - cp ../CVNBot-sample.ini /data/project/cvn/app/MyBotName/CVNBot.ini
+      - cd /data/project/cvn/app/MyBotName
+      - nano CVNBot.ini
+        # 'botnick' and 'botpass'. See https://meta.wikimedia.org/wiki/Countervandalism_Network/Management#Bots.
+        #    e.g. botnick=CVNBot5 and botpass=(CVN-Bots2 password)
+        # 'partmsg': "https://meta.wikimedia.org/wiki/CVN"
+        # 'controlchannel': "#cvn-bots"
+        # 'feedchannel': "#cvn-... channel"
+        # 'broadcastchannel': "#cvn-broadcast"
+        # 'restararg': Full in the full path to CVNBot.exe (e.g. "mono /data/project/cvn/app/MyBotName/CVNbot.exe")
+      - if "You're migrating data from an old bot":
+      - edit CVNBot.ini
+          # Add in any relevant settings from the old .ini file (editblank, editbig, feedFilterEventUpload, etc.)
+        - cp ../oldbot/Lists.sqlite .
+        - cp ../oldbot/Projects.xml .
+    - test:
+      - ssh -A cvn-appX.eqiad.wmflabs
+      - cd /data/project/cvn/app/MyBotName
+      - mono CVNBot.exe
+      - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
+      - do "Any additional setup if you need to (e.g. load or drop more wikis in memory)"
+      - do "kill the process from the command line, it was started from your shell, so Ctrl^C will do"
+    - schedule:
+      - do "Add a task for MyBotName" to 'localSettings-cvn.json' in github:countervandalism/stillalive.git
+        # From your local computer, or use:
+        # https://github.com/countervandalism/stillalive/edit/master/localSettings-cvn.json
+      - do "Save, commit, push, the file"
+      - ssh -A cvn-appX.eqiad.wmflabs
+      - cd /data/project/cvn/externals/stillalive
+      - git pull origin master
+    - done!
+      # The next time stillalive runs its job queue from crontab on the various cvn-app hosts,
+      # the bot will be started.
+      
+      
 
 CVNClerkBot:
   - source: 'https://github.com/countervandalism/CVNClerkBot'
