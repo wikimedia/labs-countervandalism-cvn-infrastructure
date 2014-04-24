@@ -11,6 +11,7 @@ stillalive:
   - source: 'https://github.com/countervandalism/stillalive'
   - debian:
     - php5-cli
+
   - quit-a-bot@cvn-wmflabs:
     - try:
       - irc '#cvn-bots'
@@ -21,7 +22,7 @@ stillalive:
       - 'ps aux | grep MyBotName'
       # Find the process id, and terminate it
       - sudo kill 123
-    
+
   - deploy-a-change@cvn.wmflabs:
     # After you've made a change to the settings file in the repository on GitHub, we need
     # to deploy it on our cluster in wmflabs:
@@ -55,7 +56,6 @@ stillalive:
     # Manually terminate the old bot process.
     - quit-a-bot
   
-
 CVNBot:
   - source: 'https://github.com/countervandalism/CVNBot'
   - debian:
@@ -63,6 +63,7 @@ CVNBot:
   - install:
     - 'https://github.com/countervandalism/CVNBot#build'
     - 'https://github.com/countervandalism/CVNBot/wiki/Documentation#installation'
+
   - setup@cvn.wmflabs:
     # Remember that it doesn't matter on which cvn-app host you run the below commands since
     # /data/project/cvn is a shared mount between the servers.
@@ -101,8 +102,6 @@ CVNBot:
     - done!
       # The next time stillalive runs its job queue from crontab on the various cvn-app hosts,
       # the bot will be started.
-      
-      
 
 CVNClerkBot:
   - source: 'https://github.com/countervandalism/CVNClerkBot'
