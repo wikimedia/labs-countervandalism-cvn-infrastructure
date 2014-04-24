@@ -11,6 +11,50 @@ stillalive:
   - source: 'https://github.com/countervandalism/stillalive'
   - debian:
     - php5-cli
+  - quit-a-bot@cvn-wmflabs:
+    - try:
+      - irc '#cvn-bots'
+      - quit MyBotName
+    - else:
+      # Connect to the server where the bot used to be pooled
+      - ssh -A cvn-appX.eqiad.wmflabs
+      - 'ps aux | grep MyBotName'
+      # Find the process id, and terminate it
+      - sudo kill 123
+    
+  - deploy-a-change@cvn.wmflabs:
+    # After you've made a change to the settings file in the repository on GitHub, we need
+    # to deploy it on our cluster in wmflabs:
+    - ssh -A cvn-dev.eqiad.wmflabs
+    # "/data" is a shared mount between all instances.
+    # When you do git-pull in there, that will affect all cvn-appX nodes.
+    # So after running "git pull", next time any of the cvn-app nodes runs cron, the
+    # new settings will be applied.
+    - cd /data/project/cvn/externals/stillalive
+    - git pull origin master
+
+  # Add a new process:
+  - add@cvn.wmflabs:
+    - do 'Add a new task for MyBotName' to 'localSettings-cvn.json' in github:countervandalism/stillalive.git
+        # From your local computer (save, file, commit, push), or use:
+        # https://github.com/countervandalism/stillalive/edit/master/localSettings-cvn.json
+    - deploy-a-change
+
+  # Change on which node a process is pooled
+  - move@cvn.wmflabs:
+    - do 'Change the "pool" property for MyBotName' in 'localSettings-cvn.json' in github:countervandalism/stillalive.git
+    - quit-a-bot
+    # Be sure to keep an eye on IRC when you follow the steps for deploy-a-change,
+    # if it takes more than a minute, the bot may start again, be sure to quite it again.
+    - deploy-a-change
+
+  - remove@cvn.wmflabs.org:
+    - deploy-a-change
+    # stillalive only starts processes, it doesn't quit them because
+    # after you remove the setting, it no longer knows about it.
+    # Manually terminate the old bot process.
+    - quit-a-bot
+  
 
 CVNBot:
   - source: 'https://github.com/countervandalism/CVNBot'
@@ -23,7 +67,7 @@ CVNBot:
     # Remember that it doesn't matter on which cvn-app host you run the below commands since
     # /data/project/cvn is a shared mount between the servers.
     - install:
-      - ssh -A cvn-appX.eqiad.wmflabs
+      - ssh -A cvn-dev.eqiad.wmflabs
       - cd /data/project/cvn/externals/CVNBot
       - git remote update && git checkout origin/master
       - cd src/CVNBot
@@ -46,20 +90,14 @@ CVNBot:
         - cp ../oldbot/Lists.sqlite .
         - cp ../oldbot/Projects.xml .
     - test:
-      - ssh -A cvn-appX.eqiad.wmflabs
+      - ssh -A cvn-dev.eqiad.wmflabs
       - cd /data/project/cvn/app/MyBotName
       - mono CVNBot.exe
       - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
       - do "Any additional setup if you need to (e.g. load or drop more wikis in memory)"
       - do "kill the process from the command line, it was started from your shell, so Ctrl^C will do"
     - schedule:
-      - do "Add a task for MyBotName" to 'localSettings-cvn.json' in github:countervandalism/stillalive.git
-        # From your local computer, or use:
-        # https://github.com/countervandalism/stillalive/edit/master/localSettings-cvn.json
-      - do "Save, commit, push, the file"
-      - ssh -A cvn-appX.eqiad.wmflabs
-      - cd /data/project/cvn/externals/stillalive
-      - git pull origin master
+      - stillalive add MyBotName
     - done!
       # The next time stillalive runs its job queue from crontab on the various cvn-app hosts,
       # the bot will be started.
