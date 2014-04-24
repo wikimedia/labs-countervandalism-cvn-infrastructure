@@ -25,7 +25,7 @@ CVNBot:
     - install:
       - ssh -A cvn-appX.eqiad.wmflabs
       - cd /data/project/cvn/externals/CVNBot
-      - git remote origin && git checkout origin/master
+      - git remote update && git checkout origin/master
       - cd src/CVNBot
       - xbuild CVNBot.csproj
       - mv bin/Debug /data/project/cvn/app/MyBotName
