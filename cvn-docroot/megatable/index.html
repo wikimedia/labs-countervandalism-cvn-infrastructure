@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CVN | SWMT MegaTable</title>
+	<link rel="stylesheet" href="../lib/bootstrap.min.css">
+	<link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<div class="container">
+	<div class="jumbotron">
+		<a href="../" title="Back to the main page">&larr; Back</a>
+		<h1>SWMT MegaTable</h1>
+		<p>Synchronise SWMT bots in #cvn-sw with the latest database of Wikimedia wikis.</p>
+	</div>
+	<form class="form-horizontal" role="form" id="cvn-form">
+		<h2 class="form-signin-heading">Current settings</h2>
+		<span class="help-block text-center">Use "<tt>CVNBot list</tt>" in <code>#cvn-bots</code> to generate the list.</span>
+	</form>
+	<div class="panel panel-primary" id="cvn-output" style="display: none;">
+		<div class="panel-heading">
+			<h3 class="panel-title">Analysis</h3>
+		</div>
+		<div class="panel-body">
+			<div class="panel panel-default" id="cvn-output-current">
+				<div class="panel-heading"><span class="cvn-count badge"></span> currently monitored wikis</div>
+				<div class="panel-body">
+					<ul style="max-height: 10em; overflow: auto;"></ul>
+					<textarea class="form-control" rows="3"></textarea>
+				</div>
+			</div>
+			<div class="panel panel-default" id="cvn-output-redundant">
+				<div class="panel-heading"><span class="cvn-count badge"></span> wikis that no longer need to be monitored</div>
+				<div class="panel-body">
+					<ul></ul>
+					<textarea class="form-control" rows="3"></textarea>
+				</div>
+			</div>
+			<div class="panel panel-default" id="cvn-output-unmonitored">
+				<div class="panel-heading"><span class="cvn-count badge"></span> wikis currently not monitored by any bot</div>
+				<div class="panel-body">
+					<ul></ul>
+					<textarea class="form-control" rows="3"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- /container -->
+<script src="../lib/jquery.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
