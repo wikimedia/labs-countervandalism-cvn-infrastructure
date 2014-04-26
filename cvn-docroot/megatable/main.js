@@ -440,8 +440,8 @@
 
 				processList(analysis.monitored, elements.results.current, 'success');
 
-				elements.results.current.find('ul').before(
-					$('<ul>').append($.map(analysis.channelsByBot, function (channels, bot) {
+				elements.results.current.find('ul').prepend(
+					$('<li>Statistics</li>').append($('<ul>').append($.map(analysis.channelsByBot, function (channels, bot) {
 						return $('<li>')
 							.text(bot + ' ')
 							.append(
@@ -449,7 +449,7 @@
 									.addClass('badge')
 									.text(channels.length)
 							);
-					}))
+					})))
 				);
 
 				processList(
