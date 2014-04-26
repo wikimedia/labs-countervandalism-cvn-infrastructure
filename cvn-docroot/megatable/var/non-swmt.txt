@@ -1,0 +1,57 @@
+# <pre>
+# This page is used by https://cvn.wmflabs.org/megatable/ to
+# exclude wikis from #cvn-sw that would otherwise qualify as Wikimedia wikis that are:
+# - not locked   // https://noc.wikimedia.org/conf/highlight.php?file=closed.dblist
+# - not private  // https://noc.wikimedia.org/conf/highlight.php?file=private.dblist
+# - not fishbowl // https://noc.wikimedia.org/conf/highlight.php?file=fishbowl.dblist
+# - not large    // https://noc.wikimedia.org/conf/highlight.php?file=large.dblist
+# but should still not be monitored by #cvn-sw. For example because they have their own
+# dedicated #cvn-.. channel or for other reasons.
+# Lines starting with "#" are ignored. Other lines should only contain irc.wikimedia.org
+# source channel names.
+#
+# See also [[Countervandalism Network/Bots]]
+# -----
+
+# List of #cvn-wp-ru
+ru.wikipedia
+
+# List of #cvn-wp-es
+es.wikipedia
+
+# List of #cvn-wp-it
+co.wikipedia
+co.wiktionary
+eml.wikipedia
+fur.wikipedia
+it.wikibooks
+it.wikinews
+it.wikiquote
+it.wikisource
+it.wikiversity
+it.wikivoyage
+it.wiktionary
+lij.wikipedia
+nap.wikipedia
+pms.wikipedia
+roa-tara.wikipedia
+sc.wikipedia
+scn.wikipedia
+scn.wiktionary
+vec.wikipedia
+vec.wikisource
+
+# List of #cvn-commons
+commons.wikimedia
+
+# List of #cvn-ja	
+ja.wikibooks
+ja.wikinews
+ja.wikipedia
+ja.wikiquote
+ja.wikisource
+ja.wikiversity
+ja.wiktionary
+
+# List of #cvn-wp-en
+en.wikipedia

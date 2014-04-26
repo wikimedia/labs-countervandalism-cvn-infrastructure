@@ -4,3 +4,4 @@ set -ex
 curl --fail 'https://noc.wikimedia.org/conf/all.dblist' > cvn-docroot/megatable/var/all.dblist
 curl --fail 'https://noc.wikimedia.org/conf/large.dblist' > cvn-docroot/megatable/var/large.dblist
 curl --fail 'https://noc.wikimedia.org/conf/InitialiseSettings.php.txt' > cvn-docroot/megatable/var/InitialiseSettings.php.txt
+curl --fail 'https://meta.wikimedia.org/w/index.php?title=Countervandalism_Network/Bots/non-swmt&action=raw' > cvn-docroot/megatable/var/non-swmt.txt

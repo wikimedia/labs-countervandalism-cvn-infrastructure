@@ -109,6 +109,54 @@
 
 	/**
 	 * @return {Promise}
+	 * @promise {Object} channels Channel keyed by dbname
+	 */
+	APP.getCustomChannels = function () {
+		return $.ajax('./var/InitialiseSettings.php.txt').then(function (data) {
+			var before, after, arrayStart, arrayEnd, arrayLines, channels;
+			// Hacky PHP-parser:
+			// 'wmgRC2UDPPrefix' => array(
+			//     'default' => false,
+			//     'wikidatawiki' => "#wikidata.wikipedia\t",
+			// );
+			before = 'wmgRC2UDPPrefix\' => array(';
+			after = '),';
+			arrayStart = data.indexOf(before);
+			if (arrayStart === -1) {
+				return $.Deferred().reject();
+			}
+			data = data.slice(arrayStart + before.length);
+			arrayEnd = data.indexOf(after);
+			if (arrayEnd === -1) {
+				return $.Deferred().reject();
+			}
+			arrayLines = data.slice(0, arrayEnd).trim().split('\n');
+			channels = {};
+			arrayLines.forEach(function (line) {
+				var matches = line.match(/\s*'([a-z0-9_]+)'\s*=>\s*"#([a-z0-9\-\.]+)\\t"/);
+				if (matches && matches[1] && matches[2]) {
+					channels[ matches[1] ] = matches[2];
+				}
+			});
+			return channels;
+		});
+	};
+
+	/**
+	 * @return {Promise}
+	 * @promise {Array} channels
+	 */
+	APP.getExcludedChannels = function () {
+		return $.ajax('./var/non-swmt.txt').then(function (data) {
+			return String(data).trim().split('\n').filter(function (line) {
+				line = line.trim();
+				return line.length && line[0] !== '#';
+			});
+		});
+	};
+
+	/**
+	 * @return {Promise}
 	 * @promise {Object} wikis Wiki site descriptors keyed by dbname
 	 */
 	APP.getWikis = function () {
@@ -157,57 +205,31 @@
 
 	/**
 	 * @return {Promise}
-	 * @promise {Object} channels Channel keyed by dbname
-	 */
-	APP.getCustomChannels = function () {
-		return $.ajax('./var/InitialiseSettings.php.txt').then(function (data) {
-			var before, after, arrayStart, arrayEnd, arrayLines, channels;
-			// Hacky PHP-parser:
-			// 'wmgRC2UDPPrefix' => array(
-			//     'default' => false,
-			//     'wikidatawiki' => "#wikidata.wikipedia\t",
-			// );
-			before = 'wmgRC2UDPPrefix\' => array(';
-			after = '),';
-			arrayStart = data.indexOf(before);
-			if (arrayStart === -1) {
-				return $.Deferred().reject();
-			}
-			data = data.slice(arrayStart + before.length);
-			arrayEnd = data.indexOf(after);
-			if (arrayEnd === -1) {
-				return $.Deferred().reject();
-			}
-			arrayLines = data.slice(0, arrayEnd).trim().split('\n');
-			channels = {};
-			arrayLines.forEach(function (line) {
-				var matches = line.match(/\s*'([a-z0-9_]+)'\s*=>\s*"#([a-z0-9\-\.]+)\\t"/);
-				if (matches && matches[1] && matches[2]) {
-					channels[ matches[1] ] = matches[2];
-				}
-			});
-			return channels;
-		});
-	};
-
-	/**
-	 * @return {Promise}
 	 * @promise {Array} channels IRC source channel names for irc.wikimedia.org (without "#")
 	 */
 	APP.getSourceChannels = function () {
 		return $.when(
 			APP.getWikis(),
-			APP.getCustomChannels()
-		).then(function (wikis, customChannels) {
+			APP.getCustomChannels(),
+			APP.getExcludedChannels()
+		).then(function (wikis, customChannels, excludedChannels) {
 			// Using jQuery.map to filter out null values
 			return $.map(wikis, function (wiki, dbname) {
-				var matches;
+				var matches, channel;
 				if (customChannels[dbname]) {
-					return customChannels[dbname];
+					channel = customChannels[dbname];
+				} else {
+					// Based on wmf-config/CommonSettings.php
+					matches = wiki.hostname.match(/^(.+).org$/);
+					if (!matches) {
+						return;
+					}
+					channel = matches[1];
 				}
-				// Based on wmf-config/CommonSettings.php
-				matches = wiki.hostname.match(/^(.+).org$/);
-				return matches && matches[1];
+				if (excludedChannels.indexOf(channel) !== -1) {
+					return;
+				}
+				return channel;
 			});
 		});
 	};
@@ -419,7 +441,7 @@
 
 				processList(
 					{
-						'Monitored wikis that no longer need to be monitored (closed, removed, too big, source channel changed, ..)': analysis.redundantByBot,
+						'Monitored wikis that no longer need to be monitored (locked, removed, too large, source channel changed, already monitored outside #cvn-sw, ..)': analysis.redundantByBot,
 						'Wikis monitored more than once': analysis.dupesByChannel
 					},
 					elements.results.redundant,
