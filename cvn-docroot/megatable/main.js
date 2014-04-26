@@ -373,6 +373,10 @@
 			}
 		}
 
+		function handleOutputTextClick(e) {
+			this.select && this.select();
+		}
+
 		/**
 		 * @param {jQuery.Event} e
 		 */
@@ -568,6 +572,15 @@
 			redundant: elements.$output.find('#cvn-output-redundant'),
 			unmonitored: elements.$output.find('#cvn-output-unmonitored')
 		};
+
+		elements.results.current.find('textarea')
+		.add(
+			elements.results.redundant.find('textarea')
+		)
+		.add(
+			elements.results.unmonitored.find('textarea')
+		)
+		.on('click', handleOutputTextClick);
 
 		return elements;
 	};
