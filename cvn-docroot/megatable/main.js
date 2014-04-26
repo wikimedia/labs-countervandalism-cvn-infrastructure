@@ -157,6 +157,20 @@
 
 	/**
 	 * @return {Promise}
+	 * @promise {Array} channels
+	 */
+	APP.getIncludedChannels = function () {
+		// These channels are excluded by the main factors, but #cvn-sw wants to
+		// keep these eventhough they are slightly large or have their own channel
+		return $.Deferred().resolve([
+				'meta.wikimedia',
+				'species.wikipedia',
+				'incubator.wikimedia'
+		]);
+	};
+
+	/**
+	 * @return {Promise}
 	 * @promise {Object} wikis Wiki site descriptors keyed by dbname
 	 */
 	APP.getWikis = function () {
@@ -211,10 +225,11 @@
 		return $.when(
 			APP.getWikis(),
 			APP.getCustomChannels(),
-			APP.getExcludedChannels()
-		).then(function (wikis, customChannels, excludedChannels) {
+			APP.getExcludedChannels(),
+			APP.getIncludedChannels()
+		).then(function (wikis, customChannels, excludedChannels, includedChannels) {
 			// Using jQuery.map to filter out null values
-			return $.map(wikis, function (wiki, dbname) {
+			var channels = $.map(wikis, function (wiki, dbname) {
 				var matches, channel;
 				if (customChannels[dbname]) {
 					channel = customChannels[dbname];
@@ -231,6 +246,12 @@
 				}
 				return channel;
 			});
+			$.each(includedChannels, function (i, channel) {
+				if (channels.indexOf(channel) === -1) {
+					channels.push(channel);
+				}
+			});
+			return channels;
 		});
 	};
 
