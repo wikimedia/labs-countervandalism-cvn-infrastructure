@@ -452,14 +452,14 @@
 					var nodes = getListItems(data);
 					$target.find('ul')
 						.empty()
-						.append(nodes);
+						.append(nodes.length ? nodes : $('<p>').addClass('text-muted').text('Nothing!'));
 
 					$target.find('textarea').val(JSON.stringify(data, null, 4));
 
 					if (nodes.length) {
 						$target.attr('class', 'panel panel-' + panelType);
 					} else {
-						$target.attr('class', 'panel panel-default');
+						$target.attr('class', 'panel panel-success');
 					}
 				}
 
