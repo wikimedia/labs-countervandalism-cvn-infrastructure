@@ -19,7 +19,7 @@ ru.wikipedia
 # List of #cvn-wp-es
 es.wikipedia
 
-# List of #cvn-wp-it
+# List of #cvn-it-scan
 co.wikipedia
 co.wiktionary
 eml.wikipedia
@@ -40,6 +40,12 @@ scn.wikipedia
 scn.wiktionary
 vec.wikipedia
 vec.wikisource
+
+# List of #cvn-wp-nl
+nl.wikipedia
+
+# List of #cvn-wp-da
+da.wikipedia
 
 # List of #cvn-commons
 commons.wikimedia
