@@ -1,4 +1,4 @@
-# <pre>
+<pre>
 # This page is used by https://cvn.wmflabs.org/megatable/ to
 # exclude wikis from #cvn-sw that would otherwise qualify as Wikimedia wikis that are:
 # - not locked   // https://noc.wikimedia.org/conf/highlight.php?file=closed.dblist
@@ -61,3 +61,26 @@ ja.wiktionary
 
 # List of #cvn-wp-en
 en.wikipedia
+
+# List of #cvn-wikivoyage
+de.wikivoyage
+el.wikivoyage
+en.wikivoyage
+es.wikivoyage
+fr.wikivoyage
+he.wikivoyage
+it.wikivoyage
+nl.wikivoyage
+pt.wikivoyage
+ro.wikivoyage
+ru.wikivoyage
+sv.wikivoyage
+uk.wikivoyage
+vi.wikivoyage
+zh.wikivoyage
+
+# List of #cvn-simplewikis
+simple.wikipedia
+simple.wiktionary
+
+# </pre>

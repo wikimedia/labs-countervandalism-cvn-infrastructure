@@ -148,7 +148,8 @@
 	 */
 	APP.getExcludedChannels = function () {
 		return $.ajax('./var/non-swmt.txt').then(function (data) {
-			return String(data).trim().split('\n').filter(function (line) {
+			// Exclude first line (opening <pre>)
+			return String(data).trim().split('\n').slice(1).filter(function (line) {
 				line = line.trim();
 				return line.length && line[0] !== '#';
 			});
@@ -373,8 +374,13 @@
 			}
 		}
 
+		/**
+		 * @param {jQuery.Event} e
+		 */
 		function handleOutputTextClick(e) {
-			this.select && this.select();
+			if (this.select) {
+				this.select();
+			}
 		}
 
 		/**
