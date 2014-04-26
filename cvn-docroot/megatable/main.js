@@ -290,6 +290,7 @@
 			}
 
 			return {
+				channelsByBot: channelsByBot,
 				monitored: Object.keys(monitoredInBot),
 				dupesByChannel: dupesByChannel,
 				redundantByBot: redundantByBot,
@@ -438,6 +439,18 @@
 				}
 
 				processList(analysis.monitored, elements.results.current, 'success');
+
+				elements.results.current.find('ul').before(
+					$('<ul>').append($.map(analysis.channelsByBot, function (channels, bot) {
+						return $('<li>')
+							.text(bot + ' ')
+							.append(
+								$('<span>')
+									.addClass('badge')
+									.text(channels.length)
+							);
+					}))
+				);
 
 				processList(
 					{
