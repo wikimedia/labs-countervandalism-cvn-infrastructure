@@ -1,0 +1,6 @@
+# Compatibility redirects for incoming requests from toolserver.org/~cvn
+Redirect 301 /bots.php https://meta.wikimedia.org/wiki/Countervandalism_Network/Bots
+Redirect 301 /MegaTable/bots.php https://meta.wikimedia.org/wiki/Countervandalism_Network/Bots
+Redirect 301 /MegaTable/swmt.php https://cvn.wmflabs.org/megatable/
+Redirect 301 /MegaTable/index.php https://cvn.wmflabs.org/megatable/
+RedirectMatch 301 ^/MegaTable/*$ https://cvn.wmflabs.org/megatable/
