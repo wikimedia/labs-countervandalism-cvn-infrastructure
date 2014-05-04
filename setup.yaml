@@ -6,6 +6,13 @@ global:
 webserver:
   - debian:
     - apache2
+  - setup: |
+    $ sudo -s
+    # cd /etc/apache2/sites-available
+    # ln -s /data/project/cvn/externals/infrastructure/apache-config/cvn.conf .
+    # cd /etc/apache2/sites-enabled
+    # ln -s ../sites-available/cvn.conf 100-cvn
+    # apachectl graceful
 
 stillalive:
   - source: 'https://github.com/countervandalism/stillalive'
@@ -55,7 +62,7 @@ stillalive:
     # after you remove the setting, it no longer knows about it.
     # Manually terminate the old bot process.
     - quit-a-bot
-  
+
 CVNBot:
   - source: 'https://github.com/countervandalism/CVNBot'
   - debian:
@@ -96,7 +103,7 @@ CVNBot:
       - mono CVNBot.exe
       - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
       - do "Any additional setup if you need to (e.g. load or drop more wikis in memory)"
-      - do "kill the process from the command line, it was started from your shell, so Ctrl^C will do"
+      - do "kill the process from the command line (it was started from your shell so Ctrl^C will do)"
     - schedule:
       - stillalive add MyBotName
     - done!
