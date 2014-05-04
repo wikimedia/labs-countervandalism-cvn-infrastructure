@@ -89,16 +89,18 @@ CVNBot:
         #    e.g. botnick=CVNBot5 and botpass=(CVN-Bots2 password)
         # 'partmsg': "https://meta.wikimedia.org/wiki/CVN"
         # 'controlchannel': "#cvn-bots"
-        # 'feedchannel': "#cvn-... channel"
+        # 'feedchannel': "#cvn-..."
         # 'broadcastchannel': "#cvn-broadcast"
-        # 'restararg': Full in the full path to CVNBot.exe (e.g. "mono /data/project/cvn/app/MyBotName/CVNbot.exe")
+        # 'restararg': Full in the full path to CVNBot.exe (e.g. "mono /data/project/cvn/app/MyBotName/CVNBot.exe")
       - if "You're migrating data from an old bot":
       - edit CVNBot.ini
-          # Add in any relevant settings from the old .ini file (editblank, editbig, feedFilterEventUpload, etc.)
+        - nano CVNBot.ini # Add relevant settings from the old bot (e.g. editblank, editbig, feedFilterEventUpload, etc.)
         - cp ../oldbot/Lists.sqlite .
         - cp ../oldbot/Projects.xml .
     - test:
-      - ssh -A cvn-dev.eqiad.wmflabs
+      # Run test on a cvn-app server because cvn-dev is subject to general
+      # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
+      - ssh -A cvn-appX.eqiad.wmflabs
       - cd /data/project/cvn/app/MyBotName
       - mono CVNBot.exe
       - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
