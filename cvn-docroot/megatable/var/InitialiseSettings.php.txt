@@ -719,7 +719,7 @@ $wgConf->settings = array(
 	'nlwiktionary' => '//upload.wikimedia.org/wiktionary/nl/2/26/WiktNL1.png',
 	'nnwiktionary' => '//upload.wikimedia.org/wikipedia/commons/thumb/5/51/Wiktionary-logo-nn.svg/128px-Wiktionary-logo-nn.svg.png', // Bug 43240
 	'nowiktionary' => '$stdlogo',
-	'ocwiktionary' => '$stdlogo',
+	'ocwiktionary' => '//upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Wiktionary-logo-oc.svg/128px-Wiktionary-logo-oc.svg.png', // bug 52019
 	'orwiktionary' => '//upload.wikimedia.org/wikipedia/commons/thumb/1/14/Wiktionary-logo-or.svg/128px-Wiktionary-logo-or.svg.png',
 	'pawiktionary' => '//upload.wikimedia.org/wikipedia/commons/thumb/9/98/Wiktionary-logo-pa.svg/128px-Wiktionary-logo-pa.svg.png', // Bug 43240
 	'plwiktionary' => '$stdlogo',
@@ -912,6 +912,7 @@ $wgConf->settings = array(
 
 	// Wikiversity
 	'arwikiversity' => '//upload.wikimedia.org/wikipedia/commons/5/5c/Wikiversity-logo-ar-small.png',
+	'cswikiversity' => '//upload.wikimedia.org/wikipedia/commons/thumb/0/04/Wikiversity-logo-cs.svg/135px-Wikiversity-logo-cs.svg.png', // bug 52019
 	'kowikiversity' => '//upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Wikiversity-logo-ko.svg/135px-Wikiversity-logo-ko.svg.png',
 	'ruwikiversity' => '//upload.wikimedia.org/wikiversity/ru/b/bc/Wiki.png',
 	'slwikiversity' => '//upload.wikimedia.org/wikipedia/commons/4/4f/Sl-wikiversity-org.png',
@@ -2059,7 +2060,7 @@ $wgConf->settings = array(
 	'ocwiki'	=> 'Wikipèdia', # http://bugzilla.wikimedia.org/show_bug.cgi?id=7123
 	'ocwikibooks'   => 'Wikilibres',
 	'ocwiktionary'  => 'Wikiccionari',
-	'officewiki'    => 'Project',
+	'officewiki'    => 'OfficeWiki', // bug 64976
 	'ombudsmenwiki' => 'Project',
 	'orwiki'        => 'ଉଇକିପିଡ଼ିଆ',
 	'oswiki'	=> 'Википеди',
@@ -3083,6 +3084,9 @@ $wgConf->settings = array(
 	'+nowiktionary' => array(
 		'Appendix' => 100,
 		'Appendix_talk' => 101,
+	),
+	'+officewiki' => array( // bug 64976
+		'OW' => NS_PROJECT,
 	),
 	'+orwiki' => array(
 		'Wikipedia' => NS_PROJECT,
@@ -4116,6 +4120,10 @@ $wgConf->settings = array(
 		106 => 'Institution',
 		107 => 'Institution_talk',
 	),
+	'chapcomwiki' => array(
+		100 => 'Draft', // bug 64123
+		101 => 'Draft_talk',
+	), 
 	'mediawikiwiki' => array(
 		100 => 'Manual',
 		101 => 'Manual_talk',
@@ -4900,6 +4908,8 @@ $wgConf->settings = array(
 		111 => 'שיחת_תרגום',
 		112 => 'מפתח',
 		113 => 'שיחת_מפתח',
+		116 => 'מקור', // bug 64353
+		117 => 'שיחת_מקור', // bug 64353
 	),
 	'hrwikisource' => array(
 		100 => 'Autor',
@@ -6876,10 +6886,11 @@ $wgConf->settings = array(
 		'autopatrolled' => array( 'autopatrol' => true ),
 	),
 	'fawiki' => array(
-		'*' => array( 'createpage' => false ), # 27195
+		'*' => array( 'createpage' => false ), // bug 27195
 		'patroller' => array( 'patrol' => true ),
 		'rollbacker' => array( 'rollback' => true ),
-		'autopatrol' => array( 'autopatrol' => true ), // http://bugzilla.wikimedia.org/show_bug.cgi?id=29007
+		'autopatrol' => array( 'autopatrol' => true ), // bug 29007
+		'Image-reviewer' => array( 'movefile' => true ), // bug 64532
 	),
 	'fawikinews' => array(
 		'rollbacker' => array( 'rollback' => true ),
@@ -7233,6 +7244,7 @@ $wgConf->settings = array(
 
 	'+officewiki' => array(
 		'communityapps' => array( 'view-community-applications' => true ),
+		'user' => array( 'massmessage' => true, ), // bug 64978
 	),
 	'+ombudsmenwiki'  => array(
 		'autoconfirmed' => array(
@@ -7424,6 +7436,9 @@ $wgConf->settings = array(
 		),
 		'filemover' => array( 'movefile' => true, 'suppressredirect' => true ),
 		'flood' => array( 'bot' => true ),
+	),
+	'shwiktionary' => array(
+		'autopatrolled' => array( 'autopatrol' => true ),
 	),
 	'siwiki' => array(
 		'rollbacker'    => array( 'rollback' => true ),
@@ -7845,7 +7860,7 @@ $wgConf->settings = array(
 		'sysop' => array( 'autopatrolled', 'flood', 'patroller', 'rollbacker' ),
 	),
 	'+fawiki' => array(
-		'bureaucrat' => array( 'patroller' ),
+		'bureaucrat' => array( 'patroller', 'Image-reviewer' ), // bug 64532
 		'sysop' => array( 'rollbacker', 'autopatrol' ),
 	),
 	'+fawikinews' => array(
@@ -8074,6 +8089,10 @@ $wgConf->settings = array(
 			'autopatrolled', 'filemover', 'patroller', 'rollbacker', // bug 50802
 			'flood', // bug 52273
 		),
+	),
+	'+shwiktionary' => array(
+		'sysop' => array( 'autopatrolled' ),
+		'bureaucrat' => array( 'autopatrolled' ),
 	),
 	'+siwiki' => array(
 		'sysop' => array( 'rollbacker', 'accountcreator', 'abusefilter', 'autopatrolled', 'confirmed', 'reviewer' ),
@@ -8335,7 +8354,7 @@ $wgConf->settings = array(
 		'sysop' => array( 'autopatrolled', 'patroller', 'rollbacker', 'flood' ),
 	),
 	'+fawiki' => array(
-		'bureaucrat' => array( 'patroller' ),
+		'bureaucrat' => array( 'patroller', 'Image-reviewer' ), // bug 64532
 		'sysop' => array( 'rollbacker', 'autopatrol' ),
 	),
 	'+fawikinews' => array(
@@ -8564,6 +8583,10 @@ $wgConf->settings = array(
 			'filemover', 'patroller', 'rollbacker', // bug 50802
 			'flood', // bug 52273
 		),
+	),
+	'+shwiktionary' => array(
+		'sysop' => array( 'autopatrolled' ),
+		'bureaucrat' => array( 'autopatrolled' ),
 	),
 	'+siwiki' => array(
 		'sysop' => array( 'rollbacker', 'accountcreator', 'abusefilter', 'autopatrolled', 'confirmed', 'reviewer', ),
@@ -8958,8 +8981,8 @@ $wgConf->settings = array(
 	'viwikisource' => array( 'w', 'wikt', 'b', 'q' ),
 	'viwikiquote'  => array( 'w', 'wikt', 'b', 's' ),
 
-	'wikidata' => array( 'meta', 'commons', 'en', 'de', 'fr', 'es', 'testwikidata' ),
-	'testwikidatawiki' => array( 'd', 'meta', 'commons', 'en', 'de', 'fr', 'es' ),
+	'wikidata' => array( 'meta', 'commons', 'en', 'de', 'fr', 'es' ),
+	'testwikidatawiki' => array( 'meta', 'commons', 'en', 'de', 'fr', 'es' ),
 	'wikimania2012wiki' => array( 'en', 'meta', 'wm2011' ),
 	'wikimania2013wiki' => array( 'en', 'meta', 'wm2011', 'wm2012' ),
 	'wikimania2014wiki' => array( 'en', 'meta', 'wm2011', 'wm2012', 'wm2013' ),
@@ -10416,7 +10439,12 @@ $wgConf->settings = array(
 		'*.musees.cg70.fr',              // Musées de la Haute-Saône (prod)  bug 63449
 		'*.wikimedia.ch',                // Wikimedia CH
 		'link.nypl.org',                 // New York Public Library
-		'peacepalacelibrary.nl', 	 // Peace Palace Library, The Hague  bug 64372
+		'*.peacepalacelibrary.nl', 	 // Peace Palace Library, The Hague  bug 64372
+		'lcweb2.loc.gov',		 // Library of Congress
+		'digital.nls.uk',		 // National Library of Scotland
+		'*.nb.admin.ch',		 // Swiss National Library
+		'*.bar.admin.ch',		 // Swiss Federal Archives
+		'*.unine.ch',			 // University of Neuchâtel
 	),
 ),
 
@@ -10452,10 +10480,6 @@ $wgConf->settings = array(
 
 'wgMaxMsgCacheEntrySize' => array(
 	'default' => 1024,
-),
-
-'wgUseXVO' => array(
-	'default' => true,
 ),
 
 'wmgUseLocalisationUpdate' => array(
@@ -10706,13 +10730,15 @@ $wgConf->settings = array(
 // DO NOT add entries here without OK from Greg Grossmeier or James Forrester.
 'wmgBetaFeaturesWhitelist' => array(
 	'default' => array(
-		'visualeditor-enable',          // VisualEditor – on-going (special permission)
-		'math-enable-visualeditor',     // 2014-05-21 – VE formula editor
-		'multimedia-viewer',            // 2014-05-21 – MediaViewer
-		'betafeatures-geonotahack',     // 2014-05-21 – Near this page
-		'cirrussearch-default',         // 2014-06-09 – New Seach
-		'uls-compact-links',            // 2014-09-06 – Compact language links
-		'popups',                       // 2014-09-18 – Hovercards
+		'visualeditor-enable',                      // VisualEditor – on-going (special permission)
+		'math-enable-visualeditor',                 // 2014-05-21 – VE formula editor
+		'multimedia-viewer',                        // 2014-05-21 – MediaViewer
+		'betafeatures-geonotahack',                 // 2014-05-21 – Near this page
+		'cirrussearch-default',                     // 2014-06-09 – New Seach
+		'uls-compact-links',                        // 2014-09-06 – Compact language links
+		'popups',                                   // 2014-09-18 – Hovercards
+		'betafeatures-vector-compact-personal-bar', // 2014-11-01 – Compact personal bar
+		'visualeditor-enable-language',             // 2014-10-30 — VE language editor
 	),
 ),
 
@@ -10734,6 +10760,10 @@ $wgConf->settings = array(
 	'default' => true,
 	'loginwiki' => false,
 	'votewiki' => false,
+),
+
+'wmgVectorBetaPersonalBar' => array(
+	'default' => true,
 ),
 
 'wmgULSCompactLinks' => array(
@@ -10770,6 +10800,9 @@ $wgConf->settings = array(
 	'dewiki' => true,
 	'frwiki' => true,
 	'ptwiki' => true,
+	// TODO disable 2014-05-28
+	'eswiki' => true,
+	'nlwiki' => true,
 ),
 
 'wmgNetworkPerformanceSamplingFactor' => array(
@@ -10950,6 +10983,7 @@ $wgConf->settings = array(
 	'huwiki' => 'uca-hu', // bug 45596
 	'iswiki' => 'uca-is', // bug 56859
 	'iswiktionary' => 'identity', // bug 30722
+	'lvwiki' => 'uca-lv', // bug 65003
 	'plwiki' => 'uca-pl', // bug 42413
 	'plwikivoyage' => 'uca-pl', // bug 45968
 	'plwiktionary' => 'uca-default', // bug 46081
@@ -11030,6 +11064,7 @@ $wgConf->settings = array(
 
 'wgUploadMissingFileUrl' => array(
 	'default' => false,
+	'enwiki' => '//en.wikipedia.org/wiki/Special:Upload',
 	'incubatorwiki' => '//commons.wikimedia.org/wiki/Special:Upload',
 	'nlwiki' => '//commons.wikimedia.org/wiki/Special:Upload?uselang=nl',
 	'nlwikisource' => '//commons.wikimedia.org/wiki/Special:Upload?uselang=nl',
@@ -11322,7 +11357,7 @@ $wgConf->settings = array(
 		'N' => false,
 	),
 	'betawikiversity' => array( // bug 64168
-		'0' => false,
+		'0' => 'User %code%-0',
 		'1' => 'User %code%-1',
 		'2' => 'User %code%-2',
 		'3' => 'User %code%-3',
@@ -12203,56 +12238,56 @@ $wgConf->settings = array(
 'wmgGettingStartedCategoriesForTaskTypes' => array(
 	'default' => array(),
 	'cawiki' => array(
-		'copyedit' => 'Articles amb ortografia per millorar',
+		'copyedit' => 'Categoria:Articles amb ortografia per millorar',
 	),
 	'enwiki' => array(
-		'copyedit' => 'All articles needing copy edit',
-		'clarify' => 'All Wikipedia articles needing clarification',
-		'addlinks' => 'All articles with too few wikilinks',
+		'copyedit' => 'Category:All articles needing copy edit',
+		'clarify' => 'Category:All Wikipedia articles needing clarification',
+		'addlinks' => 'Category:All articles with too few wikilinks',
 	),
 	'eswiki' => array(
-		'copyedit' => 'Wikipedia:Copyedit',
+		'copyedit' => 'Categoría:Wikipedia:Copyedit',
 	),
 	'simplewiki' => array(
-		'copyedit' => 'Pages in need of copyedit',
+		'copyedit' => 'Category:Pages in need of copyedit',
 	),
-	'svwiki' => array (
-		'copyedit' => 'Wikipedia:Språkvård-samtliga',
+	'svwiki' => array(
+		'copyedit' => 'Kategori:Wikipedia:Språkvård-samtliga',
 	),
 	'ukwiki' => array(
-		'copyedit' => 'Статті, що потребують вичитки',
+		'copyedit' => 'Категорія:Статті, що потребують вичитки',
 	),
 	'zhwiki' => array(
-		'copyedit' => '需要校對的頁面',
+		'copyedit' => 'Category:需要校對的頁面',
 	),
 	'fawiki' => array(
-		'clarify' => 'همه مقاله‌های نیازمند شفاف‌سازی ویکی‌پدیا',
-		'addlinks' => 'همه مقاله‌هایی که ویکی‌پیوند بسیار کمی دارند',
+		'clarify' => 'رده:همه مقاله‌های نیازمند شفاف‌سازی ویکی‌پدیا',
+		'addlinks' => 'رده:همه مقاله‌هایی که ویکی‌پیوند بسیار کمی دارند',
 	),
 	'ruwiki' => array(
-		'clarify' => 'Статьи, требующие внесения ясности',
+		'clarify' => 'Категория:Статьи, требующие внесения ясности',
 	),
 ),
 'wmgGettingStartedExcludedCategories' => array(
 	'default' => array(),
-	'astwiki' => array( 'Persones vives' ),
-	'bswiki' => array( 'Živi ljudi' ),
-	'cawiki' => array( 'Persones vives' ),
-	'dawiki' => array( 'Levende personer' ),
-	'enwiki' => array( 'Living people' ),
-	'eswiki' => array( 'Personas vivas' ),
-	'fawiki' => array( 'افراد زنده' ),
-	'itwiki' => array( 'Persone viventi' ),
-	'kowiki' => array( '살아있는 사람' ),
-	'mkwiki' => array( 'Живи луѓе' ),
-	'mlwiki' => array( 'ജീവിച്ചിരിക്കുന്ന പ്രമുഖർ' ),
-	'ptwiki' => array( 'Pessoas vivas' ),
-	'ruwiki' => array( 'Ныне живущие' ),
-	'simplewiki' => array( 'Living people' ),
-	'svwiki' => array( 'Levande personer' ),
-	'ukwiki' => array( 'Нині живуть' ),
-	'viwiki' => array( 'Nhân vật còn sống' ),
-	'zhwiki' => array( '在世人物' ),
+	'astwiki' => array( 'Categoría:Persones vives' ),
+	'bswiki' => array( 'Kategorija:Živi ljudi' ),
+	'cawiki' => array( 'Categoria:Persones vives' ),
+	'dawiki' => array( 'Kategori:Levende personer' ),
+	'enwiki' => array( 'Category:Living people' ),
+	'eswiki' => array( 'Categoría:Personas vivas' ),
+	'fawiki' => array( 'رده:افراد زنده' ),
+	'itwiki' => array( 'Categoria:Persone viventi' ),
+	'kowiki' => array( '분류:살아있는 사람' ),
+	'mkwiki' => array( 'Категорија:Живи луѓе' ),
+	'mlwiki' => array( 'വർഗ്ഗം:ജീവിച്ചിരിക്കുന്ന പ്രമുഖർ' ),
+	'ptwiki' => array( 'Categoria:Pessoas vivas' ),
+	'ruwiki' => array( 'Категория:Ныне живущие' ),
+	'simplewiki' => array( 'Category:Living people' ),
+	'svwiki' => array( 'Kategori:Levande personer' ),
+	'ukwiki' => array( 'Категорія:Нині живуть' ),
+	'viwiki' => array( 'Thể loại:Nhân vật còn sống' ),
+	'zhwiki' => array( 'Category:在世人物' ),
 ),
 'wmgGettingStartedRunTest' => array(
 	'default' => false,
@@ -12342,8 +12377,7 @@ $wgConf->settings = array(
 	'testwiki' => 'elastic',
 ),
 'wmgGeoDataUseCirrusSearch' => array(
-	'default' => false,
-	'testwiki' => true,
+	'default' => true,
 ),
 'wmgEnableGeoSearch' => array(
 	'default' => true,
@@ -12474,6 +12508,8 @@ $wgConf->settings = array(
 		'Talk:Beta Features/Hovercards',
 		'Talk:Compact Personal Bar',
 		'Talk:Beta Features/Nearby Pages',
+		'Talk:VisualEditor/Beta Features/Language',
+		'Talk:Content translation',
 	),
 	'enwiki' => array( // Bug 60178
 		'Wikipedia talk:WikiProject Breakfast',
@@ -12645,7 +12681,11 @@ $wgConf->settings = array(
 		'assoc' => 'Association',
 		'ldbwiki' => 'Location Database Wiki',
 	),
-	// Further languages for Wikidata not (yet) supported by MediaWiki (bug 59905)
+	// Further languages for (test)wikidata not (yet) supported by MediaWiki (bug 59905)
+	'wikidatawiki' => array(
+		'rwr' => 'मारवाड़ी',
+		'ota' => 'Ottoman Turkish',
+	),
 	'testwikidatawiki' => array(
 		'rwr' => 'मारवाड़ी',
 		'ota' => 'Ottoman Turkish',
@@ -12902,52 +12942,6 @@ $wgConf->settings = array(
 	'default' => true,
 ),
 
-'wmgCirrusIsBuilding' => array(
-	'default' => false,
-	'arwiki' => true,
-	'azwiki' => true,
-	'bgwiki' => true,
-	'bswiki' => true,
-	'cebwiki' => true,
-	'cswiki' => true,
-	'dawiki' => true,
-	'eowiki' => true,
-	'etwiki' => true,
-	'euwiki' => true,
-	'fawiki' => true,
-	'fiwiki' => true,
-	'hewiki' => true,
-	'hiwiki' => true,
-	'hrwiki' => true,
-	'hywiki' => true,
-	'idwiki' => true,
-	'incubatorwiki' => true,
-	'jawiki' => true,
-	'kkwiki' => true,
-	'kowiki' => true,
-	'ltwiki' => true,
-	'metawiki' => true,
-	'mkwiki' => true,
-	'mswiki' => true,
-	'nnwiki' => true,
-	'nowiki' => true,
-	'plwiki' => true,
-	'rowiki' => true,
-	'shwiki' => true,
-	'simplewiki' => true,
-	'skwiki' => true,
-	'slwiki' => true,
-	'srwiki' => true,
-	'svwiki' => true,
-	'thwiki' => true,
-	'trwiki' => true,
-	'ukwiki' => true,
-	'uzwiki' => true,
-	'viwiki' => true,
-	'warwiki' => true,
-	'zhwiki' => true,
-),
-
 'wmgCirrusSearchPreferRecentDefaultDecayPortion' => array(
 	'default' => 0,
 	'wikinews' => .6,
@@ -12960,41 +12954,85 @@ $wgConf->settings = array(
 	'mediawikiwiki' => true,
 ),
 
-// Shard each wiki to be about 2gb of index per shard.  Changing this for a wiki
-// requires an in place reindex.  Last full review 2014-01-27.  See
+// Shard each wiki to be under 2gb per shard if possible.  Changing this for a wiki
+// requires an in place reindex.  Last full review 2014-05-01.  See
 // https://wikitech.wikimedia.org/wiki/Search/New#Estimating_the_number_of_shards_required
-// for estimation methodology.  At this point I'm declaring we should have no more than
-// 20 shards per index.  We might go higher but that is a tradeoff for easier maintenance
-// at the cost of search performance.
+// for estimation of new wikis.  At this point I'm declaring we should have no more than
+// 20 shards per index.  We might go higher.  More then 20 might slow down searches due to
+// communication time.  Since we only have 16 servers at this point having 20 shards means
+// some servers are pulling double duty.
 'wmgCirrusSearchShardCount' => array(
 	// Most wikis are too small to be worth sharding
 	'default' => array( 'content' => 1, 'general' => 1 ),
+	'arwiki' => array( 'content' => 3, 'general' => 4 ),
+	'arwikisource' => array( 'content' => 2, 'general' => 1 ),
+	'bgwiki' => array( 'content' => 2, 'general' => 1 ),
 	'cawiki' => array( 'content' => 6, 'general' => 1 ),
+	'cebwiki' => array( 'content' => 2, 'general' => 1 ),
+	'cswiki' => array( 'content' => 2, 'general' => 1 ),
 	// Commons is special and has a 'file' index in addition to the regular ones.
 	// File has shards at ~6GB each even with 20 of them.
 	'commonswiki' => array( 'content' => 1, 'general' => 20, 'file' => 20 ),
+	'dawiki' => array( 'content' => 2, 'general' => 1 ),
 	'dewiki' => array( 'content' => 20, 'general' => 16 ),
 	'dewikisource' => array( 'content' => 3, 'general' => 1 ),
 	'elwiki' => array( 'content' => 2, 'general' => 1 ),
 	// These shards are also signigicantly larger than the target 2GB.
 	'enwiki' => array( 'content' => 20, 'general' => 20 ),
-	'enwikinews' => array( 'content' => 1, 'general' => 3 ),
+	'enwikinews' => array( 'content' => 1, 'general' => 4 ),
 	'enwikisource' => array( 'content' => 12, 'general' => 1 ),
 	'enwiktionary' => array( 'content' => 4, 'general' => 2 ),
-	'eswiki' => array( 'content' => 9, 'general' => 6 ),
-	'frwiki' => array( 'content' => 14, 'general' => 13 ),
+	'eswiki' => array( 'content' => 11, 'general' => 6 ),
+	'eswikisource' => array( 'content' => 2, 'general' => 1 ),
+	'fawiki' => array( 'content' => 4, 'general' => 2 ),
+	'fiwiki' => array( 'content' => 2, 'general' => 13 ),
+	'frwiki' => array( 'content' => 20, 'general' => 14 ),
 	'frwikisource' => array( 'content' => 12, 'general' => 1 ),
-	'frwikitionary' => array( 'content' => 2, 'general' => 1 ),
+	'frwiktionary' => array( 'content' => 2, 'general' => 1 ),
+	'hewiki' => array( 'content' => 2, 'general' => 2 ),
 	'huwiki' => array( 'content' => 4, 'general' => 2 ),
+	'idwiki' => array( 'content' => 2, 'general' => 2 ),
+	'incubatorwiki' => array( 'content' => 1, 'general' => 2 ),
 	'itwiki' => array( 'content' => 13, 'general' => 9 ),
+	'jawiki' => array( 'content' => 13, 'general' => 6 ),
+	'kkwiki' => array( 'content' => 2, 'general' => 1 ),
+	'kowiki' => array( 'content' => 3, 'general' => 1 ),
+	'ltwiktionary' => array( 'content' => 2, 'general' => 1 ),
+	'mswiki' => array( 'content' => 2, 'general' => 1 ),
+	'metawiki' => array( 'content' => 1, 'general' => 13 ),
 	'mgwiktionary' => array( 'content' => 2, 'general' => 1 ),
+	'nowiki' => array( 'content' => 1, 'general' => 2 ),
 	'nlwiki' => array( 'content' => 8, 'general' => 4 ),
-	'ptwiki' => array( 'content' => 6, 'general' => 5 ),
-	'ruwiki' => array( 'content' => 13, 'general' => 9 ),
+	'plwiki' => array( 'content' => 6, 'general' => 3 ),
+	'ptwiki' => array( 'content' => 7, 'general' => 5 ),
+	'rowiki' => array( 'content' => 3, 'general' => 2 ),
+	'ruwiki' => array( 'content' => 18, 'general' => 11 ),
 	'ruwikisource' => array( 'content' => 3, 'general' => 1),
 	'ruwiktionary' => array( 'content' => 3, 'general' => 1 ),
+	'thwiki' => array( 'content' => 2, 'general' => 1 ),
+	'trwiki' => array( 'content' => 2, 'general' => 2 ),
+	'srwiki' => array( 'content' => 3, 'general' => 1 ),
+	'shwiki' => array( 'content' => 2, 'general' => 1 ),
+	'svwiki' => array( 'content' => 6, 'general' => 2 ),
+	'ukwiki' => array( 'content' => 6, 'general' => 2 ),
+	'viwiki' => array( 'content' => 3, 'general' => 2 ),
 	'wikidatawiki' => array( 'content' => 7, 'general' => 1 ),
+	'warwiki' => array( 'content' => 2, 'general' => 1 ),
+	'zhwiki' => array( 'content' => 6, 'general' => 5 ),
 	'zhwikisource' => array( 'content' => 3, 'general' => 1 ),
+),
+
+'wmgCirrusSearchUserExperimentalHighlighter' => array(
+	'default' => false,
+	'commonswiki' => true,
+	'enwiki' => true,
+	'eswiki' => true,
+	'hewiki' => true,
+	'mediawikiwiki' => true,
+	'ruwiki' => true,
+	'test2wiki' => true,
+	'testwiki' => true,
+	'testwikidatawiki' => true,
 ),
 
 'wmgUseCite' => array(

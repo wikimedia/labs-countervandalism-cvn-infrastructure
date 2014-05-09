@@ -87,9 +87,11 @@ simple.wiktionary
 # http://noc.wikimedia.org/conf/highlight.php?file=large.dblist
 # but are still too large or simply too active (maybe not many pages, but many edits)
 # for SWMT
-fi.wikipedia
-ko.wikipedia
-hu.wikipedia
-no.wikipedia
 cs.wikipedia
+el.wikipedia
+fi.wikipedia
+he.wikipedia
+hu.wikipedia
+ko.wikipedia
+no.wikipedia
 # </pre>
