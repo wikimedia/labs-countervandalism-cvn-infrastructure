@@ -94,4 +94,9 @@ he.wikipedia
 hu.wikipedia
 ko.wikipedia
 no.wikipedia
+
+# Wikis that don't produce edits that need patrolling
+login.wikipedia
+test.wikipedia
+testwikidata.wikipedia
 # </pre>

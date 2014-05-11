@@ -10439,12 +10439,13 @@ $wgConf->settings = array(
 		'*.musees.cg70.fr',              // Musées de la Haute-Saône (prod)  bug 63449
 		'*.wikimedia.ch',                // Wikimedia CH
 		'link.nypl.org',                 // New York Public Library
-		'*.peacepalacelibrary.nl', 	 // Peace Palace Library, The Hague  bug 64372
-		'lcweb2.loc.gov',		 // Library of Congress
-		'digital.nls.uk',		 // National Library of Scotland
-		'*.nb.admin.ch',		 // Swiss National Library
-		'*.bar.admin.ch',		 // Swiss Federal Archives
-		'*.unine.ch',			 // University of Neuchâtel
+		'*.peacepalacelibrary.nl',       // Peace Palace Library, The Hague  bug 64372
+		'lcweb2.loc.gov',                // Library of Congress
+		'digital.nls.uk',                // National Library of Scotland
+		'*.nb.admin.ch',                 // Swiss National Library
+		'*.bar.admin.ch',                // Swiss Federal Archives
+		'*.unine.ch',                    // University of Neuchâtel
+		'*.mindat.org',                  // Mineral and locality database
 	),
 ),
 
@@ -10815,7 +10816,6 @@ $wgConf->settings = array(
 
 'wmgUseParsoid' => array(
 	'default' => true,
-	'private' => false,
 ),
 
 'wmgUseVisualEditor' => array(
@@ -12168,7 +12168,7 @@ $wgConf->settings = array(
 ),
 
 'wmgMemoryLimit' => array(
-	'default' => 220 * 1024 * 1024, // 220MB
+	'default' => 235 * 1024 * 1024, // 235MB
 ),
 'wgMaxGeneratedPPNodeCount' => array(
 	'default' => 1500000,
@@ -12347,6 +12347,7 @@ $wgConf->settings = array(
 	'ptwiki' => true, // bug 52870
 	'svwiki' => true, // bug 49009
 	'test2wiki' => true,
+	'ukwiki' => true, // bug 64143
 ),
 
 'wmgEducationProgramDYKCat' => array(
