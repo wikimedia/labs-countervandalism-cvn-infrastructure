@@ -24,8 +24,8 @@ node global @ once:
       #
       ## File permissions
       #
-      $ sudo chown root /data/project/cvn-common/git/infrastructure/crontab-config/stillalive.cron
-      $ sudo chmod 644 /data/project/cvn-common/git/infrastructure/crontab-config/stillalive.cron
+      $ sudo chown root /data/project/cvn-common/git/infrastructure/crontab-config/*.cron
+      $ sudo chmod 644 /data/project/cvn-common/git/infrastructure/crontab-config/*.cron
       #
       ## Configure stillalive
       #
@@ -66,7 +66,7 @@ node webserver:
     - www
   - setup: |
       $ cd /etc/cron.d/
-      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/crontab-config/cvn-api-db-pull.cron cvn-api-db-pull
+      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvn-api-db-pull.cron cvn-api-db-pull
 
 node appserver:
   - debian:
@@ -80,7 +80,7 @@ node appserver:
 node cvn-app5:
   - setup: |
       $ cd /etc/cron.d/
-      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/crontab-config/cvn-api-db-push-CVNBot14.cron cvn-api-db-push-CVNBot14
+      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvn-api-db-push-CVNBot14.cron cvn-api-db-push-CVNBot14
 
 service stillalive:
   - setup: |
