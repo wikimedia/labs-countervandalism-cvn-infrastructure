@@ -1,129 +1,153 @@
-global:
+node global @ once:
+  labsconsole:
+    - location: 'https://wikitech.wikimedia.org/wiki/Special:NovaServiceGroup'
+    - project: cvn
+    - add-service-group:
+      - cvnservice (local-cvnservice; cvn.cvnservice)
+  setup: |
+      $ ssh cvn-{name}.eqiad.wmflabs
+      $ umask 0002
+      #
+      ## Set up project share on NFS
+      #
+      $ cd /data/project
+      $ sudo mkdir cvn-common
+      $ sudo chgrp project-cvn cvn-common/
+      $ sudo chmod 2775 cvn-common/
+      $ mkdir cvn-common/git/ cvn-common/backup/ cvn-common/log/ cvn-common/dropbox/
+      #
+      ## Add repos
+      #
+      $ cd /data/project/cvn-common/git
+      $ git clone git@github.com:countervandalism/infrastructure.git
+      $ git clone git@github.com:countervandalism/stillalive.git
+      #
+      ## File permissions
+      #
+      $ sudo chown root /data/project/cvn-common/git/infrastructure/crontab-config/stillalive.cron
+      $ sudo chmod 644 /data/project/cvn-common/git/infrastructure/crontab-config/stillalive.cron
+      #
+      ## Configure stillalive
+      #
+      $ cd data/project/cvn-common/git/stillalive
+      $ ln -s localSettings-cvn.json localSettings.json
+
+node global @ each:
   - debian:
-    - git
+    - git-core
     - nano
-
-webserver:
-  - debian:
-    - apache2
+  - puppet:
+    - roles:
+      - 'role::labs::lvm::srv'
+  # Remember:
+  # - /data/project/cvn is a shared mount between the servers.
+  # - /srv/cvn is local to the instance.
   - setup: |
-    $ sudo -s
-    # cd /etc/apache2/sites-available
-    # ln -s /data/project/cvn/externals/infrastructure/apache-config/cvn.conf .
-    # cd /etc/apache2/sites-enabled
-    # ln -s ../sites-available/cvn.conf 100-cvn
-    # apachectl graceful
+      #
+      ## Forward key with -A in order to make authenticated git clones later
+      #
+      $ ssh -A cvn-{name}.eqiad.wmflabs
+      #
+      ## Create local directory structure
+      #
+      $ cd /srv
+      $ sudo mkdir cvn
+      $ sudo chgrp project-cvn cvn/
+      $ sudo chmod 2775 cvn/
+      $ mkdir cvn/git/ cvn/services/ cvn/log/
+      #
+      ## Configure profile.d
+      #
+      $ cd /etc/profile.d/
+      $ sudo ln -s /data/project/cvn-common/git/infrastructure/environment-config/profile-d-umask-cvn.sh umask-cvn.sh
 
-stillalive:
-  - source: 'https://github.com/countervandalism/stillalive'
+node webserver:
+  - services:
+    - www
+  - setup: |
+      $ cd /etc/cron.d/
+      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/crontab-config/cvn-api-db-pull.cron cvn-api-db-pull
+
+node appserver:
   - debian:
     - php5-cli
+    - php5-sqlite
+  - services:
+    - CVNBot
+    - CVNClerkBot
+    - stillalive
 
-  - quit-a-bot@cvn-wmflabs:
-    - try:
-      - irc '#cvn-bots'
-      - quit MyBotName
-    - else:
-      # Connect to the server where the bot used to be pooled
-      - ssh -A cvn-appX.eqiad.wmflabs
-      - 'ps aux | grep MyBotName'
-      # Find the process id, and terminate it
-      - sudo kill 123
+node cvn-app5:
+  - setup: |
+      $ cd /etc/cron.d/
+      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/crontab-config/cvn-api-db-push-CVNBot14.cron cvn-api-db-push-CVNBot14
 
-  - deploy-a-change@cvn.wmflabs:
-    # After you've made a change to the settings file in the repository on GitHub, we need
-    # to deploy it on our cluster in wmflabs:
-    - ssh -A cvn-dev.eqiad.wmflabs
-    # "/data" is a shared mount between all instances.
-    # When you do git-pull in there, that will affect all cvn-appX nodes.
-    # So after running "git pull", next time any of the cvn-app nodes runs cron, the
-    # new settings will be applied.
-    - cd /data/project/cvn/externals/stillalive
-    - git pull origin master
+service stillalive:
+  - setup: |
+      $ cd /etc/cron.d/
+      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/stillalive.cron stillalive
 
-  # Add a new process:
-  - add@cvn.wmflabs:
-    - do 'Add a new task for MyBotName' to 'localSettings-cvn.json' in github:countervandalism/stillalive.git
-        # From your local computer (save, file, commit, push), or use:
-        # https://github.com/countervandalism/stillalive/edit/master/localSettings-cvn.json
-    - deploy-a-change
+service www:
+  - debian:
+    - libapache2-mod-php5
+    - php-apc
+    - php-pear
+    - php5-cli
+    - php5-curl
+    - php5-mysql
+    - php5-sqlite
+  - setup: |
+    #
+    ## Add repos
+    #
+    $ cd /srv/cvn/git
+    $ git clone git@github.com:countervandalism/infrastructure.git
+    $ git clone git@github.com:countervandalism/cvn-api.git
+    #
+    ## Create document root
+    #
+    $ cd /srv/cvn/services
+    $ ln -s /srv/cvn/git/infrastructure/cvn-docroot www
+    $ cd www
+    $ ln -s /srv/cvn/git/cvn-api/public_html/api.php api.php
+    $ ln -s /data/project/cvn-common/log log
+    #
+    ## Setup cvn-api
+    #
+    $ cd /etc/cron.d/
+    $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvn-api-db-pull.cron cvn-api-db-pull
+    #
+    ## Configure webserver
+    #
+    $ cd /etc/apache2/sites-available
+    $ sudo ln -s /srv/cvn/git/infrastructure/apache-config/cvn.conf .
+    $ cd /etc/apache2/sites-enabled
+    $ sudo ln -s ../sites-available/cvn.conf 100-cvn
+    $ sudo apachectl graceful
 
-  # Change on which node a process is pooled
-  - move@cvn.wmflabs:
-    - do 'Change the "pool" property for MyBotName' in 'localSettings-cvn.json' in github:countervandalism/stillalive.git
-    - quit-a-bot
-    # Be sure to keep an eye on IRC when you follow the steps for deploy-a-change,
-    # if it takes more than a minute, the bot may start again, be sure to quite it again.
-    - deploy-a-change
-
-  - remove@cvn.wmflabs.org:
-    - deploy-a-change
-    # stillalive only starts processes, it doesn't quit them because
-    # after you remove the setting, it no longer knows about it.
-    # Manually terminate the old bot process.
-    - quit-a-bot
-
-CVNBot:
-  - source: 'https://github.com/countervandalism/CVNBot'
+service CVNBot:
   - debian:
     - mono-complete
-  - install:
-    - 'https://github.com/countervandalism/CVNBot#build'
-    - 'https://github.com/countervandalism/CVNBot/wiki/Documentation#installation'
+  - setup: |
+    #
+    ## Add repos
+    #
+    $ cd /srv/cvn/git
+    $ git clone git@github.com:countervandalism/CVNBot.git
+    $ cd /srv/cvn/services
+    $ mkdir cvnbot
 
-  - setup@cvn.wmflabs:
-    # Remember that it doesn't matter on which cvn-app host you run the below commands since
-    # /data/project/cvn is a shared mount between the servers.
-    - install:
-      - ssh -A cvn-dev.eqiad.wmflabs
-      - cd /data/project/cvn/externals/CVNBot
-      - git remote update && git checkout origin/master
-      - cd src/CVNBot
-      - xbuild CVNBot.csproj
-      - mv bin/Debug /data/project/cvn/app/MyBotName
-      - cp ../CVNBot.exe.config /data/project/cvn/app/MyBotName
-      - cp ../CVNBot-sample.ini /data/project/cvn/app/MyBotName/CVNBot.ini
-      - cd /data/project/cvn/app/MyBotName
-      - nano CVNBot.ini
-        # 'botnick' and 'botpass'. See https://meta.wikimedia.org/wiki/Countervandalism_Network/Management#Bots.
-        #    e.g. botnick=CVNBot5 and botpass=(CVN-Bots2 password)
-        # 'partmsg': "https://meta.wikimedia.org/wiki/CVN"
-        # 'controlchannel': "#cvn-bots"
-        # 'feedchannel': "#cvn-..."
-        # 'broadcastchannel': "#cvn-broadcast"
-        # 'restararg': Full in the full path to CVNBot.exe (e.g. "mono /data/project/cvn/app/MyBotName/CVNBot.exe")
-      - if "You're migrating data from an old bot":
-      - edit CVNBot.ini
-        - nano CVNBot.ini # Add relevant settings from the old bot (e.g. editblank, editbig, feedFilterEventUpload, etc.)
-        - cp ../oldbot/Lists.sqlite .
-        - cp ../oldbot/Projects.xml .
-    - test:
-      # Run test on a cvn-app server because cvn-dev is subject to general
-      # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
-      - ssh -A cvn-appX.eqiad.wmflabs
-      - cd /data/project/cvn/app/MyBotName
-      - mono CVNBot.exe
-      - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
-      - do "Any additional setup if you need to (e.g. load or drop more wikis in memory)"
-      - do "kill the process from the command line (it was started from your shell so Ctrl^C will do)"
-    - schedule:
-      - stillalive add MyBotName
-    - done!
-      # The next time stillalive runs its job queue from crontab on the various cvn-app hosts,
-      # the bot will be started.
-
-CVNClerkBot:
-  - source: 'https://github.com/countervandalism/CVNClerkBot'
+service CVNClerkBot:
+  # https://github.com/countervandalism/CVNClerkBot
+  # https://www.mediawiki.org/wiki/Manual:Pywikipediabot
+  # https://github.com/Krinkle/ts-krinkle-pywiki
   - debian:
     - python@2.7.3
-    - subversion
-    - mysql-server
+    - subversion # pywikibot
     - mysql-client
-    - python-twisted-words
+    - mysql-server
     - python-mysqldb
-  - raw:
-    - 'https://www.mediawiki.org/wiki/Manual:Pywikipediabot'
-    - 'https://github.com/Krinkle/ts-krinkle-pywiki'
+    - python-twisted-words
   - prepare:
     - database:
       - shell: |
@@ -136,3 +160,19 @@ CVNClerkBot:
     - database:
       - shell: |
         mysql -u root -proot cvnclerkbot < mysql_cvnclerkbot.sql
+  - setup: |
+    #
+    ## Add repos
+    #
+    $ cd /srv/cvn/git
+    $ git clone git@github.com:countervandalism/CVNClerkBot.git
+    $ cp /data/project/cvn-common/git/infrastructure/clerkbox-config.py CVNClerkBot/cvnclerkbotconfig.py
+    $ edit CVNClerkBot/wikilog.py
+      - samplewiki -> cvnwiki
+      - logname -> Developer Log
+    $ cd /srv/cvn/services
+    $ mkdir CVNClerkBot
+    $ edit CVNClerkBot/init.sh
+      #!/usr/bin/env bash
+      source /data/project/cvn-common/git/infrastructure/bash-pythonpaths.sh && python /srv/cvn/git/CVNClerkBot/cvnclerkbot.py
+    $ chmod +x CVNClerkBot/init.sh

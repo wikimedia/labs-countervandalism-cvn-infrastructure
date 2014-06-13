@@ -1,0 +1,90 @@
+tasks stillalive:
+  # https://github.com/countervandalism/stillalive
+  - quit-a-bot@cvn-wmflabs:
+    - try:
+      - 'irc #cvn-bots'
+      - quit MyBotName
+    - else:
+      # Connect to the server where the bot used to be pooled
+      - ssh -A cvn-appX.eqiad.wmflabs
+      - 'ps aux | grep MyBotName'
+      # Find the process id, and terminate it
+      - sudo kill 123
+
+  - deploy-a-change@cvn.wmflabs:
+    # After you've made a change to the settings file in the repository on GitHub, we need
+    # to deploy it on our cluster in wmflabs:
+    - ssh -A cvn-dev.eqiad.wmflabs
+    # "/data" is a shared mount between all instances.
+    # When you do git-pull in there, that will affect all cvn-appX nodes.
+    # So after running "git pull", next time any of the cvn-app nodes runs cron, the
+    # new settings will be applied.
+    - cd /data/project/cvn-common/git/stillalive
+    - git pull origin master
+
+  # Set up a new bot
+  - add@cvn.wmflabs:
+    - do 'Add a new task for MyBotName' to 'localSettings-cvn.json' in github:countervandalism/stillalive.git
+        # From your local computer (save, file, commit, push), or use:
+        # https://github.com/countervandalism/stillalive/edit/master/localSettings-cvn.json
+    - deploy-a-change
+
+  # Change on which node a process is pooled
+  - move@cvn.wmflabs:
+    - do 'Change the "pool" property for MyBotName' in 'localSettings-cvn.json' in github:countervandalism/stillalive.git
+    - quit-a-bot
+    # Be sure to keep an eye on IRC when you follow the steps for deploy-a-change,
+    # if it takes more than a minute, the bot may start again, be sure to quite it again.
+    - deploy-a-change
+
+  - remove@cvn.wmflabs.org:
+    - deploy-a-change
+    # stillalive only starts processes, it doesn't quit them because
+    # after you remove the setting, it no longer knows about it.
+    # Manually terminate the old bot process.
+    - quit-a-bot
+
+tasks CVNBot:
+  # https://github.com/countervandalism/CVNBot
+  - install:
+    - 'https://github.com/countervandalism/CVNBot#build'
+    - 'https://github.com/countervandalism/CVNBot/wiki/Documentation#installation'
+
+  - setup@cvn.wmflabs:
+    - install:
+      - ssh -A cvn-appX.eqiad.wmflabs
+      - cd /srv/cvn/git/CVNBot
+      - 'git remote update && git checkout origin/master'
+      - cd src/CVNBot
+      - xbuild CVNBot.csproj
+      - mv bin/Debug /srv/cvn/services/cvnbot/MyBotName
+      - cp ../CVNBot.exe.config /srv/cvn/services/cvnbot/MyBotName
+      - cp ../CVNBot-sample.ini /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
+      - cd /srv/cvn/services/cvnbot/MyBotName
+      - nano CVNBot.ini
+        # 'botnick' and 'botpass'. See https://meta.wikimedia.org/wiki/Countervandalism_Network/Management#Bots.
+        #    e.g. botnick=CVNBot5 and botpass=(CVN-Bots2 password)
+        # 'partmsg': "https://meta.wikimedia.org/wiki/CVN"
+        # 'controlchannel': "#cvn-bots"
+        # 'feedchannel': "#cvn-..."
+        # 'broadcastchannel': "#cvn-broadcast"
+        # 'restararg': Full in the full path to CVNBot.exe (e.g. "mono /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe")
+      - if "You're migrating data from an old bot":
+      - edit CVNBot.ini
+        - nano CVNBot.ini # Add relevant settings from the old bot (e.g. editblank, editbig, feedFilterEventUpload, etc.)
+        - cp ../oldbot/Lists.sqlite .
+        - cp ../oldbot/Projects.xml .
+    - test:
+      # Run test on a cvn-app server because cvn-dev is subject to general
+      # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
+      - ssh -A cvn-appX.eqiad.wmflabs
+      - cd /srv/cvn/services/cvnbot/MyBotName
+      - mono CVNBot.exe
+      - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
+      - do "Any additional setup if you need to (e.g. load or drop more wikis in memory)"
+      - do "kill the process from the command line (it was started from your shell so Ctrl^C will do)"
+    - schedule:
+      - stillalive add MyBotName
+    - done!
+      # The next time stillalive runs its job queue from crontab on the various cvn-app hosts,
+      # the bot will be started.
