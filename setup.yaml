@@ -26,8 +26,8 @@ node global @ once:
       #
       $ sudo chown root /data/project/cvn-common/git/infrastructure/crontab-config/*.cron
       $ sudo chmod 644 /data/project/cvn-common/git/infrastructure/crontab-config/*.cron
+      #
       $ sudo chown root /data/project/cvn-common/git/infrastructure/bin/backup-wmflabs-node
-      $ sudo chmod 644 /data/project/cvn-common/git/infrastructure/bin/backup-wmflabs-node
       #
       ## Configure stillalive
       #
