@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Make a backup of the instance's important data that should
+# persist in the event we lose the instance.
+
+# Option --short doesn't work on Darwin (MacOSX) option -s works on Darwin and Ubuntu.
+host="$(hostname -s 2>/dev/null)"
+if [ -z "$host" ]; then
+	echo "Unable to determine hostname" >&2
+	exit 1
+fi
+
+tar -cvzpf "/data/project/cvn-common/backup/$host-services.tar.gz" /srv/cvn/services
+if [[ $? != 0 ]]; then
+	echo "Creation of services.tar.gz failed" >&2
+	exit 1
+fi
