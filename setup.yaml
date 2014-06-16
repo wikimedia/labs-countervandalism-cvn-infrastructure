@@ -84,7 +84,7 @@ node cvn-app5:
 
 service backup-services:
   - setup: |
-      $ cd /etc/cron.daily/
+      $ cd /etc/cron.hourly/
       $ sudo ln -s /data/project/cvn-common/git/infrastructure/bin/backup-wmflabs-node cvn-backup-data
 
 service stillalive:
