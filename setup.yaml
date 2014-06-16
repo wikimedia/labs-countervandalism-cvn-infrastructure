@@ -73,11 +73,19 @@ node appserver:
     - CVNBot
     - CVNClerkBot
     - stillalive
+    - backup-services
 
 node cvn-app5:
   - setup: |
       $ cd /etc/cron.d/
       $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvn-api-db-push-CVNBot14.cron cvn-api-db-push-CVNBot14
+
+service backup-services:
+  - setup: |
+      $ cd /etc/cron.daily/
+      $ sudo chown root /data/project/cvn-common/bin/backup-wmflabs-node
+      $ sudo chmod 644 /data/project/cvn-common/bin/backup-wmflabs-node
+      $ sudo ln -s /data/project/cvn-common/bin/backup-wmflabs-node cvn-backup-data
 
 service stillalive:
   - setup: |
