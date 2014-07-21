@@ -32,7 +32,7 @@ node global @ once:
       #
       ## Configure stillalive
       #
-      $ cd data/project/cvn-common/git/stillalive
+      $ cd /data/project/cvn-common/git/stillalive
       $ ln -s localSettings-cvn.json localSettings.json
 
 node global @ each:
