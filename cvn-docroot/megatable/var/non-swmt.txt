@@ -95,8 +95,11 @@ hu.wikipedia
 ko.wikipedia
 no.wikipedia
 
+# Wikis that explicitly do not want the SWMT to help on their wiki
+mr.wikipedia
+
 # Wikis that don't produce edits that need patrolling
 login.wikipedia
 test.wikipedia
 testwikidata.wikipedia
-# </pre>
+# </pre> [[Category:CVN]]
