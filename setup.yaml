@@ -58,6 +58,7 @@ node global @ each:
       $ sudo chgrp project-cvn cvn/
       $ sudo chmod 2775 cvn/
       $ mkdir cvn/git/ cvn/services/ cvn/log/
+      $ sudo chgrp cvn.cvnservice cvn/services
       #
       ## Configure profile.d
       #
@@ -144,6 +145,7 @@ service CVNBot:
     ## Add repos
     #
     $ cd /srv/cvn/git
+    $ git clone git@github.com:countervandalism/infrastructure.git # Needed for Console.msgs links
     $ git clone git@github.com:countervandalism/CVNBot.git
     $ cd /srv/cvn/services
     $ mkdir cvnbot

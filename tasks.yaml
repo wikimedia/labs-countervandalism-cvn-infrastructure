@@ -74,6 +74,9 @@ tasks CVNBot:
         - nano CVNBot.ini # Add relevant settings from the old bot (e.g. editblank, editbig, feedFilterEventUpload, etc.)
         - cp ../oldbot/Lists.sqlite .
         - cp ../oldbot/Projects.xml .
+      - chmod 664 *
+      - chmod 775 CVNBot.exe Lists.sqlite
+      - chmod 660 CVNBot.init
     - test:
       # Run test on a cvn-app server because cvn-dev is subject to general
       # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
