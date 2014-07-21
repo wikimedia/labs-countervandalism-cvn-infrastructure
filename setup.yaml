@@ -1,4 +1,4 @@
-node global @ once:
+node @once:
   labsconsole:
     - location: 'https://wikitech.wikimedia.org/wiki/Special:NovaServiceGroup'
     - project: cvn
@@ -35,7 +35,7 @@ node global @ once:
       $ cd /data/project/cvn-common/git/stillalive
       $ ln -s localSettings-cvn.json localSettings.json
 
-node global @ each:
+node @each:
   - debian:
     - git-core
     - nano
@@ -65,17 +65,16 @@ node global @ each:
       $ cd /etc/profile.d/
       $ sudo ln -s /data/project/cvn-common/git/infrastructure/environment-config/profile-d-umask-cvn.sh umask-cvn.sh
 
-node webserver:
+node [type=webserver]:
   - services:
     - www
 
-node appserver:
+node [type=appserver]:
   - debian:
     - php5-cli
     - php5-sqlite
   - services:
     - CVNBot
-    - CVNClerkBot
     - stillalive
   - setup: |
       #
@@ -90,6 +89,8 @@ node appserver:
       $ sudo ln -s /data/project/cvn-common/git/infrastructure/bin/collect-wmflabs-log cvn-collect-log
 
 node cvn-app5:
+  - services:
+    - CVNClerkBot
   - setup: |
       $ cd /etc/cron.d/
       $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvn-api-db-push-CVNBot14.cron cvn-api-db-push-CVNBot14
