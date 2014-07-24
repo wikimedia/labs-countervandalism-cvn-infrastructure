@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /lib/
+Disallow: /log
+Disallow: /megatable/var/
+Disallow: /api.php
