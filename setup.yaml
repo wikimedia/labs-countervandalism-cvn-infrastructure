@@ -175,11 +175,8 @@ service CVNClerkBot:
       - shell: |
         mysql -u root -proot cvnclerkbot < mysql_cvnclerkbot.sql
   - setup: |
-    #
-    ## Add repos
-    #
     $ cd /srv/cvn/git
-    $ git clone git@github.com:countervandalism/CVNClerkBot.git
+    $ git clone https://github.com/countervandalism/CVNClerkBot.git
     $ cp /data/project/cvn-common/git/infrastructure/clerkbox-config.py CVNClerkBot/cvnclerkbotconfig.py
     $ edit CVNClerkBot/wikilog.py
       - samplewiki -> cvnwiki
