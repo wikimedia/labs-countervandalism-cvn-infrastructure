@@ -19,8 +19,8 @@ node @once:
       ## Add repos
       #
       $ cd /data/project/cvn-common/git
-      $ git clone git@github.com:countervandalism/infrastructure.git
-      $ git clone git@github.com:countervandalism/stillalive.git
+      $ git clone https://github.com/countervandalism/infrastructure.git
+      $ git clone https://github.com/countervandalism/stillalive.git
       #
       ## File permissions
       #
@@ -113,8 +113,8 @@ service www:
     ## Add repos
     #
     $ cd /srv/cvn/git
-    $ git clone git@github.com:countervandalism/infrastructure.git
-    $ git clone git@github.com:countervandalism/cvn-api.git
+    $ git clone https://github.com/countervandalism/infrastructure.git
+    $ git clone https://github.com/countervandalism/cvn-api.git
     #
     ## Create document root
     #
@@ -145,8 +145,8 @@ service CVNBot:
     ## Add repos
     #
     $ cd /srv/cvn/git
-    $ git clone git@github.com:countervandalism/infrastructure.git # Needed for Console.msgs links
-    $ git clone git@github.com:countervandalism/CVNBot.git
+    $ git clone https://github.com/countervandalism/infrastructure.git # Needed for Console.msgs links
+    $ git clone https://github.com/countervandalism/CVNBot.git
     $ cd /srv/cvn/services
     $ mkdir cvnbot
 
