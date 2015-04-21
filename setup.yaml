@@ -62,7 +62,7 @@ node @each:
       ## Configure profile.d
       #
       $ cd /etc/profile.d/
-      $ sudo ln -s /data/project/cvn-common/git/infrastructure/environment-config/profile-d-umask-cvn.sh umask-cvn.sh
+      $ sudo cp /data/project/cvn-common/git/infrastructure/environment-config/profile-d-umask-cvn.sh umask-cvn.sh
 
 node [type=webserver]:
   - services:
