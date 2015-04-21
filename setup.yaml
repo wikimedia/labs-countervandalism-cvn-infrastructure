@@ -40,11 +40,10 @@ node @each:
     - git-core
     - nano
   - puppet:
-    - roles:
-      - 'role::labs::lvm::srv'
+    - see: https://wikitech.wikimedia.org/wiki/Hiera:Cvn
   # Remember:
-  # - /data/project/cvn is a shared mount between the servers.
-  # - /srv/cvn is local to the instance.
+  # - /data/project/cvn is an NFS mount shared between all servers.
+  # - /srv/cvn is local to the individual server.
   - setup: |
       #
       ## Forward key with -A in order to make authenticated git clones later
