@@ -92,7 +92,7 @@ node cvn-app5:
     - CVNClerkBot
   - setup: |
       $ cd /etc/cron.d/
-      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvn-api-db-push-CVNBot14.cron cvn-api-db-push-CVNBot14
+      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvndb-CVNBot14-publish.cron cvndb-CVNBot14-publish
 
 service stillalive:
   - setup: |
@@ -127,7 +127,7 @@ service www:
     ## Setup cvn-api
     #
     $ cd /etc/cron.d/
-    $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvn-api-db-pull.cron cvn-api-db-pull
+    $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvndb-pull.cron cvndb-pull
     #
     ## Configure webserver
     #

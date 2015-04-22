@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu
 
 # Make a backup of the instance's important data that should
 # persist in the event we lose the instance.

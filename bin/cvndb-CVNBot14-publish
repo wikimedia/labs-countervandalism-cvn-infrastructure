@@ -1,0 +1,16 @@
+#!/bin/bash -eu
+
+# Publish CVNBot14 database to NFS Dropbox
+
+LOCAL_FILENAME=Lists.sqlite
+NFS_FILENAME=cvn-api-db.sqlite
+
+LOCAL_DIR=/srv/cvn/services/cvnbot/CVNBot14
+NFS_DIR=/data/project/cvn-common/dropbox
+
+# First, duplicate locally to reduce lock time on the file used by CVNBot
+cp "$LOCAL_DIR/$LOCAL_FILE" "$LOCAL_DIR/.cp.$NFS_FILENAME"
+# Move to NFS
+mv "$LOCAL_DIR/.cp.$NFS_FILENAME" "$NFS_DIR/.cp.$NFS_FILENAME"
+# Replace the canonical copy on NFS
+mv "$NFS_DIR/.cp.$NFS_FILENAME" "$NFS_DIR/$NFS_FILENAME"

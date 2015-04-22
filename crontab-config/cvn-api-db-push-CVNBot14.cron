@@ -1,1 +1,0 @@
-*/5 * * * *	root	cp /srv/cvn/services/cvnbot/CVNBot14/Lists.sqlite /data/project/cvn-common/dropbox/cvn-api-db.sqlite > /dev/null

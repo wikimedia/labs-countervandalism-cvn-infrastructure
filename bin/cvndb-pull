@@ -1,0 +1,14 @@
+#!/bin/bash -eu
+
+# Update database for cvn-api web service from NFS Dropbox
+
+LOCAL_FILENAME=Lists.sqlite
+NFS_FILENAME=cvn-api-db.sqlite
+
+LOCAL_DIR=/srv/cvn/git/cvn-api/data
+NFS_DIR=/data/project/cvn-common/dropbox
+
+# Copy from NFS
+cp "$NFS_DIR/$NFS_FILENAME" "$LOCAL_DIR/.cp.$NFS_FILENAME"
+# Replace local file
+mv "$LOCAL_DIR/.cp.$NFS_FILENAME" "$LOCAL_DIR/$LOCAL_FILE"
