@@ -1,1 +1,1 @@
-*/5 * * * *	root	/data/project/cvn-common/git/infrastructure/bin/cvndb-pull > /dev/null
+*/5 * * * *	root	/srv/cvn/git/infrastructure/bin/cvndb-pull > /dev/null

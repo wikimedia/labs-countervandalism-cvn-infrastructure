@@ -59,10 +59,15 @@ node @each:
       $ mkdir cvn/git/ cvn/services/ cvn/log/
       $ sudo chgrp cvn.cvnservice cvn/services
       #
+      ## Add repos
+      #
+      $ cd /srv/cvn/git
+      $ git clone https://github.com/countervandalism/infrastructure.git
+      #
       ## Configure profile.d
       #
       $ cd /etc/profile.d/
-      $ sudo cp /data/project/cvn-common/git/infrastructure/environment-config/profile-d-umask-cvn.sh umask-cvn.sh
+      $ sudo ln -s /srv/cvn/git/infrastructure//environment-config/profile-d-umask-cvn.sh umask-cvn.sh
 
 node [type=webserver]:
   - services:
@@ -92,7 +97,7 @@ node cvn-app5:
     - CVNClerkBot
   - setup: |
       $ cd /etc/cron.d/
-      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvndb-CVNBot14-publish.cron cvndb-CVNBot14-publish
+      $ sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-CVNBot14-publish.cron cvndb-CVNBot14-publish
 
 service stillalive:
   - setup: |
@@ -113,7 +118,6 @@ service www:
     ## Add repos
     #
     $ cd /srv/cvn/git
-    $ git clone https://github.com/countervandalism/infrastructure.git
     $ git clone https://github.com/countervandalism/cvn-api.git
     #
     ## Create document root
@@ -127,7 +131,7 @@ service www:
     ## Setup cvn-api
     #
     $ cd /etc/cron.d/
-    $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/cvndb-pull.cron cvndb-pull
+    $ sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-pull.cron cvndb-pull
     #
     ## Configure webserver
     #
@@ -145,7 +149,6 @@ service CVNBot:
     ## Add repos
     #
     $ cd /srv/cvn/git
-    $ git clone https://github.com/countervandalism/infrastructure.git # Needed for Console.msgs links
     $ git clone https://github.com/countervandalism/CVNBot.git
     $ cd /srv/cvn/services
     $ mkdir cvnbot
@@ -176,7 +179,7 @@ service CVNClerkBot:
   - setup: |
     $ cd /srv/cvn/git
     $ git clone https://github.com/countervandalism/CVNClerkBot.git
-    $ cp /data/project/cvn-common/git/infrastructure/clerkbox-config.py CVNClerkBot/cvnclerkbotconfig.py
+    $ cp /srv/cvn/git/infrastructure/clerkbox-config.py CVNClerkBot/cvnclerkbotconfig.py
     $ edit CVNClerkBot/wikilog.py
       - samplewiki -> cvnwiki
       - logname -> Developer Log
@@ -184,5 +187,5 @@ service CVNClerkBot:
     $ mkdir CVNClerkBot
     $ edit CVNClerkBot/init.sh
       #!/usr/bin/env bash
-      source /data/project/cvn-common/git/infrastructure/bash-pythonpaths.sh && python /srv/cvn/git/CVNClerkBot/cvnclerkbot.py
+      source /srv/cvn/git/infrastructure/bash-pythonpaths.sh && python /srv/cvn/git/CVNClerkBot/cvnclerkbot.py
     $ chmod +x CVNClerkBot/init.sh
