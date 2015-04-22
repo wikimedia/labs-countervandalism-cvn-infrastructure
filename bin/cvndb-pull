@@ -11,4 +11,4 @@ NFS_DIR=/data/project/cvn-common/dropbox
 # Copy from NFS
 cp "$NFS_DIR/$NFS_FILENAME" "$LOCAL_DIR/.cp.$NFS_FILENAME"
 # Replace local file
-mv "$LOCAL_DIR/.cp.$NFS_FILENAME" "$LOCAL_DIR/$LOCAL_FILE"
+mv "$LOCAL_DIR/.cp.$NFS_FILENAME" "$LOCAL_DIR/$LOCAL_FILENAME"
