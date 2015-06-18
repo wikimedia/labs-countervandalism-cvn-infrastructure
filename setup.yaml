@@ -20,7 +20,6 @@ node @once:
       #
       $ cd /data/project/cvn-common/git
       $ git clone https://github.com/countervandalism/infrastructure.git
-      $ git clone https://github.com/countervandalism/stillalive.git
       #
       ## File permissions
       #
@@ -29,11 +28,6 @@ node @once:
       #
       $ sudo chown root /data/project/cvn-common/git/infrastructure/bin/backup-wmflabs-node
       $ sudo chown root /data/project/cvn-common/git/infrastructure/bin/collect-wmflabs-log
-      #
-      ## Configure stillalive
-      #
-      $ cd /data/project/cvn-common/git/stillalive
-      $ ln -s localSettings-cvn.json localSettings.json
 
 node @each:
   - debian:
@@ -63,11 +57,17 @@ node @each:
       #
       $ cd /srv/cvn/git
       $ git clone https://github.com/countervandalism/infrastructure.git
+      $ git clone https://github.com/countervandalism/stillalive.git
       #
       ## Configure profile.d
       #
       $ cd /etc/profile.d/
       $ sudo ln -s /srv/cvn/git/infrastructure//environment-config/profile-d-umask-cvn.sh umask-cvn.sh
+      #
+      ## Configure stillalive
+      #
+      $ cd /srv/cvn/git/stillalive
+      $ ln -s localSettings-cvn.json localSettings.json
 
 node [type=webserver]:
   - services:
@@ -102,7 +102,7 @@ node cvn-app5:
 service stillalive:
   - setup: |
       $ cd /etc/cron.d/
-      $ sudo ln -s /data/project/cvn-common/git/infrastructure/crontab-config/stillalive.cron stillalive
+      $ sudo ln -s /srv/cvn/git/infrastructure/crontab-config/stillalive.cron stillalive
 
 service www:
   - debian:
