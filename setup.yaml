@@ -15,19 +15,6 @@ node @once:
       $ sudo chgrp project-cvn cvn-common/
       $ sudo chmod 2775 cvn-common/
       $ mkdir cvn-common/git/ cvn-common/backup/ cvn-common/log/ cvn-common/dropbox/
-      #
-      ## Add repos
-      #
-      $ cd /data/project/cvn-common/git
-      $ git clone https://github.com/countervandalism/infrastructure.git
-      #
-      ## File permissions
-      #
-      $ sudo chown root /data/project/cvn-common/git/infrastructure/crontab-config/*.cron
-      $ sudo chmod 644 /data/project/cvn-common/git/infrastructure/crontab-config/*.cron
-      #
-      $ sudo chown root /data/project/cvn-common/git/infrastructure/bin/backup-wmflabs-node
-      $ sudo chown root /data/project/cvn-common/git/infrastructure/bin/collect-wmflabs-log
 
 node @each:
   - debian:
@@ -62,12 +49,22 @@ node @each:
       ## Configure profile.d
       #
       $ cd /etc/profile.d/
-      $ sudo ln -s /srv/cvn/git/infrastructure//environment-config/profile-d-umask-cvn.sh umask-cvn.sh
+      $ sudo ln -s /srv/cvn/git/infrastructure/environment-config/profile-d-umask-cvn.sh umask-cvn.sh
       #
       ## Configure stillalive
       #
       $ cd /srv/cvn/git/stillalive
       $ ln -s localSettings-cvn.json localSettings.json
+      #
+      ## File permissions
+      #
+      $ sudo chown root /srv/cvn/git/infrastructure/crontab-config/*.cron
+      $ sudo chmod 644 /srv/cvn/git/infrastructure/crontab-config/*.cron
+      #
+      $ sudo chown root /srv/cvn/git/infrastructure/bin/backup-wmflabs-node
+      $ sudo chown root /srv/cvn/git/infrastructure/bin/collect-wmflabs-log
+      $ sudo chown root /srv/cvn/git/infrastructure/bin/cvndb-CVNBot14-publish
+      $ sudo chown root /srv/cvn/git/infrastructure/bin/cvndb-pull
 
 node [type=webserver]:
   - services:
@@ -85,12 +82,12 @@ node [type=appserver]:
       # Back up data
       #
       $ cd /etc/cron.hourly/
-      $ sudo ln -s /data/project/cvn-common/git/infrastructure/bin/backup-wmflabs-node cvn-backup-data
+      $ sudo ln -s /srv/cvn/git/infrastructure/bin/backup-wmflabs-node cvn-backup-data
       #
       # Collect logs
       #
       $ cd /etc/cron.hourly/
-      $ sudo ln -s /data/project/cvn-common/git/infrastructure/bin/collect-wmflabs-log cvn-collect-log
+      $ sudo ln -s /srv/cvn/git/infrastructure/bin/collect-wmflabs-log cvn-collect-log
 
 node cvn-app5:
   - services:
