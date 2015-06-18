@@ -152,8 +152,8 @@ service CVNBot:
 
 service CVNClerkBot:
   # https://github.com/countervandalism/CVNClerkBot
-  # https://www.mediawiki.org/wiki/Manual:Pywikipediabot
-  # https://github.com/Krinkle/ts-krinkle-pywiki
+  # https://www.mediawiki.org/wiki/Manual:Pywikipedia
+  # https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation#compat_2
   - debian:
     - python@2.7.3
     - subversion # pywikibot
@@ -174,8 +174,15 @@ service CVNClerkBot:
       - shell: |
         mysql -u root -proot cvnclerkbot < mysql_cvnclerkbot.sql
   - setup: |
+    #
+    ## Add repos
+    #
     $ cd /srv/cvn/git
     $ git clone https://github.com/countervandalism/CVNClerkBot.git
+    $ git clone --recursive https://gerrit.wikimedia.org/r/pywikibot/compat.git pywikibot-compat
+    #
+    ## Configure
+    #
     $ cp /srv/cvn/git/infrastructure/clerkbox-config.py CVNClerkBot/cvnclerkbotconfig.py
     $ edit CVNClerkBot/wikilog.py
       - samplewiki -> cvnwiki
