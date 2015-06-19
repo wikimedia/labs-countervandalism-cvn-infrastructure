@@ -181,7 +181,24 @@ service CVNClerkBot:
     $ git clone https://github.com/countervandalism/CVNClerkBot.git
     $ git clone --recursive https://gerrit.wikimedia.org/r/pywikibot/compat.git pywikibot-compat
     #
-    ## Configure
+    ## Configure pywikibot
+    #
+    $ cp /srv/cvn/git/infrastructure/cvnwiki_family.py /srv/cvn/git/pywikibot-compat/families/
+    # Interactive:
+    # 1. Create user-config.py
+    # 2. Select cvnwiki
+    # 3. Username: Clogger
+    # 4. Small file
+    $ python pywikibot-compat/generate_user_files.py
+    $ create pywikibot-compat/.passwd with `("Clogger", "<password>")`
+    $ chmod 600 pywikibot-compat/.passwd
+    $ edit pywikibot-compat/user-config.py and add `password_file = '.passwd'`
+    #
+    # FIXME: Fix this and stillalive/cvn-localSettings so that it can run as "cvn.cvnservice"
+    $ chown root pywikibot-compat/user-config.py
+    $ chown root pywikibot-compat/.passwd
+    #
+    ## Configure CVNClerkBot
     #
     $ cp /srv/cvn/git/infrastructure/clerkbox-config.py CVNClerkBot/cvnclerkbotconfig.py
     $ edit CVNClerkBot/wikilog.py
