@@ -210,3 +210,5 @@ service CVNClerkBot:
       #!/usr/bin/env bash
       source /srv/cvn/git/infrastructure/bash-pythonpaths.sh && python /srv/cvn/git/CVNClerkBot/cvnclerkbot.py
     $ chmod +x CVNClerkBot/init.sh
+    #
+    $ exec prepare.database
