@@ -30,7 +30,7 @@ tasks stillalive:
   - move@cvn.wmflabs:
     - do 'Change the "pool" property for MyBotName' in 'localSettings-cvn.json' in github:countervandalism/stillalive.git
     - ssh cvn-appX(PREVIOUS).eqiad.wmflabs
-      - rsync -v -c -a --delete-delay --compress /srv/services/cvnbots/CVNBotX /data/project/cvn-common/dropbox/
+      - rsync -v -c -a --delete-delay --compress /srv/cvn/services/cvnbot/CVNBotX /data/project/cvn-common/dropbox/
     - ssh cvn-appX(NEXT).eqiad.wmflabs
       - rsync -v -c -a --delete-delay --compress /data/project/cvn-common/dropbox/CVNBotX /srv/services/cvnbots/
     - quit-a-bot
