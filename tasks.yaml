@@ -32,11 +32,11 @@ tasks stillalive:
     - ssh cvn-appX(PREVIOUS).eqiad.wmflabs
       - rsync -v -c -a --delete-delay --compress /srv/cvn/services/cvnbot/CVNBotX /data/project/cvn-common/dropbox/
     - ssh cvn-appX(NEXT).eqiad.wmflabs
-      - rsync -v -c -a --delete-delay --compress /data/project/cvn-common/dropbox/CVNBotX /srv/services/cvnbots/
-    - quit-a-bot
-    # Be sure to keep an eye on IRC when you follow the steps for deploy-a-change,
-    # if it takes more than a minute, the bot may start again, be sure to quite it again.
+      - rsync -v -c -a --delete-delay --compress /data/project/cvn-common/dropbox/CVNBotX /srv/cvn/services/cvnbot/
+    # Easiest is to deploy to the old server first, then kill the running bot from IRC,
+    # then deploy on the new server and wait for stillalive to start it from cron.
     - deploy-a-change
+    - quit-a-bot
     - sudo cvn-appX-eqiad.wmflabs
       - rm -rf /data/project/cvn-common/dropbox/CVNBotX
 
