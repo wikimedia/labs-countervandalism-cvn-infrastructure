@@ -6,7 +6,7 @@ tasks stillalive:
       - quit MyBotName
     - else:
       # Connect to the server where the bot used to be pooled
-      - ssh -A cvn-appX.eqiad.wmflabs
+      - ssh cvn-appX.eqiad.wmflabs
       - 'ps aux | grep MyBotName'
       # Find the process id, and terminate it
       - sudo kill 123
@@ -14,13 +14,10 @@ tasks stillalive:
   - deploy-a-change@cvn.wmflabs:
     # After you've made a change to the settings file in the repository on GitHub, we need
     # to deploy it on our cluster in wmflabs:
-    - ssh -A cvn-dev.eqiad.wmflabs
-    # "/data" is a shared mount between all instances.
-    # When you do git-pull in there, that will affect all cvn-appX nodes.
-    # So after running "git pull", next time any of the cvn-app nodes runs cron, the
-    # new settings will be applied.
-    - cd /data/project/cvn-common/git/stillalive
-    - git pull origin master
+    - foreach cvn-app*.eqiad.wmflabs:
+      - ssh cvn-appX.eqiad.wmflabs
+      - cd /srv/cvn/git/stillalive
+      - git pull origin master
 
   # Set up a new bot
   - add@cvn.wmflabs:
@@ -32,10 +29,16 @@ tasks stillalive:
   # Change on which node a process is pooled
   - move@cvn.wmflabs:
     - do 'Change the "pool" property for MyBotName' in 'localSettings-cvn.json' in github:countervandalism/stillalive.git
+    - ssh cvn-appX(PREVIOUS).eqiad.wmflabs
+      - rsync -v -c -a --delete-delay --compress /srv/services/cvnbots/CVNBotX /data/project/cvn-common/dropbox/
+    - ssh cvn-appX(NEXT).eqiad.wmflabs
+      - rsync -v -c -a --delete-delay --compress /data/project/cvn-common/dropbox/CVNBotX /srv/services/cvnbots/
     - quit-a-bot
     # Be sure to keep an eye on IRC when you follow the steps for deploy-a-change,
     # if it takes more than a minute, the bot may start again, be sure to quite it again.
     - deploy-a-change
+    - sudo cvn-appX-eqiad.wmflabs
+      - rm -rf /data/project/cvn-common/dropbox/CVNBotX
 
   - remove@cvn.wmflabs.org:
     - deploy-a-change
@@ -52,7 +55,7 @@ tasks CVNBot:
 
   - setup@cvn.wmflabs:
     - install:
-      - ssh -A cvn-appX.eqiad.wmflabs
+      - ssh cvn-appX.eqiad.wmflabs
       - cd /srv/cvn/git/CVNBot
       - 'git remote update && git checkout origin/master'
       - cd src/CVNBot
@@ -80,7 +83,7 @@ tasks CVNBot:
     - test:
       # Run test on a cvn-app server because cvn-dev is subject to general
       # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
-      - ssh -A cvn-appX.eqiad.wmflabs
+      - ssh cvn-appX.eqiad.wmflabs
       - cd /srv/cvn/services/cvnbot/MyBotName
       - mono CVNBot.exe
       - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
