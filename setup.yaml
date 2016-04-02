@@ -26,10 +26,7 @@ node @each:
   # - /data/project is an NFS mount shared between all servers.
   # - /srv is local to the individual server.
   - setup: |
-      #
-      ## Forward key with -A in order to make authenticated git clones later
-      #
-      $ ssh -A cvn-{name}.eqiad.wmflabs
+      $ ssh cvn-X.eqiad.wmflabs
       #
       ## Create local directory structure
       #
