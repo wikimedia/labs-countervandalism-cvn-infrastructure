@@ -146,6 +146,14 @@ service CVNBot:
     git clone https://github.com/countervandalism/CVNBot.git
     cd /srv/cvn/services
     mkdir cvnbot
+    #
+    ## Import SSL certificates
+    #
+    # http://stackoverflow.com/a/11451213/319266
+    # http://www.mono-project.com/docs/faq/security/
+    #
+    sudo -u cvn.cvnservice mozroots --import --ask-remove
+    sudo mozroots --import --ask-remove --machine
 
 service CVNClerkBot:
   # https://github.com/countervandalism/CVNClerkBot
