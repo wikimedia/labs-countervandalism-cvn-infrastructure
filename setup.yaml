@@ -51,7 +51,7 @@ node @each:
       ## Configure stillalive
       #
       cd /srv/cvn/git/stillalive
-      ln -s localSettings-cvn.json localSettings.json
+      ln -s localSettings-cvn.yaml localSettings.yaml
       #
       ## File permissions
       #
