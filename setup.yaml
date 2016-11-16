@@ -86,7 +86,7 @@ node [type=appserver]:
       cd /etc/cron.hourly/
       sudo ln -s /srv/cvn/git/infrastructure/bin/collect-wmflabs-log cvn-collect-log
 
-node cvn-app5:
+node cvn-app7:
   - services:
     - CVNClerkBot
   - setup: |
