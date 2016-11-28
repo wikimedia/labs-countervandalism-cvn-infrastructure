@@ -14,7 +14,7 @@ global @once:
       $ sudo mkdir cvn-common
       $ sudo chgrp project-cvn cvn-common/
       $ sudo chmod 2775 cvn-common/
-      $ mkdir cvn-common/git/ cvn-common/backup/ cvn-common/log/ cvn-common/dropbox/
+      $ mkdir cvn-common/backup/ cvn-common/log/ cvn-common/dropbox/
 
 node @each:
   - debian:
@@ -162,8 +162,8 @@ service CVNClerkBot:
   # https://www.mediawiki.org/wiki/Manual:Pywikipedia
   # https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation#compat_2
   - debian:
-    - python@2.7.3
-    - subversion # pywikibot
+    - python@2.7.x
+    - git-core
     - mysql-client
     - mysql-server
     - python-mysqldb
