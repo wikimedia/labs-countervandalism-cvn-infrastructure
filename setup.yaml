@@ -175,11 +175,11 @@ service CVNClerkBot:
   - backup:
     - database:
       - shell: |
-        mysqldump cvnclerkbot -u root -proot --extended-insert=FALSE > mysql_cvnclerkbot.sql
+        mysqldump cvnclerkbot -u root -proot --extended-insert=FALSE > ~/mysql_cvnclerkbot.sql
   - restore:
     - database:
       - shell: |
-        mysql -u root -proot cvnclerkbot < mysql_cvnclerkbot.sql
+        mysql -u root -proot cvnclerkbot < /srv/cvn/git/infrastructure/mysql_cvnclerkbot.sql
   - setup: |
     #
     ## Add repos
@@ -205,15 +205,16 @@ service CVNClerkBot:
     $ edit pywikibot-compat/user-config.py and add `password_file = '.passwd'`
     #
     # FIXME: Fix this and stillalive/cvn-localSettings so that it can run as "cvn.cvnservice"
-    $ chown root pywikibot-compat/user-config.py
-    $ chown root pywikibot-compat/.passwd
+    $ sudo chown root pywikibot-compat/user-config.py
+    $ sudo chown root pywikibot-compat/.passwd
     #
     ## Configure CVNClerkBot
     #
-    $ cp /srv/cvn/git/infrastructure/clerkbox-config.py CVNClerkBot/cvnclerkbotconfig.py
+    $ cp /srv/cvn/git/infrastructure/clerkbotconfig.py CVNClerkBot/cvnclerkbotconfig.py
+    $ edit CVNClerkBot/cvnclerkbotconfig.py
+      - password
     $ edit CVNClerkBot/wikilog.py
       - samplewiki -> cvnwiki
-      - logname -> Developer Log
     $ cd /srv/cvn/services
     $ mkdir CVNClerkBot
     $ edit CVNClerkBot/init.sh
