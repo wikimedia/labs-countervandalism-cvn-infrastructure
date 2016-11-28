@@ -6,7 +6,7 @@ PORT = 6667
 
 # IRC user (used to identify with NickServ)
 nickname = "CVN-ClerkBot"
-password = "CVN-ClerkBot:591wxzR"
+password = "CVN-ClerkBot:***"
 
 # IRC initial channels to join onconnect
 channels = ["#countervandalism", "#cvn-staff", "#cvn-bots"]
