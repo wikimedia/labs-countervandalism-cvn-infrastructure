@@ -191,6 +191,8 @@ service CVNClerkBot:
     ## Configure pywikibot
     #
     $ cp /srv/cvn/git/infrastructure/cvnwiki_family.py /srv/cvn/git/pywikibot-compat/families/
+    # Change from 644 to 664 - matching the default family files
+    $ chmod 664 /srv/cvn/git/pywikibot-compat/families/cvnwiki_family.py
     $ cd  /srv/cvn/git/pywikibot-compat
     $ python ./generate_user_files.py
     # Interactive:
