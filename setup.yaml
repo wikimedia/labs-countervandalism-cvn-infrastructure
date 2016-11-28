@@ -191,12 +191,13 @@ service CVNClerkBot:
     ## Configure pywikibot
     #
     $ cp /srv/cvn/git/infrastructure/cvnwiki_family.py /srv/cvn/git/pywikibot-compat/families/
+    $ cd  /srv/cvn/git/pywikibot-compat
+    $ python ./generate_user_files.py
     # Interactive:
     # 1. Create user-config.py
     # 2. Select cvnwiki
     # 3. Username: Clogger
     # 4. Small file
-    $ python pywikibot-compat/generate_user_files.py
     $ create pywikibot-compat/.passwd with `("Clogger", "<password>")`
     $ chmod 600 pywikibot-compat/.passwd
     $ edit pywikibot-compat/user-config.py and add `password_file = '.passwd'`
