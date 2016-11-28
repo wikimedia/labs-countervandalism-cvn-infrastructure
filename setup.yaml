@@ -223,3 +223,8 @@ service CVNClerkBot:
     $ chmod +x CVNClerkBot/init.sh
     #
     $ exec prepare.database
+    #
+    # Run once manually to accept the deprecation warning of pywikibot-compat
+    $ sudo CVNClerkBot/init.sh
+    # Or, alternatively put the following:
+    $ echo -e 'Compat deprecation warning shown\n' > /srv/cvn/git/pywikibot-compat/pywikibot/throttle.ctrl
