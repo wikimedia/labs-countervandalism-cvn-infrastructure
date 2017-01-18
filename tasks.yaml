@@ -81,6 +81,8 @@ tasks CVNBot:
         # 'feedchannel': "#cvn-..."
         # 'broadcastchannel': "#cvn-broadcast"
         # 'restararg': Full in the full path to CVNBot.exe (e.g. "mono /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe")
+      - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
+      - chmod 775 Lists.sqlite
       - if "You're migrating data from an old bot":
       - edit CVNBot.ini
         - nano CVNBot.ini # Add relevant settings from the old bot (e.g. editblank, editbig, feedFilterEventUpload, etc.)
@@ -88,7 +90,7 @@ tasks CVNBot:
         - cp ../oldbot/Projects.xml .
       - chmod 664 *
       - chmod 775 CVNBot.exe Lists.sqlite
-      - chmod 660 CVNBot.init
+      - chmod 660 CVNBot.ini
     - test:
       # Run test on a cvn-app server because cvn-dev is subject to general
       # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
