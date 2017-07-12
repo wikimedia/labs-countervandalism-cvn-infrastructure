@@ -242,6 +242,6 @@
 20002=Aleen de bad new user, bad new article title en bad edit summary lijsten kunnen getest worden
 20003=Specificeer een gebruikersnaam
 20004=Interwiki voorvoegsel kan niet geraden worden. Geef er een op (bijv., nl:) in de laatste optionele parameter.
-20005=%c14Zie https://bit.ly/cvnbotcmds voor een tabel met beschrijvingen van de commandos. %c10Msgs-ID: %c14v2.03-nl-r19
+20005=Zie https://github.com/countervandalism/CVNBot/wiki/Documentation#commands voor een tabel met beschrijvingen van de commandos. %c10Msgs-ID: %c14v2.03-nl-r19
 // Bij Lijstcommandos, x=0 : tot "the end of time"
 20006=het eind der tijd
