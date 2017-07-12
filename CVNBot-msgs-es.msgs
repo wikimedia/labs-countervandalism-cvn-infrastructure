@@ -242,5 +242,5 @@
 20002=Only the bad new username, bad new article title and bad edit summary lists can be tested
 20003=Tiene que especificar un nombre de usuario
 20004=Cannot guess interwiki prefix. Please specify one (e.g., en:) in the last optional parameter.
-20005=Una descripcion de los comandos: https://bit.ly/cvnbotcmds %c10Msgs-ID: %c14v2.03-es-r10
+20005=Una descripcion de los comandos: https://github.com/countervandalism/CVNBot/wiki/Documentation#commands %c10Msgs-ID: %c14v2.03-es-r11
 20006=indefinidamente
