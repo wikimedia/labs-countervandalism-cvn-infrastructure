@@ -18,7 +18,7 @@ global @once:
 
 node @each:
   - packages:
-    - git-core
+    - git
     - nano
   - puppet:
     - see: https://wikitech.wikimedia.org/wiki/Hiera:Cvn
@@ -68,9 +68,6 @@ node [type=webserver]:
     - www
 
 node [type=appserver]:
-  - packages:
-    - php5-cli
-    - php5-sqlite
   - services:
     - CVNBot
     - stillalive
