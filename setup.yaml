@@ -151,7 +151,7 @@ service CVNBot:
     # http://stackoverflow.com/a/11451213/319266
     # http://www.mono-project.com/docs/faq/security/
     #
-    sudo -u cvn.cvnservice mozroots --import --ask-remove
+    sudo -iu cvn.cvnservice mozroots --import --ask-remove
     sudo mozroots --import --ask-remove --machine
 
 service CVNClerkBot:
