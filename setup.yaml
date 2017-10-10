@@ -17,7 +17,7 @@ global @once:
       $ mkdir cvn-common/backup/ cvn-common/log/ cvn-common/dropbox/
 
 node @each:
-  - debian:
+  - packages:
     - git-core
     - nano
   - puppet:
@@ -68,7 +68,7 @@ node [type=webserver]:
     - www
 
 node [type=appserver]:
-  - debian:
+  - packages:
     - php5-cli
     - php5-sqlite
   - services:
@@ -101,7 +101,7 @@ service stillalive:
       sudo ln -s /srv/cvn/git/infrastructure/crontab-config/stillalive.cron stillalive
 
 service www:
-  - debian:
+  - packages:
     - libapache2-mod-php5
     - php-apc
     - php-pear
@@ -138,7 +138,7 @@ service www:
     $ sudo apachectl graceful
 
 service CVNBot:
-  - debian:
+  - packages:
     - mono-complete
   - setup: |
     #
@@ -161,7 +161,7 @@ service CVNClerkBot:
   # https://github.com/countervandalism/CVNClerkBot
   # https://www.mediawiki.org/wiki/Manual:Pywikipedia
   # https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation#compat_2
-  - debian:
+  - packages:
     - python@2.7.x
     - git-core
     - mysql-client
