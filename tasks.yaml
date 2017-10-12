@@ -68,9 +68,8 @@ tasks CVNBot:
       - cd /srv/cvn/git/CVNBot
       - 'git remote update && git checkout origin/master'
       - cd src/CVNBot
-      - xbuild CVNBot.csproj
-      - mv bin/Debug /srv/cvn/services/cvnbot/MyBotName
-      - cp ../CVNBot.exe.config /srv/cvn/services/cvnbot/MyBotName
+      - xbuild CVNBot.csproj /p:Configuration=Release
+      - mv bin/Release /srv/cvn/services/cvnbot/MyBotName
       - cp ../CVNBot-sample.ini /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
       - cd /srv/cvn/services/cvnbot/MyBotName
       - nano CVNBot.ini
