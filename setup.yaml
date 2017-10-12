@@ -59,7 +59,6 @@ node @each:
       sudo chmod 644 /srv/cvn/git/infrastructure/crontab-config/*.cron
       #
       sudo chown root /srv/cvn/git/infrastructure/bin/backup-wmflabs-node
-      sudo chown root /srv/cvn/git/infrastructure/bin/collect-wmflabs-log
       sudo chown root /srv/cvn/git/infrastructure/bin/cvndb-CVNBot14-publish
       sudo chown root /srv/cvn/git/infrastructure/bin/cvndb-pull
 
@@ -77,11 +76,6 @@ node [type=appserver]:
       #
       cd /etc/cron.hourly/
       sudo ln -s /srv/cvn/git/infrastructure/bin/backup-wmflabs-node cvn-backup-data
-      #
-      # Collect logs
-      #
-      cd /etc/cron.hourly/
-      sudo ln -s /srv/cvn/git/infrastructure/bin/collect-wmflabs-log cvn-collect-log
 
 node cvn-app6:
   - services:
