@@ -80,7 +80,7 @@ tasks CVNBot:
         # 'controlchannel': "#cvn-bots"
         # 'feedchannel': "#cvn-..."
         # 'broadcastchannel': "#cvn-broadcast"
-        # 'restararg': Full in the full path to CVNBot.exe (e.g. "mono /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe")
+        # 'restartarg': Full in the full path to CVNBot.exe (e.g. "mono /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe")
       - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
       - chmod 775 Lists.sqlite
       - if "You're migrating data from an old bot":
