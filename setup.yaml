@@ -87,19 +87,21 @@ node cvn-app7:
       sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-CVNBot14-publish.cron cvndb-CVNBot14-publish
 
 service stillalive:
+  - packages:
+    - php7.0-cli
   - setup: |
       cd /etc/cron.d/
       sudo ln -s /srv/cvn/git/infrastructure/crontab-config/stillalive.cron stillalive
 
 service www:
   - packages:
-    - libapache2-mod-php5
-    - php-apc
-    - php-pear
-    - php5-cli
-    - php5-curl
-    - php5-mysql
-    - php5-sqlite
+    - libapache2-mod-php7.0
+    - php-apcu
+    - php-apcu-bc
+    - php7.0-cli
+    - php7.0-curl
+    - php7.0-mysql
+    - php7.0-sqlite3
   - setup: |
     #
     ## Add repos
