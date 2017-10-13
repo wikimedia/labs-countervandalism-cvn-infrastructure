@@ -21,7 +21,7 @@ tasks stillalive:
 
   # Set up a new bot
   - add:
-    - do 'Set up the bot directory on one of the servers'
+    - do 'Follow install and setup instructions for the new bot and have it working on the new server'
     - do 'Add a new task for MyBotName' to 'localSettings-cvn.yaml' in github:countervandalism/stillalive.git
         # Either with a text editor on your local computer and push with Git,
         # or, use the online editor:
@@ -31,17 +31,15 @@ tasks stillalive:
 
   # Change on which node a process is pooled
   - move:
-    - do 'Change the "pool" property for MyBotName' in 'localSettings-cvn.yaml' in github:countervandalism/stillalive.git
-    - ssh cvn-appX(PREVIOUS).eqiad.wmflabs
-      - rsync -v -c -a --delete-delay --compress /srv/cvn/services/cvnbot/CVNBotX /data/project/cvn-common/dropbox/
-    - ssh cvn-appX(NEXT).eqiad.wmflabs
-      - rsync -v -c -a --delete-delay --compress /data/project/cvn-common/dropbox/CVNBotX /srv/cvn/services/cvnbot/
+    - do 'Change the pool property from server PREV to NEXT for MyBotName' in 'localSettings-cvn.yaml' in github:countervandalism/stillalive.git
     # Deploy the stillalive change to the previous server first (so that it won't restart there),
-    # then kill the active bot from IRC,
-    # then deploy the stillalive change to the new server,
-    # then either wait for cron to run it or run it right away
+    # then kill the active bot from IRC. Then copy the bot (while not running) to the new server.
     - deploy-a-change@cvn-appX(PREVIOUS)
     - quit-a-bot
+    - ssh cvn-appX(PREV).eqiad.wmflabs
+      - rsync -v -c -a --delete-delay --compress /srv/cvn/services/cvnbot/MyBotName /data/project/cvn-common/dropbox/
+    - ssh cvn-appX(NEXT).eqiad.wmflabs
+      - rsync -v -c -a --delete-delay --compress /data/project/cvn-common/dropbox/MyBotName /srv/cvn/services/cvnbot/
     - deploy-a-change@cvn-appX(NEXT)
     - force-run@cvn-appX(NEXT)
 
@@ -80,16 +78,31 @@ tasks CVNBot:
         # 'feedchannel': "#cvn-..."
         # 'broadcastchannel': "#cvn-broadcast"
         # 'restartarg': Full in the full path to CVNBot.exe (e.g. "mono /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe")
-      - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
-      - chmod 775 Lists.sqlite
       - if "You're migrating data from an old bot":
       - edit CVNBot.ini
-        - nano CVNBot.ini # Add relevant settings from the old bot (e.g. editblank, editbig, feedFilterEventUpload, etc.)
+        - cp ../oldbot/CVNBot.ini .
         - cp ../oldbot/Lists.sqlite .
         - cp ../oldbot/Projects.xml .
+      - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
       - chmod 664 *
       - chmod 775 CVNBot.exe Lists.sqlite
       - chmod 660 CVNBot.ini
+    - upgrade:
+      - ssh cvn-appX.eqiad.wmflabs
+      - cd /srv/cvn/git/CVNBot
+      - 'git remote update && git checkout origin/master'
+      - cd src/CVNBot
+      - xbuild CVNBot.csproj /p:Configuration=Release
+      # Take take to ONLY copy CVNBot.exe.
+      # New builds will come with an empty state files (CVNBot.ini, Lists.sqlite, Projects.xml)
+      # But those must NOT be copied cover as else you'll destroy the existing bot
+      - stillalive.quit-a-bot
+      - mv bin/Release/CVNBot.exe /srv/cvn/services/cvnbot/MyBotName
+      - stillalive.force-run
+      - CVNBot.monitor
+    - monitor:
+      - ssh cvn-appX.eqiad.wmflabs
+      - sudo tail -n100 -f /var/log/syslog | grep CVNBot
     - test:
       # Run test on a cvn-app server because cvn-dev is subject to general
       # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
