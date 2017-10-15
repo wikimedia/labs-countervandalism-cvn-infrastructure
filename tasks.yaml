@@ -102,7 +102,14 @@ tasks CVNBot:
       - CVNBot.monitor
     - monitor:
       - ssh cvn-appX.eqiad.wmflabs
-      - sudo tail -n100 -f /var/log/syslog | grep CVNBot
+      # Open a log of recent logs from all CVNBot instances, updating in real time:
+      - sudo tail -n100 -f /var:/log/syslog | grep CVNBot
+      # Find recent warnings and errors from CVNBot:
+      - sudo tail -n1000 -f /var/log/syslog | grep CVNBot | grep -v ': INFO '
+      # Find errors from CVNBot:
+      - sudo tail -n+0 -f /var/log/syslog | grep CVNBot | grep -E ': (ERROR|FATAL) '
+      # Find errors from CVNBot (including yesterday):
+      - sudo tail -n+0 -f /var/log/syslog{.1,} | grep CVNBot | grep -E ': (ERROR|FATAL) '
     - test:
       # Run test on a cvn-app server because cvn-dev is subject to general
       # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
