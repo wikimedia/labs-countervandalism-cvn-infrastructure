@@ -64,11 +64,11 @@ tasks CVNBot:
     - install:
       - ssh cvn-appX.eqiad.wmflabs
       - cd /srv/cvn/git/CVNBot
-      - 'git remote update && git checkout origin/master'
-      - cd src/CVNBot
-      - xbuild CVNBot.csproj /p:Configuration=Release
-      - mv bin/Release /srv/cvn/services/cvnbot/MyBotName
-      - cp ../CVNBot-sample.ini /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
+      # Use latest code and clear out any previous build artefacts
+      - 'git remote update && git --hard origin/master && git clean -dffx'
+      - xbuild src/CVNBot.sln /p:Configuration=Release
+      - mv src/CVNBot/bin/Release /srv/cvn/services/cvnbot/MyBotName
+      - cp src/CVNBot-sample.ini /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
       - cd /srv/cvn/services/cvnbot/MyBotName
       - nano CVNBot.ini
         # 'botnick' and 'botpass'. See https://meta.wikimedia.org/wiki/Countervandalism_Network/Management#Bots.
@@ -90,14 +90,16 @@ tasks CVNBot:
     - upgrade:
       - ssh cvn-appX.eqiad.wmflabs
       - cd /srv/cvn/git/CVNBot
-      - 'git remote update && git checkout origin/master'
-      - cd src/CVNBot
-      - xbuild CVNBot.csproj /p:Configuration=Release
+      # Use latest code and clear out any previous build artefacts
+      - 'git remote update && git --hard origin/master && git clean -dffx'
+      - xbuild src/CVNBot.sln /p:Configuration=Release
       # Take take to ONLY copy CVNBot.exe.
       # New builds will come with an empty state files (CVNBot.ini, Lists.sqlite, Projects.xml)
       # But those must NOT be copied cover as else you'll destroy the existing bot
       - stillalive.quit-a-bot
-      - mv bin/Release/CVNBot.exe /srv/cvn/services/cvnbot/MyBotName
+      - mv src/CVNBot/bin/Release/CVNBot.exe /srv/cvn/services/cvnbot/MyBotName
+      # Move CVNBot.exe group ownership for stillalive
+      - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
       - stillalive.force-run
       - CVNBot.monitor
     - check-chmod:
