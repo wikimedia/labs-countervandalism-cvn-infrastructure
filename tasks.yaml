@@ -93,9 +93,13 @@ tasks CVNBot:
       # Use latest code and clear out any previous build artefacts
       - 'git remote update && git --hard origin/master && git clean -dffx'
       - xbuild src/CVNBot.sln /p:Configuration=Release
-      # Take take to ONLY copy CVNBot.exe.
-      # New builds will come with an empty state files (CVNBot.ini, Lists.sqlite, Projects.xml)
-      # But those must NOT be copied cover as else you'll destroy the existing bot
+      # Take care to NOT update files like CVNBot.ini, Lists.sqlite, or Projects.xml.
+      # Those belong to the specific bot instance to maintain its state and configuration
+      # Replace: CVNBot.exe, CVNBot.exe.config, and any *.dll files.
+      # Also, check if the bot's Console.msgs file (interface messages) is a symlink or
+      # a regular file. If a regular file, replace it with the latest one.
+      # If a symlink, then it is a translation from countervandalism/infrastructure.git which
+      # should remain as-is.
       - stillalive.quit-a-bot
       - mv src/CVNBot/bin/Release/CVNBot.exe /srv/cvn/services/cvnbot/MyBotName
       # Move CVNBot.exe group ownership for stillalive
