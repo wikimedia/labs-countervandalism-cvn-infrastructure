@@ -89,6 +89,7 @@ node cvn-app8:
 service stillalive:
   - packages:
     - php7.0-cli
+    - php7.0-mbstring # used by ulrichsg/getopt-php
   - setup: |
       cd /etc/cron.d/
       sudo ln -s /srv/cvn/git/infrastructure/crontab-config/stillalive.cron stillalive
