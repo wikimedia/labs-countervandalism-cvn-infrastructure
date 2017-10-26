@@ -65,7 +65,7 @@ tasks CVNBot:
       - ssh cvn-appX.eqiad.wmflabs
       - cd /srv/cvn/git/CVNBot
       # Use latest code and clear out any previous build artefacts
-      - 'git remote update && git --hard origin/master && git clean -dffx'
+      - 'git remote update && git reset --hard origin/master && git clean -dffx'
       - xbuild src/CVNBot.sln /p:Configuration=Release
       - mv src/CVNBot/bin/Release /srv/cvn/services/cvnbot/MyBotName
       - cp src/CVNBot-sample.ini /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
