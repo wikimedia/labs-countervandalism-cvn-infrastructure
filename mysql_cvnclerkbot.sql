@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.35, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.58, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: cvnclerkbot
 -- ------------------------------------------------------
--- Server version	5.5.35-0ubuntu0.12.04.2
+-- Server version	5.5.58-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -95,6 +95,7 @@ INSERT INTO `channels` VALUES ('#cvn-wp-en-uploads');
 INSERT INTO `channels` VALUES ('#cvn-wp-es');
 INSERT INTO `channels` VALUES ('#cvn-wp-fa');
 INSERT INTO `channels` VALUES ('#cvn-wp-fi');
+INSERT INTO `channels` VALUES ('#cvn-wp-he');
 INSERT INTO `channels` VALUES ('#cvn-wp-hu');
 INSERT INTO `channels` VALUES ('#cvn-wp-is');
 INSERT INTO `channels` VALUES ('#cvn-wp-nl');
@@ -106,6 +107,7 @@ INSERT INTO `channels` VALUES ('#cvn-wp-ru');
 INSERT INTO `channels` VALUES ('#cvn-wp-scan');
 INSERT INTO `channels` VALUES ('#cvn-wp-sh');
 INSERT INTO `channels` VALUES ('#cvn-wp-sv');
+INSERT INTO `channels` VALUES ('#cvn-wp-tr');
 INSERT INTO `channels` VALUES ('#cvn-wq-en');
 INSERT INTO `channels` VALUES ('#cvn-ws-en');
 INSERT INTO `channels` VALUES ('#cvn-ws-fa');
@@ -127,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-03-27 18:22:06
+-- Dump completed on 2017-11-15  0:49:20
