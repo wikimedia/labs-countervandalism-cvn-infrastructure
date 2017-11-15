@@ -75,14 +75,14 @@ node [type=appserver]:
       #
       sudo ln -s /srv/cvn/git/infrastructure/bin/backup-wmflabs-node /etc/cron.hourly/cvn-backup-data
 
-node cvn-app6:
-  - services:
-    - CVNClerkBot
-
 node cvn-app8:
   - setup: |
       # Add cron
       sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-CVNBot14-publish.cron /etc/cron.d/cvndb-CVNBot14-publish
+
+node cvn-app9:
+  - services:
+    - CVNClerkBot
 
 service stillalive:
   - packages:
@@ -151,10 +151,8 @@ service CVNBot:
 
 service CVNClerkBot:
   # https://github.com/countervandalism/CVNClerkBot
-  # https://www.mediawiki.org/wiki/Manual:Pywikipedia
-  # https://www.mediawiki.org/wiki/Manual:Pywikibot/Installation#compat_2
   - packages:
-    - python@2.7.x
+    - python # version 2.8
     - git-core
     - mysql-client
     - mysql-server
@@ -178,45 +176,17 @@ service CVNClerkBot:
     #
     $ cd /srv/cvn/git
     $ git clone https://github.com/countervandalism/CVNClerkBot.git
-    $ git clone --recursive https://gerrit.wikimedia.org/r/pywikibot/compat.git pywikibot-compat
-    #
-    ## Configure pywikibot
-    #
-    $ cp /srv/cvn/git/infrastructure/cvnwiki_family.py /srv/cvn/git/pywikibot-compat/families/
-    # Change from 644 to 664 - matching the default family files
-    $ chmod 664 /srv/cvn/git/pywikibot-compat/families/cvnwiki_family.py
-    $ cd  /srv/cvn/git/pywikibot-compat
-    $ python ./generate_user_files.py
-    # Interactive:
-    # 1. Create user-config.py
-    # 2. Select cvnwiki
-    # 3. Username: Clogger
-    # 4. Small file
-    $ create pywikibot-compat/.passwd with `("Clogger", "<password>")`
-    $ chmod 600 pywikibot-compat/.passwd
-    $ edit pywikibot-compat/user-config.py and add `password_file = '.passwd'`
-    #
-    # FIXME: Fix this and stillalive/cvn-localSettings so that it can run as "cvn.cvnservice"
-    $ sudo chown root pywikibot-compat/user-config.py
-    $ sudo chown root pywikibot-compat/.passwd
     #
     ## Configure CVNClerkBot
     #
     $ cp /srv/cvn/git/infrastructure/clerkbotconfig.py CVNClerkBot/cvnclerkbotconfig.py
     $ edit CVNClerkBot/cvnclerkbotconfig.py
       - password
-    $ edit CVNClerkBot/wikilog.py
-      - samplewiki -> cvnwiki
     $ cd /srv/cvn/services
     $ mkdir CVNClerkBot
     $ edit CVNClerkBot/init.sh
       #!/usr/bin/env bash
-      source /srv/cvn/git/infrastructure/bash-pythonpaths.sh && python /srv/cvn/git/CVNClerkBot/cvnclerkbot.py
+      python /srv/cvn/git/CVNClerkBot/cvnclerkbot.py
     $ chmod +x CVNClerkBot/init.sh
     #
-    $ exec prepare.database
-    #
-    # Run once manually to accept the deprecation warning of pywikibot-compat
-    $ sudo CVNClerkBot/init.sh
-    # Or, alternatively put the following:
-    $ echo -e 'Compat deprecation warning shown\n' > /srv/cvn/git/pywikibot-compat/pywikibot/throttle.ctrl
+    # Run the steps of 'prepare.database'
