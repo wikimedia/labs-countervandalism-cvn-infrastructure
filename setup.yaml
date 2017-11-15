@@ -152,12 +152,11 @@ service CVNBot:
 service CVNClerkBot:
   # https://github.com/countervandalism/CVNClerkBot
   - packages:
-    - python # version 2.8
-    - git-core
+    - python # version 2.7
     - mysql-client
     - mysql-server
     - python-mysqldb
-    - python-twisted-words
+    - python-twisted
   - prepare:
     - database:
       - shell: |
