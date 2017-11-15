@@ -173,19 +173,19 @@ service CVNClerkBot:
     #
     ## Add repos
     #
-    $ cd /srv/cvn/git
-    $ git clone https://github.com/countervandalism/CVNClerkBot.git
+    cd /srv/cvn/git
+    git clone https://github.com/countervandalism/CVNClerkBot.git
     #
     ## Configure CVNClerkBot
     #
-    $ cp /srv/cvn/git/infrastructure/clerkbotconfig.py CVNClerkBot/cvnclerkbotconfig.py
-    $ edit CVNClerkBot/cvnclerkbotconfig.py
+    cp /srv/cvn/git/infrastructure/clerkbotconfig.py CVNClerkBot/cvnclerkbotconfig.py
+    # edit CVNClerkBot/cvnclerkbotconfig.py
       - password
-    $ cd /srv/cvn/services
-    $ mkdir CVNClerkBot
-    $ edit CVNClerkBot/init.sh
+    cd /srv/cvn/services
+    mkdir CVNClerkBot
+    # edit CVNClerkBot/init.sh
       #!/usr/bin/env bash
       python /srv/cvn/git/CVNClerkBot/cvnclerkbot.py
-    $ chmod +x CVNClerkBot/init.sh
+    chmod +x CVNClerkBot/init.sh
     #
     # Run the steps of 'prepare.database'
