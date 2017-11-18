@@ -5,16 +5,16 @@ global @once:
     - add-service-group:
       - cvnservice (local-cvnservice; cvn.cvnservice)
   setup: |
-      $ ssh cvn-{name}.eqiad.wmflabs
-      $ umask 0002
+      ssh cvn-{name}.eqiad.wmflabs
+      umask 0002
       #
       ## Prepare directory structure on on NFS
       #
-      $ cd /data/project
-      $ sudo mkdir cvn-common
-      $ sudo chgrp project-cvn cvn-common/
-      $ sudo chmod 2775 cvn-common/
-      $ mkdir cvn-common/backup/ cvn-common/dropbox/
+      cd /data/project
+      sudo mkdir cvn-common
+      sudo chgrp project-cvn cvn-common/
+      sudo chmod 2775 cvn-common/
+      mkdir cvn-common/backup/ cvn-common/dropbox/
 
 node @each:
   # sudo apt-get install ..
@@ -105,28 +105,28 @@ service www:
     #
     ## Add repos
     #
-    $ cd /srv/cvn/git
-    $ git clone https://github.com/countervandalism/cvn-api.git
+    cd /srv/cvn/git
+    git clone https://github.com/countervandalism/cvn-api.git
     #
     ## Create document root
     #
-    $ cd /srv/cvn/services
-    $ ln -s /srv/cvn/git/infrastructure/cvn-docroot www
-    $ cd www
-    $ ln -s /srv/cvn/git/cvn-api/public_html/api.php api.php
+    cd /srv/cvn/services
+    ln -s /srv/cvn/git/infrastructure/cvn-docroot www
+    cd www
+    ln -s /srv/cvn/git/cvn-api/public_html/api.php api.php
     #
     ## Setup cvn-api
     #
-    $ cd /etc/cron.d/
-    $ sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-pull.cron cvndb-pull
+    cd /etc/cron.d/
+    sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-pull.cron cvndb-pull
     #
     ## Configure webserver
     #
-    $ cd /etc/apache2/sites-available
-    $ sudo ln -s /srv/cvn/git/infrastructure/apache-config/cvn.conf .
-    $ cd /etc/apache2/sites-enabled
-    $ sudo ln -s ../sites-available/cvn.conf 100-cvn
-    $ sudo apachectl graceful
+    cd /etc/apache2/sites-available
+    sudo ln -s /srv/cvn/git/infrastructure/apache-config/cvn.conf .
+    cd /etc/apache2/sites-enabled
+    sudo ln -s ../sites-available/cvn.conf 100-cvn
+    sudo apachectl graceful
 
 service CVNBot:
   - packages:
