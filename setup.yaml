@@ -126,7 +126,7 @@ service www:
     cd /etc/apache2/sites-available
     sudo ln -s /srv/cvn/git/infrastructure/apache-config/cvn.conf .
     cd /etc/apache2/sites-enabled
-    sudo ln -s ../sites-available/cvn.conf 100-cvn
+    sudo ln -s ../sites-available/cvn.conf 100-cvn.conf
     sudo apachectl graceful
 
 service CVNBot:
