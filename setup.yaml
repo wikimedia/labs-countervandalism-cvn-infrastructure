@@ -14,7 +14,7 @@ global @once:
       $ sudo mkdir cvn-common
       $ sudo chgrp project-cvn cvn-common/
       $ sudo chmod 2775 cvn-common/
-      $ mkdir cvn-common/backup/ cvn-common/log/ cvn-common/dropbox/
+      $ mkdir cvn-common/backup/ cvn-common/dropbox/
 
 node @each:
   # sudo apt-get install ..
