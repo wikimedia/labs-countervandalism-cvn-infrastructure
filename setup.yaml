@@ -101,6 +101,7 @@ service www:
     - php7.0-curl
     - php7.0-mysql
     - php7.0-sqlite3
+    - apache2
   - setup: |
     #
     ## Add repos
