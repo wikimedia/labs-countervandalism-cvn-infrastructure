@@ -114,7 +114,6 @@ service www:
     $ ln -s /srv/cvn/git/infrastructure/cvn-docroot www
     $ cd www
     $ ln -s /srv/cvn/git/cvn-api/public_html/api.php api.php
-    $ ln -s /data/project/cvn-common/log log
     #
     ## Setup cvn-api
     #
