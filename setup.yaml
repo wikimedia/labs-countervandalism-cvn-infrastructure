@@ -111,22 +111,17 @@ service www:
     #
     ## Create document root
     #
-    cd /srv/cvn/services
-    ln -s /srv/cvn/git/infrastructure/cvn-docroot www
-    cd www
-    ln -s /srv/cvn/git/cvn-api/public_html/api.php api.php
+    ln -s /srv/cvn/git/infrastructure/cvn-docroot /srv/cvn/services/www
+    ln -s /srv/cvn/git/cvn-api/public_html/api.php /srv/cvn/services/www/api.php
     #
     ## Setup cvn-api
     #
-    cd /etc/cron.d/
-    sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-pull.cron cvndb-pull
+    sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-pull.cron /etc/cron.d/cvndb-pull
     #
     ## Configure webserver
     #
-    cd /etc/apache2/sites-available
-    sudo ln -s /srv/cvn/git/infrastructure/apache-config/cvn.conf .
-    cd /etc/apache2/sites-enabled
-    sudo ln -s ../sites-available/cvn.conf 100-cvn.conf
+    sudo ln -s /srv/cvn/git/infrastructure/apache-config/cvn.conf /etc/apache2/sites-available/cvn.conf
+    sudo ln -s /etc/apache2/sites-available/cvn.conf /etc/apache2/sites-enabled/100-cvn.conf
     sudo apachectl graceful
 
 service CVNBot:
