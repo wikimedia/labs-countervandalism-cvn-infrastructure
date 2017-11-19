@@ -118,6 +118,11 @@ service www:
     #
     sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-pull.cron /etc/cron.d/cvndb-pull
     #
+    ## Configure PHP
+    #
+    sudo ln -s /srv/cvn/git/infrastructure/php-cvn.ini /etc/php/7.0/mods-available/cvn.ini
+    sudo ln -s /etc/php/7.0/mods-available/cvn.ini /etc/php/7.0/apache2/conf.d/50-cvn.ini
+    #
     ## Configure webserver
     #
     sudo ln -s /srv/cvn/git/infrastructure/apache-config/cvn.conf /etc/apache2/sites-available/cvn.conf
