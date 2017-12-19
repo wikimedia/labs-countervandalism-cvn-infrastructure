@@ -6,7 +6,7 @@
 
 	var hasOwn = Object.hasOwnProperty;
 
-	var BOT_NR = 5;
+	var BOT_NR = 6;
 
 	var parseUrl = function (url) {
 		// Lazy-init this DOM element, and share it between
