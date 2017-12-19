@@ -47,8 +47,8 @@
 	var convertCvnbotList = function (chatlog, nickname) {
 		var sep, opening, end, extracted, idx, channels;
 		// Example:
-		// "SampleBot-sw2: Currently monitoring: ab.wikipedia af.wiktionary ang.wikiq\
-		//  18:05 SampleBot-sw2: uote es.wikinews es.wikiquote (Total: 142 wikis)"
+		// "Example2: Currently monitoring: ab.wikipedia af.wiktionary ang.wikiq\
+		//  18:05 Example2: uote es.wikinews es.wikiquote (Total: 142 wikis)"
 		sep = null;
 		opening = cvnbotListOpening;
 		end = '(Total';
@@ -149,13 +149,41 @@
 	 * @promise {Array} channels
 	 */
 	APP.getExcludedChannels = function () {
-		return $.ajax('./var/non-swmt.txt').then(function (data) {
-			// Exclude first line (opening <pre>)
-			return String(data).trim().split('\n').slice(1).filter(function (line) {
-				line = line.trim();
-				return line.length && line[0] !== '#';
+		return $.ajax({
+			url: 'https://meta.wikimedia.org/w/api.php',
+			data: {
+				format: 'json',
+				formatversion: '2',
+				action: 'query',
+				prop: 'revisions',
+				titles: 'Countervandalism Network/Bots',
+				redirects: '1',
+				rvprop: 'content'
+			},
+			dataType: 'jsonp',
+			cache: true
+		}).then(function (data) {
+			return data.query.pages[0].revisions[0].content;
+		}).then(function (content) {
+			var channels = [];
+			// On [[m:CVN/Bots]], the list of source channels (e.g. "en.wikipedia") is
+			// in the table cell right before the cell that contains the
+			// feed channel(s), starting with "#" (e.g. "#cvn-wp-en")
+			var listPattern = /\|([^|]+)\|\s*#/g;
+			var lists = content.match(listPattern);
+			if (!lists) {
+				return channels;
+			}
+			var rChannel = /[\w]+\.wik[\w]+/;
+			lists.forEach(function (list) {
+				list.trim().split(/[\s\|\n]+/).forEach(function (channel) {
+					if (rChannel.test(channel)) {
+						channels.push(channel);
+					}
+				});
 			});
-		});
+			return channels;
+		}).then(console.log.bind(console));
 	};
 
 	/**
@@ -179,7 +207,7 @@
 	APP.getWikis = function () {
 		return $.when(
 			$.ajax({
-				url: '//meta.wikimedia.org/w/api.php?format=json&action=sitematrix',
+				url: 'https://meta.wikimedia.org/w/api.php?format=json&action=sitematrix',
 				dataType: 'jsonp',
 				cache: true
 			}),
@@ -409,7 +437,7 @@
 					channels = [];
 				}
 				if (!nick) {
-					nick = 'Bot-sw' + i;
+					nick = '(Bot_' + i + ')';
 				}
 				channelsByBot[nick] = channels;
 			}
