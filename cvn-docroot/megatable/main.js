@@ -125,12 +125,12 @@
 			after = '),';
 			arrayStart = data.indexOf(before);
 			if (arrayStart === -1) {
-				return $.Deferred().reject();
+				return $.Deferred().reject(new Error('wmgRC2UDPPrefix start not found'));
 			}
 			data = data.slice(arrayStart + before.length);
 			arrayEnd = data.indexOf(after);
 			if (arrayEnd === -1) {
-				return $.Deferred().reject();
+				return $.Deferred().reject(new Error('wmgRC2UDPPrefix end not found'));
 			}
 			arrayLines = data.slice(0, arrayEnd).trim().split('\n');
 			channels = {};
@@ -217,7 +217,7 @@
 			var data = ajax[0];
 			var wikis = {};
 			if (!data.sitematrix) {
-				return $.Deferred().reject();
+				return $.Deferred().reject(new Error('SiteMatrix not found'));
 			}
 			$.each(data.sitematrix, function (key, group) {
 				var sites, siteWikis;
