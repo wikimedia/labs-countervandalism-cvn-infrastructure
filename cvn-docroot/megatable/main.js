@@ -6,6 +6,8 @@
 
 	var hasOwn = Object.hasOwnProperty;
 
+	var BOT_NR = 5;
+
 	var parseUrl = function (url) {
 		// Lazy-init this DOM element, and share it between
 		// calls using closure.
@@ -332,8 +334,8 @@
 		}
 		var channelsByBot = JSON.parse(data);
 		var bots = Object.keys(channelsByBot).sort();
-		if (bots.length > 5) {
-			throw new Error('Bot index must be in range 1 - 5');
+		if (bots.length > BOT_NR) {
+			throw new Error('Bot index out of range');
 		}
 		$.each(bots, function (i, bot) {
 			elements.swNicks[i + 1].val(bot);
@@ -392,7 +394,7 @@
 			elements.$spinner.show();
 
 			channelsByBot = {};
-			for (i = 1; i <= 5; i++) {
+			for (i = 1; i <= BOT_NR; i++) {
 				list = elements.swLists[i].val().trim();
 				nick = elements.swNicks[i].val().trim();
 				if (!list && !nick) {
@@ -505,7 +507,7 @@
 		elements.swNicks = [];
 		elements.swLists = [];
 
-		for (i = 1; i <= 5; i++) {
+		for (i = 1; i <= BOT_NR; i++) {
 			elements.swNicks[i] = input = $('<input type="text"/>')
 				.addClass('form-control')
 				.data('cvn-sw-nr', i)
