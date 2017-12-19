@@ -304,15 +304,19 @@
 
 		var unmonitored = [];
 
-		// Get list of channels that should be monitored (all public wikis)
+		// Get list of channels that should be monitored
+		// All wikis that are:
+		// - public (not private or fishbowl)
+		// - open (not locked)
+		// - small (not large)
 		return APP.getSourceChannels().then(function (allchannels) {
-			var i, len;
+			var i;
 
 			$.each(channelsByBot, function (bot, channels) {
-				var i, len, channel,
+				var i, channel,
 					redundant = [];
 
-				for (i = 0, len = channels.length; i < len; i++) {
+				for (i = 0; i < channels.length; i++) {
 					channel = channels[i];
 
 					if (!hasOwn.call(monitoredInBot, channel)) {
@@ -335,17 +339,23 @@
 				}
 			});
 
-			for (i = 0, len = allchannels.length; i < len; i++) {
+			for (i = 0; i < allchannels.length; i++) {
 				if (!hasOwn.call(monitoredInBot, allchannels[i])) {
 					unmonitored.push(allchannels[i]);
 				}
 			}
 
 			return {
+				// Currently monitored
 				channelsByBot: channelsByBot,
 				monitored: Object.keys(monitoredInBot),
+				// Suggested for removal
+				// - Already monitored by another SWMT bot
 				dupesByChannel: dupesByChannel,
+				// - Not needed (locked, private/fishbowl, or large)
 				redundantByBot: redundantByBot,
+				// Suggested for addition
+				// - Needed but not currently monitored
 				unmonitored: unmonitored
 			};
 		});
@@ -515,7 +525,7 @@
 
 				processList(
 					{
-						'Monitored wikis that no longer need to be monitored (locked, removed, too large, source channel changed, already monitored outside #cvn-sw, ..)': analysis.redundantByBot,
+						'Wikis that no longer need to be monitored (locked, private/fishbowl, or too large)': analysis.redundantByBot,
 						'Wikis monitored more than once': analysis.dupesByChannel
 					},
 					elements.results.redundant,
