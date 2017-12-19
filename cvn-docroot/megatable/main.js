@@ -121,8 +121,8 @@
 			//     'default' => false,
 			//     'wikidatawiki' => "#wikidata.wikipedia\t",
 			// );
-			before = 'wmgRC2UDPPrefix\' => array(';
-			after = '),';
+			before = 'wmgRC2UDPPrefix\' => ';
+			after = '],';
 			arrayStart = data.indexOf(before);
 			if (arrayStart === -1) {
 				return $.Deferred().reject(new Error('wmgRC2UDPPrefix start not found'));
