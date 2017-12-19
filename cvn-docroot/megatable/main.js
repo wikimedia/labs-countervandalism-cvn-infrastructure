@@ -526,9 +526,9 @@
 
 				elements.$output.get(0).scrollIntoView();
 			})
-			.fail(function () {
+			.fail(function (e) {
 				elements.$spinner.hide();
-				alert('Analysis failed');
+				alert('Analysis failed: ' + e);
 			});
 		});
 
