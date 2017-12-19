@@ -513,7 +513,7 @@
 				.data('cvn-sw-nr', i)
 				.attr({
 					id: 'cvn-sw' + i + '-nick',
-					placeholder: 'Bot ' + i
+					placeholder: 'Enter nick name...'
 				})
 				.on('input', validateSwField);
 
@@ -523,7 +523,7 @@
 					$('<label>')
 						.addClass('control-label col-sm-2')
 						.attr('for', 'cvn-sw' + i + '-nick')
-						.text('Bot ' + i + ' nick'),
+						.text('Group ' + i + ' bot'),
 					$('<div>')
 						.addClass('col-sm-10')
 						.append(input)
@@ -535,7 +535,7 @@
 				.data('cvn-sw-nr', i)
 				.prop({
 					id: 'cvn-sw' + i + '-list',
-					placeholder: 'aa.wikipedia ab.wiktionary ...',
+					placeholder: 'Enter wiki list...',
 					rows: 4
 				})
 				.on('input', validateSwField);
@@ -546,7 +546,7 @@
 					$('<label>')
 						.addClass('control-label col-sm-2')
 						.attr('for', 'cvn-sw' + i + '-list')
-						.text('Bot ' + i + ' channels'),
+						.text('Group ' + i + ' channels'),
 					$('<div>')
 						.addClass('col-sm-10')
 						.append(input)
