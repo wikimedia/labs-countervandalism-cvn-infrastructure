@@ -183,7 +183,7 @@
 				});
 			});
 			return channels;
-		}).then(console.log.bind(console));
+		});
 	};
 
 	/**
