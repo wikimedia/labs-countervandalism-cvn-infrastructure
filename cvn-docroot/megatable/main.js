@@ -90,6 +90,27 @@
 	};
 
 	/**
+	 * @return {string} Source channel name
+	 */
+	function getSourceChannelForWiki(customChannels, dbname, wiki) {
+		if (customChannels[dbname]) {
+			return customChannels[dbname];
+		}
+		// Based on wmf-config/CommonSettings.php
+		matches = wiki.hostname.match(/^(.+).org$/);
+		if (!matches) {
+			return null;
+		}
+		return matches[1];
+	}
+
+	function warn() {
+		if (window.console && console.warn) {
+			console.warn.apply(console, arguments);
+		}
+	}
+
+	/**
 	 * @return {Promise}
 	 * @promise {Array} dbnames
 	 */
@@ -207,7 +228,11 @@
 	APP.getWikis = function () {
 		return $.when(
 			$.ajax({
-				url: 'https://meta.wikimedia.org/w/api.php?format=json&action=sitematrix',
+				url: 'https://meta.wikimedia.org/w/api.php',
+				data: {
+					format: 'json',
+					action: 'sitematrix'
+				},
 				dataType: 'jsonp',
 				cache: true
 			}),
@@ -215,7 +240,15 @@
 		).then(function (ajax, largewikiDbnames) {
 			// ajax = [ responseData, statusText, jqXhr ]
 			var data = ajax[0];
-			var wikis = {};
+			var ret = {
+				goodWikis: {},
+				badWikis: {
+					closed: {},
+					private: {},
+					fishbowl: {},
+					large: {}
+				}
+			};
 			if (!data.sitematrix) {
 				return $.Deferred().reject(new Error('SiteMatrix not found'));
 			}
@@ -230,59 +263,24 @@
 					sites = group.site;
 				}
 				$.each(sites, function (i, site) {
-					if (
-						site.closed === undefined &&
-						site.private === undefined &&
-						site.fishbowl === undefined &&
-						largewikiDbnames.indexOf(site.dbname) === -1
-					) {
-						wikis[site.dbname] = {
-							url: site.url,
-							hostname: parseUrl(site.url).hostname
-						};
+					var wiki = {
+						url: site.url,
+						hostname: parseUrl(site.url).hostname
+					};
+					if (site.closed !== undefined) {
+						ret.badWikis.closed[site.dbname] = wiki;
+					} else if (site.private !== undefined) {
+						ret.badWikis.private[site.dbname] = wiki;
+					} else if (site.fishbowl !== undefined) {
+						ret.badWikis.fishbowl[site.dbname] = wiki;
+					} else if (largewikiDbnames.indexOf(site.dbname) !== -1) {
+						ret.badWikis.large[site.dbname] = wiki;
+					} else {
+						ret.goodWikis[site.dbname] = wiki;
 					}
-					return null;
 				});
 			});
-			return wikis;
-		});
-	};
-
-	/**
-	 * @return {Promise}
-	 * @promise {Array} channels IRC source channel names for irc.wikimedia.org (without "#")
-	 */
-	APP.getSourceChannels = function () {
-		return $.when(
-			APP.getWikis(),
-			APP.getCustomChannels(),
-			APP.getExcludedChannels(),
-			APP.getIncludedChannels()
-		).then(function (wikis, customChannels, excludedChannels, includedChannels) {
-			// Using jQuery.map to filter out null values
-			var channels = $.map(wikis, function (wiki, dbname) {
-				var matches, channel;
-				if (customChannels[dbname]) {
-					channel = customChannels[dbname];
-				} else {
-					// Based on wmf-config/CommonSettings.php
-					matches = wiki.hostname.match(/^(.+).org$/);
-					if (!matches) {
-						return;
-					}
-					channel = matches[1];
-				}
-				if (excludedChannels.indexOf(channel) !== -1) {
-					return;
-				}
-				return channel;
-			});
-			$.each(includedChannels, function (i, channel) {
-				if (channels.indexOf(channel) === -1) {
-					channels.push(channel);
-				}
-			});
-			return channels;
+			return ret;
 		});
 	};
 
@@ -294,31 +292,63 @@
 		// Keyed by channel, value of 1 bot name
 		var monitoredInBot = {};
 
-		// channels monitored by more than one bot.
-		// Keyed by channel, value list of two or more bot names.
+		// Suggested for removal
+		// - Already monitored by another SWMT bot
+		//   Keyed by channel, value list of two or more bot names.
 		var dupesByChannel = {};
 
-		// channels needlessly monitored
-		// Keyed by bot
+		// - Not needed (locked, private/fishbowl, or large)
+		//   Keyed by bot, value is a list where
+		//   each value is an object with a 'channel' and 'reason' key
 		var redundantByBot = {};
 
+		// Suggested for addition
+		// - Needed but not currently monitored
 		var unmonitored = [];
 
-		// Get list of channels that should be monitored
-		// All wikis that are:
-		// - public (not private or fishbowl)
-		// - open (not locked)
-		// - small (not large)
-		return APP.getSourceChannels().then(function (allchannels) {
+		return $.when(
+			APP.getWikis(),
+			APP.getCustomChannels(),
+			APP.getExcludedChannels(),
+			APP.getIncludedChannels()
+		).then(function (wikis, customChannels, excludedChannels, includedChannels) {
 			var i;
+			// Map of dbname => wiki object
+			// Good wikis are:
+			// - public (not private or fishbowl)
+			// - open (not locked)
+			// - small (not large)
+			var goodWikis = wikis.goodWikis;
+			// Map of bad-reason => dbname = wiki object
+			var badWikis = wikis.badWikis;
+
+			// Using jQuery.map to filter out null values
+			var goodChannels = $.map(goodWikis, function (wiki, dbname) {
+				var channel = getSourceChannelForWiki(customChannels, dbname, wiki);
+				if (!channel) {
+					// Ignore this wiki, given we don't know its channel name
+					// we can't know if a bot is monitoring it or how
+					// to add it to the monitor.
+					warn('Analysis: Unable to determine source channel for ' + dbname);
+					return;
+				}
+				if (excludedChannels.indexOf(channel) !== -1) {
+					return;
+				}
+				return channel;
+			});
+			// Make sure we re-include the list of wikis we intentionally
+			// monitor both within SWMT and elsewhere in the CVN.
+			includedChannels.forEach(function (channel) {
+				if (goodChannels.indexOf(channel) === -1) {
+					goodChannels.push(channel);
+				}
+			});
 
 			$.each(channelsByBot, function (bot, channels) {
-				var i, channel,
-					redundant = [];
-
-				for (i = 0; i < channels.length; i++) {
-					channel = channels[i];
-
+				var redundant = [];
+				channels.forEach(function (channel) {
+					var badReason, reason;
 					if (!hasOwn.call(monitoredInBot, channel)) {
 						monitoredInBot[channel] = bot;
 					} else {
@@ -329,19 +359,29 @@
 						}
 					}
 
-					if (allchannels.indexOf(channel) === -1) {
-						redundant.push(channel);
+					if (goodChannels.indexOf(channel) === -1) {
+						// Try to figure out why
+						reason = 'unknown';
+						for (badReason in badWikis) {
+							$.each(badWikis[badReason], function (dbname, wiki) {
+								var badChannel = getSourceChannelForWiki(customChannels, dbname, wiki);
+								if (badChannel === channel) {
+									reason = badReason;
+								}
+							});
+						}
+						redundant.push({ channel: channel, reason: reason });
 					}
-				}
+				});
 
 				if (redundant.length) {
 					redundantByBot[bot] = redundant;
 				}
 			});
 
-			for (i = 0; i < allchannels.length; i++) {
-				if (!hasOwn.call(monitoredInBot, allchannels[i])) {
-					unmonitored.push(allchannels[i]);
+			for (i = 0; i < goodChannels.length; i++) {
+				if (!hasOwn.call(monitoredInBot, goodChannels[i])) {
+					unmonitored.push(goodChannels[i]);
 				}
 			}
 
@@ -349,13 +389,8 @@
 				// Currently monitored
 				channelsByBot: channelsByBot,
 				monitored: Object.keys(monitoredInBot),
-				// Suggested for removal
-				// - Already monitored by another SWMT bot
 				dupesByChannel: dupesByChannel,
-				// - Not needed (locked, private/fishbowl, or large)
 				redundantByBot: redundantByBot,
-				// Suggested for addition
-				// - Needed but not currently monitored
 				unmonitored: unmonitored
 			};
 		});
@@ -463,7 +498,11 @@
 				function makeListItems(channels) {
 					return $.map(channels, function (channel) {
 						var node = document.createElement('li');
-						node.textContent = channel;
+						if (channel.channel && channel.reason) {
+							node.textContent = channel.channel + ' (' + channel.reason + ')';
+						} else {
+							node.textContent = channel.channel;
+						}
 						return node;
 					});
 				}
