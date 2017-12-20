@@ -332,9 +332,6 @@
 					warn('Analysis: Unable to determine source channel for ' + dbname);
 					return;
 				}
-				if (excludedChannels.indexOf(channel) !== -1) {
-					return;
-				}
 				return channel;
 			});
 			// Make sure we re-include the list of wikis we intentionally
@@ -371,6 +368,8 @@
 							});
 						}
 						redundant.push({ channel: channel, reason: reason });
+					} else if (excludedChannels.indexOf(channel) !== -1) {
+						redundant.push({ channel: channel, reason: 'non-swmt' });
 					}
 				});
 
