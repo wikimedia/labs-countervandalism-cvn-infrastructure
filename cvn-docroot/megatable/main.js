@@ -501,7 +501,7 @@
 						if (channel.channel && channel.reason) {
 							node.textContent = channel.channel + ' (' + channel.reason + ')';
 						} else {
-							node.textContent = channel.channel;
+							node.textContent = channel;
 						}
 						return node;
 					});
