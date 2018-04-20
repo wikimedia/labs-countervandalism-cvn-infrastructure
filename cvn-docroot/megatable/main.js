@@ -32,6 +32,10 @@
 		return parseUrl(url);
 	};
 
+	var natsort = function (a, b) {
+		return a.localeCompare(b, 'en', { numeric: true });
+	};
+
 	var cvnbotListOpening = 'Currently monitoring:';
 
 	// To disambiguate an item that's split over two lines and an item that perfectly
@@ -409,7 +413,7 @@
 			return;
 		}
 		var channelsByBot = JSON.parse(data);
-		var bots = Object.keys(channelsByBot).sort();
+		var bots = Object.keys(channelsByBot).sort(natsort);
 		if (bots.length > BOT_NR) {
 			throw new Error('Bot index out of range');
 		}
