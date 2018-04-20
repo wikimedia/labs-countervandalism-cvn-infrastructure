@@ -335,8 +335,9 @@
 				}
 				return channel;
 			});
-			// Make sure we re-include the list of wikis we intentionally
-			// monitor both within SWMT and elsewhere in the CVN.
+			// Add the list of wikis we intentionally monitor both within SWMT
+			// and elsewhere in the CVN, to good channels. This means they won't
+			// be suggested for removal, even if they are "bad" (eg. too large)
 			includedChannels.forEach(function (channel) {
 				if (goodChannels.indexOf(channel) === -1) {
 					goodChannels.push(channel);
@@ -358,7 +359,7 @@
 					}
 
 					if (goodChannels.indexOf(channel) === -1) {
-						// Try to figure out why
+						// Try to figure out why this is not a good one
 						reason = 'unknown';
 						for (badReason in badWikis) {
 							$.each(badWikis[badReason], function (dbname, wiki) {
@@ -369,7 +370,9 @@
 							});
 						}
 						redundant.push({ channel: channel, reason: reason });
-					} else if (excludedChannels.indexOf(channel) !== -1) {
+					} else if (excludedChannels.indexOf(channel) !== -1 && includedChannels.indexOf(channel) === -1) {
+						// This is a good wiki for SWMT, but already monitored elsewhere,
+						// and not intentionally monitored twice.
 						redundant.push({ channel: channel, reason: 'non-swmt' });
 					}
 				});
