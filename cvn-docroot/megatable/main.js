@@ -216,6 +216,7 @@
 		// keep these eventhough they are slightly large or have their own channel
 		return $.Deferred().resolve([
 				'meta.wikimedia',
+				'mediawiki.wikipedia',
 				'species.wikipedia',
 				'incubator.wikimedia'
 		]);
