@@ -54,94 +54,92 @@ tasks stillalive:
     - ssh cvn-appX.cvn.eqiad.wmflabs
     - `sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname)`
 
+# https://github.com/countervandalism/CVNBot
 tasks CVNBot:
-  # https://github.com/countervandalism/CVNBot
   - install:
     - 'https://github.com/countervandalism/CVNBot#build'
     - 'https://github.com/countervandalism/CVNBot/wiki/Documentation#installation'
 
-  - setup@cvn.wmflabs:
-    - install:
-      - ssh cvn-appX.eqiad.wmflabs
-      - cd /srv/cvn/git/CVNBot
-      # Use latest code and clear out any previous build artefacts
-      - 'git remote update && git reset --hard origin/master && git clean -dffx'
-      - xbuild src/CVNBot.sln /p:Configuration=Release
-      - mv src/CVNBot/bin/Release /srv/cvn/services/cvnbot/MyBotName
-      - cp src/CVNBot-sample.ini /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
-      - cd /srv/cvn/services/cvnbot/MyBotName
-      - nano CVNBot.ini
-        # 'botnick' and 'botpass'. See https://meta.wikimedia.org/wiki/Countervandalism_Network/Management#Bots.
-        #    e.g. botnick=CVNBot5 and botpass=(CVN-Bots2 password)
-        # 'partmsg': "https://meta.wikimedia.org/wiki/CVN"
-        # 'controlchannel': "#cvn-bots"
-        # 'feedchannel': "#cvn-..."
-        # 'broadcastchannel': "#cvn-broadcast"
-        # 'restartarg': Full in the full path to CVNBot.exe (e.g. "mono /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe")
-      - if "You're migrating data from an old bot":
-      - edit CVNBot.ini
-        - cp ../oldbot/CVNBot.ini .
-        - cp ../oldbot/Lists.sqlite .
-        - cp ../oldbot/Projects.xml .
-      - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
-      - chmod 664 *
-      - chmod 775 CVNBot.exe Lists.sqlite
-      - chmod 660 CVNBot.ini
-    - upgrade:
-      - ssh cvn-appX.eqiad.wmflabs
-      - cd /srv/cvn/git/CVNBot
-      # Use latest code and clear out any previous build artefacts
-      - 'git remote update && git --hard origin/master && git clean -dffx'
-      - xbuild src/CVNBot.sln /p:Configuration=Release
-      # Take care to NOT update files like CVNBot.ini, Lists.sqlite, or Projects.xml.
-      # Those belong to the specific bot instance to maintain its state and configuration
-      # Replace: CVNBot.exe, CVNBot.exe.config, and any *.dll files.
-      # Also, check if the bot's Console.msgs file (interface messages) is a symlink or
-      # a regular file. If a regular file, replace it with the latest one.
-      # If a symlink, then it is a translation from countervandalism/infrastructure.git which
-      # should remain as-is.
-      - stillalive.quit-a-bot
-      - mv src/CVNBot/bin/Release/CVNBot.exe /srv/cvn/services/cvnbot/MyBotName
-      # Move CVNBot.exe group ownership for stillalive
-      - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
-      - stillalive.force-run
-      - CVNBot.monitor
-    - check-chmod:
-      # To easily quick the permissions of files in a directory
-      # in a way that matches the parameters passed to chmod, use stat:
-      - stat -c '%a %n' *
-      # Produces:
-      #  775 CVNBot.exe
-      #  664 CVNBot.exe.config
-      #  660 CVNBot.ini
-      #  664 Console.msgs
-      #  775 Lists.sqlite
-      #  664 Projects.xml
-    - monitor:
-      - ssh cvn-appX.eqiad.wmflabs
-      # Open a log of recent logs from all CVNBot instances, updating in real time:
-      - sudo tail -n100 -f /var/log/syslog | grep CVNBot.exe
-      # Find recent warnings and errors from any CVNBot:
-      - sudo tail -n1000 -f /var/log/syslog | grep CVNBot.exe | grep -v ': INFO '
-      # Find errors from any CVNBot:
-      - sudo tail -n+0 -f /var/log/syslog | grep CVNBot | grep -E ': (ERROR|FATAL) '
-      # Find errors from any CVNBot (including yesterday):
-      - sudo tail -n+0 -f /var/log/syslog{.1,} | grep CVNBot | grep -E ': (ERROR|FATAL) '
-      # Show last 10 log messages grouped by bot
-      - for dir in `ls -d /srv/cvn/services/cvnbot/* | sort -V`; do name=$(basename "$dir"); echo; echo "# $name"; (sudo cat /var/log/syslog | grep $name | tail -n10); done;
-      - alias cvnlog='for dir in `ls -d /srv/cvn/services/cvnbot/* | sort -V`; do name=$(basename "$dir"); echo; echo "# $name"; (sudo cat /var/log/syslog | grep $name | tail -n10); done;'
-      - cvnlog
-    - test:
-      # Run test on a cvn-app server because cvn-dev is subject to general
-      # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
-      - ssh cvn-appX.eqiad.wmflabs
-      - cd /srv/cvn/services/cvnbot/MyBotName
-      - mono CVNBot.exe
-      - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
-      - do "Any additional setup if you need to (e.g. load or drop more wikis in memory)"
-      - do "kill the process from the command line (it was started from your shell so Ctrl^C will do)"
-    - schedule:
-      - stillalive add MyBotName
-    - done!
-      # The next time stillalive runs its job queue from crontab on the various cvn-app hosts,
-      # the bot will be started.
+  - install:
+    - ssh cvn-appX.eqiad.wmflabs
+    - cd /srv/cvn/git/CVNBot
+    # Use latest code and clear out any previous build artefacts
+    - 'git remote update && git reset --hard origin/master && git clean -dffx'
+    - xbuild src/CVNBot.sln /p:Configuration=Release
+    - mv src/CVNBot/bin/Release /srv/cvn/services/cvnbot/MyBotName
+    - cp src/CVNBot-sample.ini /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
+    - cd /srv/cvn/services/cvnbot/MyBotName
+    - nano CVNBot.ini
+      # 'botnick' and 'botpass'. See https://meta.wikimedia.org/wiki/Countervandalism_Network/Management#Bots.
+      #    e.g. botnick=CVNBot5 and botpass=(CVN-Bots2 password)
+      # 'partmsg': "https://meta.wikimedia.org/wiki/CVN"
+      # 'controlchannel': "#cvn-bots"
+      # 'feedchannel': "#cvn-..."
+      # 'broadcastchannel': "#cvn-broadcast"
+      # 'restartarg': Full in the full path to CVNBot.exe (e.g. "mono /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe")
+    - if "You're migrating data from an old bot":
+    - edit CVNBot.ini
+      - cp ../oldbot/CVNBot.ini .
+      - cp ../oldbot/Lists.sqlite .
+      - cp ../oldbot/Projects.xml .
+    - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
+    - chmod 664 *
+    - chmod 775 CVNBot.exe Lists.sqlite
+    - chmod 660 CVNBot.ini
+
+  - upgrade:
+    - ssh cvn-appX.eqiad.wmflabs
+    - cd /srv/cvn/git/CVNBot
+    # Use latest code and clear out any previous build artefacts
+    - 'git remote update && git --hard origin/master && git clean -dffx'
+    - xbuild src/CVNBot.sln /p:Configuration=Release
+    # Take care to NOT update files like CVNBot.ini, Lists.sqlite, or Projects.xml.
+    # Those belong to the specific bot instance to maintain its state and configuration
+    # Replace: CVNBot.exe, CVNBot.exe.config, and any *.dll files.
+    # Also, check if the bot's Console.msgs file (interface messages) is a symlink or
+    # a regular file. If a regular file, replace it with the latest one.
+    # If a symlink, then it is a translation from countervandalism/infrastructure.git which
+    # should remain as-is.
+    - stillalive.quit-a-bot
+    - mv src/CVNBot/bin/Release/CVNBot.exe /srv/cvn/services/cvnbot/MyBotName
+    # Move CVNBot.exe group ownership for stillalive
+    - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
+    - stillalive.force-run
+    - CVNBot.monitor
+
+  - check-chmod:
+    # To easily quick the permissions of files in a directory
+    # in a way that matches the parameters passed to chmod, use stat:
+    - stat -c '%a %n' *
+    # Produces:
+    #  775 CVNBot.exe
+    #  664 CVNBot.exe.config
+    #  660 CVNBot.ini
+    #  664 Console.msgs
+    #  775 Lists.sqlite
+    #  664 Projects.xml
+
+  - monitor:
+    - ssh cvn-appX.eqiad.wmflabs
+    # Open a log of recent logs from all CVNBot instances, updating in real time:
+    - sudo tail -n100 -f /var/log/syslog | grep CVNBot.exe
+    # Find recent warnings and errors from any CVNBot:
+    - sudo tail -n1000 -f /var/log/syslog | grep CVNBot.exe | grep -v ': INFO '
+    # Find errors from any CVNBot:
+    - sudo tail -n+0 -f /var/log/syslog | grep CVNBot | grep -E ': (ERROR|FATAL) '
+    # Find errors from any CVNBot (including yesterday):
+    - sudo tail -n+0 -f /var/log/syslog{.1,} | grep CVNBot | grep -E ': (ERROR|FATAL) '
+    # Show last 10 log messages grouped by bot
+    - for dir in `ls -d /srv/cvn/services/cvnbot/* | sort -V`; do name=$(basename "$dir"); echo; echo "# $name"; (sudo cat /var/log/syslog | grep $name | tail -n10); done;
+    - alias cvnlog='for dir in `ls -d /srv/cvn/services/cvnbot/* | sort -V`; do name=$(basename "$dir"); echo; echo "# $name"; (sudo cat /var/log/syslog | grep $name | tail -n10); done;'
+    - cvnlog
+
+  - test:
+    # Run test on a cvn-app server because cvn-dev is subject to general
+    # IP connection limit of all of wmflabs (cvn-app servers have a dedicated IP)
+    - ssh cvn-appX.eqiad.wmflabs
+    - cd /srv/cvn/services/cvnbot/MyBotName
+    - mono CVNBot.exe
+    - assert "Bot MyBotName has joined #cvn-... channel and works as expected"
+    - do "Any additional setup if you need to (e.g. load or drop more wikis in memory)"
+    - do "kill the process from the command line (it was started from your shell so Ctrl^C will do)"
