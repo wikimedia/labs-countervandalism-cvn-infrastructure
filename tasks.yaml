@@ -87,6 +87,14 @@ tasks CVNBot:
     - chmod 775 CVNBot.exe Lists.sqlite
     - chmod 660 CVNBot.ini
 
+  - run-db-query:
+    - ssh cvn-appX.eqiad.wmflabs
+    - cd /srv/cvn/services/cvnbot/MyBotName
+    # The following command opens an interactive REPL.
+    # For the schema, see https://github.com/countervandalism/CVNBot/blob/v1.21.0/src/CVNBot/ListManager.cs#L51-L57
+    - sqlite3 Lists.sqlite
+    
+
   - upgrade:
     - ssh cvn-appX.eqiad.wmflabs
     - cd /srv/cvn/git/CVNBot
