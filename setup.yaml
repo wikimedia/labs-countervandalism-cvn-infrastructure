@@ -130,8 +130,19 @@ service www:
     sudo apachectl graceful
 
 service CVNBot:
-  - packages:
-    - mono-complete
+  # Wikimedia Foundation projects require TLS 1.2 which
+  # Mono 4.6 (Debian 9 Stretch default) does not support.
+  # https://github.com/countervandalism/CVNBot/issues/46
+  # Install latest Mono (5.16) from Mono's official repository instead.
+  - packages: |
+    # https://www.mono-project.com/download/stable/#download-lin-debian
+    sudo apt install apt-transport-https dirmngr
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+    echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+    sudo apt update
+    # Packages we need
+    sudo apt-get install mono-complete
+    sudo apt-get install ca-certificates-mono
   - setup: |
     #
     ## Add repos
