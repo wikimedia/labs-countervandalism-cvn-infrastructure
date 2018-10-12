@@ -145,9 +145,11 @@ service CVNBot:
     #
     # http://stackoverflow.com/a/11451213/319266
     # http://www.mono-project.com/docs/faq/security/
+    # https://github.com/duplicati/duplicati/wiki/SSL-TLS-support-in-Mono#generic-debian--ubuntu
     #
     sudo -iu cvn.cvnservice mozroots --import --sync
     sudo mozroots --import --ask-remove --sync
+    sudo cert-sync /etc/ssl/certs/ca-certificates.crt
 
 service CVNClerkBot:
   # https://github.com/countervandalism/CVNClerkBot
