@@ -57,19 +57,17 @@ tasks stillalive:
 # https://github.com/countervandalism/CVNBot
 tasks CVNBot:
   - install:
-    - 'https://github.com/countervandalism/CVNBot#build'
-    - 'https://github.com/countervandalism/CVNBot/wiki/Documentation#installation'
+    - 'https://github.com/countervandalism/CVNBot/blob/master/docs/install.md'
 
   - install:
     - ssh cvn-appX.eqiad.wmflabs
     - cd /srv/cvn/git/CVNBot
-    # Use latest code and clear out any previous build artefacts
+    # Fetch the latest code from GitHub and remove any local modifications or build artefacts
     - 'git remote update && git reset --hard origin/master && git clean -dffx'
-    - xbuild src/CVNBot.sln /p:Configuration=Release
-    - mv src/CVNBot/bin/Release /srv/cvn/services/cvnbot/MyBotName
-    - cp src/CVNBot-sample.ini /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
-    - cd /srv/cvn/services/cvnbot/MyBotName
-    - nano CVNBot.ini
+    - do 'Follow https://github.com/countervandalism/CVNBot/blob/master/docs/install.md#installation'
+      - Compile with msbuild in Release mode.
+      - Move the generates files to /srv/cvn/services/cvnbot/MyBotName
+      - edit CVNBot.ini
       # 'botnick' and 'botpass'. See https://meta.wikimedia.org/wiki/Countervandalism_Network/Management#Bots.
       #    e.g. botnick=CVNBot5 and botpass=(CVN-Bots2 password)
       # 'partmsg': "https://meta.wikimedia.org/wiki/CVN"
@@ -77,15 +75,11 @@ tasks CVNBot:
       # 'feedchannel': "#cvn-..."
       # 'broadcastchannel': "#cvn-broadcast"
       # 'restartarg': Full in the full path to CVNBot.exe (e.g. "mono /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe")
-    - if "You're migrating data from an old bot":
-    - edit CVNBot.ini
-      - cp ../oldbot/CVNBot.ini .
-      - cp ../oldbot/Lists.sqlite .
-      - cp ../oldbot/Projects.xml .
-    - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
-    - chmod 664 *
-    - chmod 775 CVNBot.exe Lists.sqlite
-    - chmod 660 CVNBot.ini
+      - if "You're migrating data from an old bot":
+        - cp ../oldbot/CVNBot.ini .
+        - cp ../oldbot/Lists.sqlite .
+        - cp ../oldbot/Projects.xml .
+      - do 'Set permissions and group ownership correctly (see CVNBot:/docs/install.md)'
 
   - run-db-query:
     - ssh cvn-appX.eqiad.wmflabs
@@ -98,21 +92,19 @@ tasks CVNBot:
   - upgrade:
     - ssh cvn-appX.eqiad.wmflabs
     - cd /srv/cvn/git/CVNBot
-    # Use latest code and clear out any previous build artefacts
+    # Fetch the latest code from GitHub and remove any local modifications or build artefacts
     - 'git remote update && git --hard origin/master && git clean -dffx'
-    - xbuild src/CVNBot.sln /p:Configuration=Release
-    # Take care to NOT update files like CVNBot.ini, Lists.sqlite, or Projects.xml.
-    # Those belong to the specific bot instance to maintain its state and configuration
-    # Replace: CVNBot.exe, CVNBot.exe.config, and any *.dll files.
-    # Also, check if the bot's Console.msgs file (interface messages) is a symlink or
-    # a regular file. If a regular file, replace it with the latest one.
-    # If a symlink, then it is a translation from countervandalism/infrastructure.git which
-    # should remain as-is.
-    - stillalive.quit-a-bot
-    - mv src/CVNBot/bin/Release/CVNBot.exe /srv/cvn/services/cvnbot/MyBotName
-    # Move CVNBot.exe group ownership for stillalive
-    - chgrp cvn.cvnservice -R /srv/cvn/services/cvnbot/MyBotName
-    - stillalive.force-run
+    - do 'Follow https://github.com/countervandalism/CVNBot/blob/master/docs/install.md#Upgrade'
+      - Compile with msbuild in Release mode.
+      - You MUST delete the newly generated 'CVNBot.ini' and 'Projects.xml' files.
+      - Quit the bot on IRC (or manually via 'ps' and 'kill' if the bot is unresponsive).
+      - Run:
+        - cp src/CVNBot/bin/Release/* /srv/cvn/services/cvnbot/MyBotName/
+        - chgrp cvn.cvnservice /srv/cvn/services/cvnbot/MyBotName/*
+        - chmod 664 /srv/cvn/services/cvnbot/MyBotName/*
+        - chmod 660 /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
+        - chmod 775 /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe
+        - sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname)
     - CVNBot.monitor
 
   - check-chmod:
