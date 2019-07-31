@@ -105,6 +105,12 @@ tasks CVNBot:
         - chmod 660 /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
         - chmod 775 /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe
         - sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname)
+        # Advanced version of the above:
+        # $ msbuild …
+        # $ cvnupgrade() { BOT=$1; test -n "$BOT" && rm -f /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/CVNBot.ini /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/Projects.xml && cp /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/* "/srv/cvn/services/cvnbot/$BOT/" && chgrp cvn.cvnservice "/srv/cvn/services/cvnbot/$BOT/"* && chmod 660 "/srv/cvn/services/cvnbot/$BOT/CVNBot.ini" && chmod 775 "/srv/cvn/services/cvnbot/$BOT/CVNBot.exe" && sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname); }
+        # on IRC: Botname quit -or- kill process id
+        # $ cvnupgrade "Botname"
+        
     - CVNBot.monitor
 
   - check-chmod:
