@@ -632,7 +632,7 @@
 				.data('cvn-sw-nr', i)
 				.prop({
 					id: 'cvn-sw' + i + '-list',
-					placeholder: 'Enter wiki list...',
+					placeholder: 'Enter wiki list...\n\n… <CVNBot#> Currently monitoring: foo.ex\n… <CVNBot#> ample, bar.example',
 					rows: 4
 				})
 				.on('input', validateSwField);
