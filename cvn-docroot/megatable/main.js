@@ -501,6 +501,10 @@
 					nick = '(Bot_' + i + ')';
 				}
 				channelsByBot[nick] = channels;
+				if (channels.length) {
+					// Show normalised input back to the user
+					elements.swLists[i].val(channels.join(' '));
+				}
 			}
 
 			APP.ui.save(channelsByBot);
