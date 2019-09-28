@@ -221,7 +221,7 @@
 		return $.Deferred().resolve([
 				'meta.wikimedia',
 				'mediawiki.wikipedia',
-				'species.wikipedia',
+				'species.wikimedia',
 				'incubator.wikimedia'
 		]);
 	};
