@@ -216,8 +216,8 @@
 	 * @promise {Array} channels
 	 */
 	APP.getIncludedChannels = function () {
-		// These channels are excluded by the main factors, but #cvn-sw wants to
-		// keep these eventhough they are slightly large or have their own channel
+		// These channels overrride the normal definition of "small",
+		// but #cvn-sw wants to keep these eventhough they are not "small".
 		return $.Deferred().resolve([
 				'meta.wikimedia',
 				'mediawiki.wikipedia',
@@ -339,9 +339,8 @@
 				}
 				return channel;
 			});
-			// Add the list of wikis we intentionally monitor both within SWMT
-			// and elsewhere in the CVN, to good channels. This means they won't
-			// be suggested for removal, even if they are "bad" (eg. too large)
+			// Add the list of wikis we intentionally monitor within SWMT
+			// regardless of whether they are are "bad" (eg. too large)
 			includedChannels.forEach(function (channel) {
 				if (goodChannels.indexOf(channel) === -1) {
 					goodChannels.push(channel);
@@ -374,10 +373,6 @@
 							});
 						}
 						redundant.push({ channel: channel, reason: reason });
-					} else if (excludedChannels.indexOf(channel) !== -1 && includedChannels.indexOf(channel) === -1) {
-						// This is a good wiki for SWMT, but already monitored elsewhere,
-						// and not intentionally monitored twice.
-						redundant.push({ channel: channel, reason: 'non-swmt' });
 					}
 				});
 
