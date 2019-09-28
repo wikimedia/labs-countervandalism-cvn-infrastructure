@@ -404,11 +404,20 @@
 	};
 
 	APP.ui.save = function (channelsByBot) {
-		localStorage.setItem('cvnMegaTableInput', JSON.stringify(channelsByBot));
+		try {
+			localStorage.setItem('cvnMegaTableInput', JSON.stringify(channelsByBot));
+		} catch (e) {
+			// Storage may be full or disabled. Ignore.
+		}
 	};
 
 	APP.ui.load = function (elements) {
-		var data = localStorage.getItem('cvnMegaTableInput');
+		var data;
+		try {
+			data = localStorage.getItem('cvnMegaTableInput');
+		} catch (e) {
+			// Storage may be disabled, e.g. private mode. Ignore.
+		}
 		if (!data) {
 			return;
 		}
