@@ -93,7 +93,7 @@ tasks CVNBot:
     - ssh cvn-appX.eqiad.wmflabs
     - cd /srv/cvn/git/CVNBot
     # Fetch the latest code from GitHub and remove any local modifications or build artefacts
-    - 'git remote update && git --hard origin/master && git clean -dffx'
+    - 'git remote update && git reset --hard origin/master && git clean -dffx'
     - do 'Follow https://github.com/countervandalism/CVNBot/blob/master/docs/install.md#Upgrade'
       - Compile with msbuild in Release mode.
       - You MUST delete the newly generated 'CVNBot.ini' and 'Projects.xml' files.
