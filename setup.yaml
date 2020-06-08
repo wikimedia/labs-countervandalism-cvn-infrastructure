@@ -130,10 +130,13 @@ service www:
     sudo apachectl graceful
 
 service CVNBot:
-  # Wikimedia Foundation projects require TLS 1.2 which
-  # Mono 4.6 (Debian 9 Stretch default) does not support.
-  # https://github.com/countervandalism/CVNBot/issues/46
-  # Install latest Mono (5.16) from Mono's official repository instead.
+  # - Wikimedia Foundation projects require TLS 1.2 which
+  #   Mono 4.6 (Debian 9 Stretch default) does not support.
+  #   https://github.com/countervandalism/CVNBot/issues/46
+  # - Using .NET Framework 4.7.2 requires Mono 5.18+
+  #   https://github.com/countervandalism/CVNBot/issues/13
+  #
+  # The below installs latest Mono (6.8.0) from Mono's apt source for Debian Stretch.
   - packages: |
     # https://www.mono-project.com/download/stable/#download-lin-debian
     sudo apt install apt-transport-https dirmngr
