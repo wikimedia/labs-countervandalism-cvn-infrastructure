@@ -98,18 +98,25 @@ tasks CVNBot:
       - Compile with msbuild in Release mode.
       - You MUST delete the newly generated 'CVNBot.ini' and 'Projects.xml' files.
       - Quit the bot on IRC (or manually via 'ps' and 'kill' if the bot is unresponsive).
-      - Run:
-        - cp src/CVNBot/bin/Release/* /srv/cvn/services/cvnbot/MyBotName/
-        - chgrp cvn.cvnservice /srv/cvn/services/cvnbot/MyBotName/*
-        - chmod 664 /srv/cvn/services/cvnbot/MyBotName/*
-        - chmod 660 /srv/cvn/services/cvnbot/MyBotName/CVNBot.ini
-        - chmod 775 /srv/cvn/services/cvnbot/MyBotName/CVNBot.exe
-        - sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname)
-        # Advanced version of the above:
-        # $ msbuild …
-        # $ cvnupgrade() { BOT=$1; test -n "$BOT" && rm -f /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/CVNBot.ini /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/Projects.xml && cp /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/* "/srv/cvn/services/cvnbot/$BOT/" && chgrp cvn.cvnservice "/srv/cvn/services/cvnbot/$BOT/"* && chmod 660 "/srv/cvn/services/cvnbot/$BOT/CVNBot.ini" && chmod 775 "/srv/cvn/services/cvnbot/$BOT/CVNBot.exe" && sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname); }
-        # on IRC: Botname quit -or- kill process id
-        # $ cvnupgrade "Botname"
+      # $ msbuild …
+      # Usage:
+      # 1. Run 'msbuild …'
+      # 2. Copy 'cvnupgrade() {}' from below.
+      # 3. Run 'cvnupgrade MyCVNBOT1'
+      - bash: |
+        cvnupgrade() {
+          BOT=$1; BOTDIR="/srv/cvn/services/cvnbot/$BOT";
+          test -n "$BOT" && \
+          # Reset ownership and group with sudo (before copy)
+          sudo chown "$USER" "$BOTDIR/" "$BOTDIR/"* && \
+          sudo chgrp cvn.cvnservice "$BOTDIR/" "$BOTDIR/"* && \
+          rm -f /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/CVNBot.ini /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/Projects.xml && \
+          cp /srv/cvn/git/CVNBot/src/CVNBot/bin/Release/* "$BOTDIR/" && \
+          chgrp cvn.cvnservice "$BOTDIR/"* && \
+          chmod 660 "$BOTDIR/CVNBot.ini" && \
+          chmod 775 "$BOTDIR/CVNBot.exe" && \
+          sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname);
+        }
         
     - CVNBot.monitor
 
