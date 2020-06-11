@@ -143,8 +143,7 @@ tasks CVNBot:
     # Find errors from any CVNBot (including yesterday):
     - sudo tail -n+0 -f /var/log/syslog{.1,} | grep CVNBot | grep -E ': (ERROR|FATAL) '
     # Show last 10 log messages grouped by bot
-    - for dir in `ls -d /srv/cvn/services/cvnbot/* | sort -V`; do name=$(basename "$dir"); echo; echo "# $name"; (sudo cat /var/log/syslog | grep $name | tail -n10); done;
-    - alias cvnlog='for dir in `ls -d /srv/cvn/services/cvnbot/* | sort -V`; do name=$(basename "$dir"); echo; echo "# $name"; (sudo cat /var/log/syslog | grep $name | tail -n10); done;'
+    - alias cvnlog='for dir in `ls -d /srv/cvn/services/cvnbot/* | sort -V`; do name=$(basename "$dir"); echo; echo "# $name"; (sudo cat /var/log/syslog | grep -F "[$name]" | tail -n10); done;'
     - cvnlog
 
   - test:
