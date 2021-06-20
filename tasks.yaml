@@ -17,7 +17,7 @@ tasks stillalive:
     # to deploy it on our cluster in wmflabs:
     - ssh cvn-appX.cvn.eqiad.wmflabs
     - cd /srv/cvn/git/stillalive
-    - git pull origin master
+    - git pull
 
   # Set up a new bot
   - add:
@@ -25,7 +25,7 @@ tasks stillalive:
     - do 'Add a new task for MyBotName' to 'localSettings-cvn.yaml' in github:countervandalism/stillalive.git
         # Either with a text editor on your local computer and push with Git,
         # or, use the online editor:
-        # https://github.com/countervandalism/stillalive/edit/master/localSettings-cvn.yaml
+        # https://github.com/countervandalism/stillalive/edit/HEAD/localSettings-cvn.yaml
     - deploy-a-change
     - force-run
 
@@ -57,14 +57,14 @@ tasks stillalive:
 # https://github.com/countervandalism/CVNBot
 tasks CVNBot:
   - install:
-    - 'https://github.com/countervandalism/CVNBot/blob/master/docs/install.md'
+    - 'https://github.com/countervandalism/CVNBot/blob/main/docs/install.md'
 
   - install:
     - ssh cvn-appX.eqiad.wmflabs
     - cd /srv/cvn/git/CVNBot
     # Fetch the latest code from GitHub and remove any local modifications or build artefacts
-    - 'git remote update && git reset --hard origin/master && git clean -dffx'
-    - do 'Follow https://github.com/countervandalism/CVNBot/blob/master/docs/install.md#installation'
+    - 'git remote update && git reset --hard origin/main && git clean -dffx'
+    - do 'Follow https://github.com/countervandalism/CVNBot/blob/main/docs/install.md#installation'
       - Compile with msbuild in Release mode.
       - Move the generates files to /srv/cvn/services/cvnbot/MyBotName
       - edit CVNBot.ini
