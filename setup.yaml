@@ -13,11 +13,17 @@ global @once:
 
 node @each:
   Horizon:
-    - project: cvn
-    - source: latest Debian
-    - flavour: # when in doubt, match flavour of previous instance
-        [type=webserver]: 2 cores, 4 GB RAM
+    project: cvn
+    source: latest Debian
+    flavour: # when in doubt, match previous instance
+        [type=web]: 2 cores, 4 GB RAM
         [type=appserver]: 4 cores, 8 GB RAM
+    security-groups: # when in doubt, match previous instance
+        [type=web]: default, web
+        [type=appserver]: default
+    floating-ip:
+        [type=web]: No
+        [type=appserver]: Yes
   # sudo apt-get install ..
   packages:
     - git
