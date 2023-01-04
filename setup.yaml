@@ -1,9 +1,10 @@
 global @once:
-  labsconsole:
-    - location: 'https://wikitech.wikimedia.org/wiki/Special:NovaServiceGroup'
+  Horizon:
     - project: cvn
-    - add-service-group:
-      - cvnservice (local-cvnservice; cvn.cvnservice)
+    - source: latest Debian
+    - flavour: # when in doubt, match flavour of previous instance
+        [type=webserver]: 2 cores, 4 GB RAM
+        [type=appserver]: 4 cores, 8 GB RAM
   setup: |
       ssh cvn-{name}.eqiad.wmflabs
       umask 0002
@@ -15,6 +16,12 @@ global @once:
       sudo chgrp project-cvn cvn-common/
       sudo chmod 2775 cvn-common/
       mkdir cvn-common/backup/ cvn-common/dropbox/
+      #
+      ## Ensure the shared "cvn.cvnservice" user exists.
+      ## https://phabricator.wikimedia.org/T162945#4030092
+      #
+      sudo -u cvn.cvnservice echo 1
+      # should return 1 without error
 
 node @each:
   # sudo apt-get install ..
