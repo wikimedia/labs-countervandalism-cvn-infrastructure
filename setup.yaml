@@ -1,10 +1,4 @@
 global @once:
-  Horizon:
-    - project: cvn
-    - source: latest Debian
-    - flavour: # when in doubt, match flavour of previous instance
-        [type=webserver]: 2 cores, 4 GB RAM
-        [type=appserver]: 4 cores, 8 GB RAM
   setup: |
       ssh cvn-{name}.eqiad.wmflabs
       umask 0002
@@ -16,24 +10,29 @@ global @once:
       sudo chgrp project-cvn cvn-common/
       sudo chmod 2775 cvn-common/
       mkdir cvn-common/backup/ cvn-common/dropbox/
-      #
-      ## Ensure the shared "cvn.cvnservice" user exists.
-      ## https://phabricator.wikimedia.org/T162945#4030092
-      #
-      sudo -u cvn.cvnservice echo 1
-      # should return 1 without error
 
 node @each:
+  Horizon:
+    - project: cvn
+    - source: latest Debian
+    - flavour: # when in doubt, match flavour of previous instance
+        [type=webserver]: 2 cores, 4 GB RAM
+        [type=appserver]: 4 cores, 8 GB RAM
   # sudo apt-get install ..
-  - packages:
+  packages:
     - git
     - nano
     - vim
   # Remember:
   # * /data/project is an NFS mount shared between all servers.
   # * /srv is local to the individual server.
-  - setup: |
+  setup: |
       $ ssh cvn-X.cvn.eqiad.wmflabs
+      #
+      ## Ensure the shared "cvn.cvnservice" user exists. https://phabricator.wikimedia.org/T162945#4030092
+      ## The below should return 1 without error.
+      #
+      sudo -u cvn.cvnservice echo 1
       #
       ## Create local directory structure
       #
