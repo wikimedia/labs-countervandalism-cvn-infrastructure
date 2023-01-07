@@ -148,12 +148,13 @@ service CVNBot:
   # - Using .NET Framework 4.7.2 requires Mono 5.18+
   #   https://github.com/countervandalism/CVNBot/issues/13
   #
-  # The below installs latest Mono (6.8.0) from Mono's apt source for Debian Stretch.
+  # The below installs latest Mono (6.12.0) from Mono's apt source for Debian Buster.
+  # Upstream doesn't package for Debian Bullseye, but the Buster package should work fine.
   - packages: |
     # https://www.mono-project.com/download/stable/#download-lin-debian
     sudo apt install apt-transport-https dirmngr
     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-    echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+    echo "deb https://download.mono-project.com/repo/debian stable-buster main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
     sudo apt-get update
     # Packages we need
     sudo apt-get install -y mono-complete ca-certificates-mono
