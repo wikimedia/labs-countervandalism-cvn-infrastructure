@@ -169,13 +169,18 @@ service CVNBot:
     #
     ## Import SSL certificates
     #
-    # http://stackoverflow.com/a/11451213/319266
     # http://www.mono-project.com/docs/faq/security/
     # https://github.com/duplicati/duplicati/wiki/SSL-TLS-support-in-Mono#generic-debian--ubuntu
+    # https://github.com/KSP-CKAN/CKAN/wiki/SSL-certificate-errors#removing-expired-lets-encrypt-certificates
     #
-    sudo -iu cvn.cvnservice mozroots --import --sync
-    sudo mozroots --import --ask-remove --sync
+    sudo sed -i 's/^mozilla\/DST_Root_CA_X3.crt$/!mozilla\/DST_Root_CA_X3.crt/' /etc/ca-certificates.conf
+    sudo update-ca-certificates
     sudo cert-sync /etc/ssl/certs/ca-certificates.crt
+    #
+    ## Verify that HTTPS is working correctly.
+    ## You should get the HTML for enwiki's main page and not an exception.
+    #
+    csharp -e 'new System.Net.WebClient ().DownloadString ("https://en.wikipedia.org")' | head
 
 service CVNClerkBot:
   # https://github.com/countervandalism/CVNClerkBot
