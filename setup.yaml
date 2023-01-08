@@ -98,8 +98,8 @@ node cvn-app9:
 
 service stillalive:
   - packages:
-    - php7.0-cli
-    - php7.0-mbstring # used by ulrichsg/getopt-php
+    - php7.4-cli
+    - php7.4-mbstring # used by ulrichsg/getopt-php
   - setup: |
       # Add cron
       sudo ln -s /srv/cvn/git/infrastructure/crontab-config/stillalive.cron /etc/cron.d/stillalive
@@ -107,13 +107,13 @@ service stillalive:
 service www:
   - packages:
     - apache2
-    - libapache2-mod-php7.0
+    - libapache2-mod-php7.4
     - php-apcu
     - php-apcu-bc
-    - php7.0-cli
-    - php7.0-curl
-    - php7.0-mysql
-    - php7.0-sqlite3
+    - php7.4-cli
+    - php7.4-curl
+    - php7.4-mysql
+    - php7.4-sqlite3
   - setup: |
     #
     ## Add repos
@@ -132,8 +132,8 @@ service www:
     #
     ## Configure PHP
     #
-    sudo ln -s /srv/cvn/git/infrastructure/php-cvn.ini /etc/php/7.0/mods-available/cvn.ini
-    sudo ln -s /etc/php/7.0/mods-available/cvn.ini /etc/php/7.0/apache2/conf.d/50-cvn.ini
+    sudo ln -s /srv/cvn/git/infrastructure/php-cvn.ini /etc/php/7.4/mods-available/cvn.ini
+    sudo ln -s /etc/php/7.4/mods-available/cvn.ini /etc/php/7.4/apache2/conf.d/50-cvn.ini
     #
     ## Configure webserver
     #
