@@ -87,12 +87,12 @@ node [type=appserver]:
       #
       sudo ln -s /srv/cvn/git/infrastructure/bin/backup-wmflabs-node /etc/cron.hourly/cvn-backup-data
 
-node cvn-app8:
+node cvn-app10:
   - setup: |
       # Add cron
       sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-CVNBot14-publish.cron /etc/cron.d/cvndb-CVNBot14-publish
 
-node cvn-app9:
+node cvn-app12:
   - services:
     - CVNClerkBot
 
