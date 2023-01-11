@@ -38,7 +38,7 @@ node @each:
       ## Ensure the shared "cvn.cvnservice" user exists. https://phabricator.wikimedia.org/T162945#4030092
       ## The below should return 1 without error.
       #
-      sudo -u cvn.cvnservice echo 1
+      sudo -- sudo -u cvn.cvnservice echo 1
       #
       ## Create local directory structure
       #
