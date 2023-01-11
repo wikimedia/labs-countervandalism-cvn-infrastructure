@@ -185,14 +185,15 @@ service CVNBot:
 service CVNClerkBot:
   # https://github.com/countervandalism/CVNClerkBot
   - packages:
-    - python # version 2.7
-    - mysql-client
-    - mysql-server
-    - python-mysqldb
-    - python-twisted
+    - python3
+    - mariadb-client
+    - mariadb-server
+    - python3-mysqldb
+    - python3-twisted
   - prepare:
     - database:
       - shell: |
+        echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root');" | sudo mysql -u root mysql
         mysql -u root -proot -e 'CREATE DATABASE cvnclerkbot;'
   - backup:
     - database:

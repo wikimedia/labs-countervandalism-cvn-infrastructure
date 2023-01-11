@@ -1,12 +1,12 @@
 # Configuration for clerkbot
 
 # IRC server
-HOST = "irc.freenode.net"
+HOST = "irc.libera.chat"
 PORT = 6667
 
 # IRC user (used to identify with NickServ)
-nickname = "CVN-ClerkBot"
-password = "CVN-ClerkBot:***"
+nickname = "cvn-clerkbot"
+password = "cvn-clerkbot:***"
 
 # IRC initial channels to join onconnect
 channels = ["#countervandalism", "#cvn-staff", "#cvn-bots"]

@@ -50,7 +50,7 @@ tasks stillalive:
     # Manually terminate the old bot process.
     - quit-a-bot
 
-  - force-run
+  - force-run:
     - ssh cvn-appX.cvn.eqiad.wmflabs
     - `sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname)`
 
