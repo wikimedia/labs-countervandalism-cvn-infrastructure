@@ -1,5 +1,6 @@
 # Tasks related to stillalive
-# https://github.com/countervandalism/stillalive
+#
+# Browse repo: https://gerrit.wikimedia.org/g/labs/countervandalism/stillalive
 tasks stillalive:
   - quit-a-bot:
     - try:
@@ -13,7 +14,7 @@ tasks stillalive:
       - sudo kill 123
 
   - deploy-a-change:
-    # After you've made a change to the settings file in the repository on GitHub, we need
+    # After you've made a change to the settings file in the Git repository, we need
     # to deploy it on our cluster in wmflabs:
     - ssh cvn-appX.cvn.eqiad.wmflabs
     - cd /srv/cvn/git/stillalive
@@ -22,16 +23,14 @@ tasks stillalive:
   # Set up a new bot
   - add:
     - do 'Follow install and setup instructions for the new bot and have it working on the new server'
-    - do 'Add a new task for MyBotName' to 'localSettings-cvn.yaml' in github:countervandalism/stillalive.git
-        # Either with a text editor on your local computer and push with Git,
-        # or, use the online editor:
-        # https://github.com/countervandalism/stillalive/edit/HEAD/localSettings-cvn.yaml
+    - do 'Add a new task for MyBotName' to 'localSettings-cvn.yaml' in stillalive.git
+        # Edit with text editor on your local computer and push with Git
     - deploy-a-change
     - force-run
 
   # Change on which node a process is pooled
   - move:
-    - do 'Change the pool property from server PREV to NEXT for MyBotName' in 'localSettings-cvn.yaml' in github:countervandalism/stillalive.git
+    - do 'Change the pool property from server PREV to NEXT for MyBotName' in 'localSettings-cvn.yaml' in stillalive.git
     # Deploy the stillalive change to the previous server first (so that it won't restart there),
     # then kill the active bot from IRC. Then copy the bot (while not running) to the new server.
     - deploy-a-change@cvn-appX(PREVIOUS)
@@ -54,17 +53,17 @@ tasks stillalive:
     - ssh cvn-appX.cvn.eqiad.wmflabs
     - `sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname)`
 
-# https://github.com/countervandalism/CVNBot
+# Browse repo: https://gerrit.wikimedia.org/g/labs/countervandalism/CVNBot
 tasks CVNBot:
   - install:
-    - 'https://github.com/countervandalism/CVNBot/blob/main/docs/install.md'
+    - do Read https://gerrit.wikimedia.org/g/labs/countervandalism/CVNBot/+/HEAD/docs/install.md
 
   - install:
     - ssh cvn-appX.eqiad.wmflabs
     - cd /srv/cvn/git/CVNBot
-    # Fetch the latest code from GitHub and remove any local modifications or build artefacts
+    # Fetch the latest code and remove any local modifications or build artefacts
     - 'git remote update && git reset --hard origin/main && git clean -dffx'
-    - do 'Follow https://github.com/countervandalism/CVNBot/blob/main/docs/install.md#installation'
+    - do 'Follow CVNBot.git:/docs/install.md#installation'
       - Compile with msbuild in Release mode.
       - Move the generates files to /srv/cvn/services/cvnbot/MyBotName
       - edit CVNBot.ini
@@ -85,16 +84,16 @@ tasks CVNBot:
     - ssh cvn-appX.eqiad.wmflabs
     - cd /srv/cvn/services/cvnbot/MyBotName
     # The following command opens an interactive REPL.
-    # For the schema, see https://github.com/countervandalism/CVNBot/blob/v1.21.0/src/CVNBot/ListManager.cs#L51-L57
+    # For the schema, see https://gerrit.wikimedia.org/g/labs/countervandalism/CVNBot/+/v1.21.0/src/CVNBot/ListManager.cs#51
     - sqlite3 Lists.sqlite
-    
+
 
   - upgrade:
     - ssh cvn-appX.eqiad.wmflabs
     - cd /srv/cvn/git/CVNBot
-    # Fetch the latest code from GitHub and remove any local modifications or build artefacts
+    # Fetch the latest code and remove any local modifications or build artefacts
     - 'git remote update && git reset --hard origin/master && git clean -dffx'
-    - do 'Follow https://github.com/countervandalism/CVNBot/blob/master/docs/install.md#Upgrade'
+    - do 'Follow CVNBot.git:/docs/install.md#Upgrade'
       - Compile with msbuild in Release mode.
       - You MUST delete the newly generated 'CVNBot.ini' and 'Projects.xml' files.
       - Quit the bot on IRC (or manually via 'ps' and 'kill' if the bot is unresponsive).
@@ -117,7 +116,6 @@ tasks CVNBot:
           chmod 775 "$BOTDIR/CVNBot.exe" && \
           sudo /srv/cvn/git/stillalive/bin/stillalive --pool=$(hostname);
         }
-        
     - CVNBot.monitor
 
   - check-chmod:

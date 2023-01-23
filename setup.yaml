@@ -52,8 +52,8 @@ node @each:
       ## Add repos
       #
       cd /srv/cvn/git
-      git clone https://github.com/countervandalism/infrastructure.git
-      git clone https://github.com/countervandalism/stillalive.git
+      git clone https://gerrit.wikimedia.org/r/labs/countervandalism/cvn-clerkbot
+      git clone https://gerrit.wikimedia.org/r/labs/countervandalism/stillalive
       #
       ## Configure profile.d
       #
@@ -119,7 +119,7 @@ service www:
     ## Add repos
     #
     cd /srv/cvn/git
-    git clone https://github.com/countervandalism/cvn-api.git
+    git clone https://gerrit.wikimedia.org/r/labs/countervandalism/cvn-api
     #
     ## Create document root
     #
@@ -163,7 +163,7 @@ service CVNBot:
     ## Add repos
     #
     cd /srv/cvn/git
-    git clone https://github.com/countervandalism/CVNBot.git
+    git clone https://gerrit.wikimedia.org/r/labs/countervandalism/CVNBot
     cd /srv/cvn/services
     mkdir cvnbot
     #
@@ -183,7 +183,8 @@ service CVNBot:
     csharp -e 'new System.Net.WebClient ().DownloadString ("https://en.wikipedia.org")' | head
 
 service CVNClerkBot:
-  # https://github.com/countervandalism/CVNClerkBot
+  # Browse repo:
+  # https://gerrit.wikimedia.org/g/labs/countervandalism/cvn-clerkbot
   - packages:
     - python3
     - mariadb-client
@@ -208,7 +209,7 @@ service CVNClerkBot:
     ## Add repos
     #
     cd /srv/cvn/git
-    git clone https://github.com/countervandalism/CVNClerkBot.git
+    git clone https://gerrit.wikimedia.org/r/labs/countervandalism/cvn-clerkbot CVNClerkBot
     #
     ## Configure CVNClerkBot
     #

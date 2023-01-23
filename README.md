@@ -1,7 +1,6 @@
 CVN Infrastructure
 ==============
 
-
 See [CVN documentation on Meta-Wiki](https://meta.wikimedia.org/wiki/Countervandalism_Network/Infrastructure) for a high-level overview of the infrastructure.
 
 Server configuration
@@ -17,8 +16,6 @@ Legend:
 * `node @each` section: Describes the steps that apply to all instances. These are run when creating new instances, such as web servers or application servers.
 
 * `debian` steps: Install packages from the Ubuntu package repository (through `apt-get install`).
-
-* `puppet` steps: Apply puppet roles from Wikimedia's Puppet repository. See <https://github.com/wikimedia/operations-puppet>. May also contain Puppet Hiera key/values that are interpreted by the [`role::labs::instance` base class](https://github.com/wikimedia/operations-puppet/blob/production/manifests/role/labs.pp) for instances in Wikimedia Cloud.
 
 * `services` steps: Install these services by performing the steps under the relevant `service` section.
 
