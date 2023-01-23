@@ -26,4 +26,4 @@ Legend:
 MegaTable
 -------
 
-<img src="http://i.imgur.com/HbgOTGq.png" width="812">
+![](./docs/MegaTable_2014.png)
