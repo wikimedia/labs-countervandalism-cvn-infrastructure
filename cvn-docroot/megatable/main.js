@@ -118,16 +118,6 @@
 	 * @return {Promise}
 	 * @promise {Array} dbnames
 	 */
-	APP.getAllDblist = function () {
-		return $.ajax('./var/all.dblist').then(function (data) {
-			return String(data).trim().split('\n');
-		});
-	};
-
-	/**
-	 * @return {Promise}
-	 * @promise {Array} dbnames
-	 */
 	APP.getLargeDblist = function () {
 		return $.ajax('./var/large.dblist').then(function (data) {
 			return String(data).trim().split('\n');
