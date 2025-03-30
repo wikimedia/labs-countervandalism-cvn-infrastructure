@@ -3,8 +3,7 @@ CVN Infrastructure
 
 See [CVN documentation on Meta-Wiki](https://meta.wikimedia.org/wiki/Countervandalism_Network/Infrastructure) for a high-level overview of the infrastructure.
 
-Server configuration
--------
+## Server configuration
 
 Our servers run at Wikimedia Cloud in a dedicated Nova project at https://wikitech.wikimedia.org/wiki/Nova_Resource:Cvn.
 
@@ -23,7 +22,16 @@ Legend:
 
 * Any steps with differt names (e.g. `prepare`) should be ignored until and unless they are referenced by an `exec` command.
 
-MegaTable
--------
+## MegaTable
 
 ![](./docs/MegaTable_2014.png)
+
+## Website
+
+Production: https://cvn.wmcloud.org/
+
+Local development: <http://localhost:4000/
+
+```
+php -S localhost:4000 -t cvn-docroot/
+```

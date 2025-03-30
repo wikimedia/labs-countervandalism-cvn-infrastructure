@@ -25,6 +25,11 @@
 	<div class="jumbotron">
 		<h1>Countervandalism Network</h1>
 	</div>
+	<div class="panel panel-default col-sm-offset-6" hidden>
+		<div class="panel-body">
+			<strong>API status</strong>: <span id="cvn-api-status">…</span>
+		</div>
+	</div>
 	<div class="well">
 		<div class="list-group">
 			<a class="list-group-item" href="https://gerrit.wikimedia.org/g/labs/countervandalism/cvn-api" title="Database API">
@@ -54,6 +59,87 @@
 		</div>
 	</div>
 </div>
+<script type="module">
+const API_STATUS_URL = 'https://cvn.wmcloud.org/api.php?pages=Special:Blankpage';
+const API_STATUS_THRESHOLD = 30 * 60; // 30 minutes
+const API_STATUS_CLASSES = {
+	Unknown: { label: 'label-default', text: 'text-muted' },
+	Error: { label: 'label-danger', text: 'text-danger' },
+	Warning: { label: 'label-warning', text: 'text-warning' },
+	Good: { label: 'label-success', text: 'text-success' }
+};
+
+function createStatus(status, message) {
+	const node = document.createElement('span');
+	node.append(
+		Object.assign(document.createElement('span'), {
+			className: `label ${API_STATUS_CLASSES[status].label}`,
+			textContent: status
+		}),
+		' ',
+		Object.assign(document.createElement('span'), {
+			className: API_STATUS_CLASSES[status].text,
+			textContent: message
+		}),
+		' (',
+		Object.assign(document.createElement('a'), {
+			href: API_STATUS_URL,
+			textContent: 'check'
+		}),
+		')'
+	);
+	return node;
+}
+
+/**
+ * JavaScript Pretty Date
+ *
+ * Copyright 2008 John Resig
+ * Copyright 2024 Timo Tijhof
+ *
+ * @license MIT
+ * @source Based on https://github.com/jquery/testswarm/blob/v1.1.0/js/pretty.js
+ */
+function formatDuration(seconds) {
+	var days = Math.floor( seconds / 86400 );
+	return days < 2
+		&& ( seconds < 30 && 'just now'
+			|| seconds < 50 && Math.floor( seconds ) + ' seconds ago'
+				|| seconds < 120 && '1 minute ago'
+					|| seconds < 3000 && Math.floor( seconds / 60 ) + ' minutes ago'
+						|| seconds < 7200 && '1 hour ago'
+							|| Math.floor( seconds / 3600 ) + ' hours ago'
+		)
+		|| days + ' days ago';
+}
+
+async function getApiStatus() {
+	try {
+		const resp = await fetch(API_STATUS_URL);
+		if (resp.status !== 200) {
+			return createStatus('Error', `HTTP ${resp.status} ${resp.statusText}`);
+		}
+		const data = await resp.json();
+		if (!data.lastUpdate) {
+			return createStatus('Error', 'Undefined data.lastUpdate');
+		}
+		const age = Math.round((Date.now() / 1000) - data.lastUpdate);
+		if (age > API_STATUS_THRESHOLD) {
+			return createStatus('Warning', `Last update ${formatDuration(age)}`);
+		}
+		return createStatus('Good', `Last update ${formatDuration(age)}`);
+	} catch (e) {
+		return createStatus('Unknown', `Could not due to ${e}`);
+	}
+}
+
+async function renderApiStatus() {
+	const target = document.querySelector('#cvn-api-status');
+	target?.closest('[hidden')?.removeAttribute('hidden');
+	target?.replaceChildren(await getApiStatus());
+}
+renderApiStatus();
+</script>
 </body>
 </html>
 
