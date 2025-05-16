@@ -115,48 +115,46 @@
 	}
 
 	/**
-	 * @return {Promise}
-	 * @promise {Array} dbnames
+	 * @return {Promise<Array>} List of DB names
 	 */
-	APP.getLargeDblist = function () {
-		return $.ajax('./var/large.dblist').then(function (data) {
-			return String(data).trim().split('\n');
-		});
+	APP.getLargeDblist = async function () {
+		var resp = await fetch('./var/large.dblist');
+		var data = await resp.text();
+		return data.trim().split('\n');
 	};
 
 	/**
-	 * @return {Promise}
-	 * @promise {Object} channels Channel keyed by dbname
+	 * @return {Promise<Object>} Channels keyed by dbname
 	 */
-	APP.getCustomChannels = function () {
-		return $.ajax('./var/InitialiseSettings.php.txt').then(function (data) {
-			var before, after, arrayStart, arrayEnd, arrayLines, channels;
-			// Hacky PHP-parser:
-			// 'wmgRC2UDPPrefix' => array(
-			//     'default' => false,
-			//     'wikidatawiki' => "#wikidata.wikipedia\t",
-			// );
-			before = 'wmgRC2UDPPrefix\' => ';
-			after = '],';
-			arrayStart = data.indexOf(before);
-			if (arrayStart === -1) {
-				return $.Deferred().reject(new Error('wmgRC2UDPPrefix start not found'));
+	APP.getCustomChannels = async function () {
+		var resp = await fetch('./var/InitialiseSettings.php.txt');
+		var data = await resp.text();
+
+		// Hacky PHP-parser:
+		// 'wmgRC2UDPPrefix' => array(
+		//     'default' => false,
+		//     'wikidatawiki' => "#wikidata.wikipedia\t",
+		// );
+		var before = 'wmgRC2UDPPrefix\' => ';
+		var after = '],';
+		var arrayStart = data.indexOf(before);
+		if (arrayStart === -1) {
+			throw new Error('wmgRC2UDPPrefix start not found');
+		}
+		data = data.slice(arrayStart + before.length);
+		var arrayEnd = data.indexOf(after);
+		if (arrayEnd === -1) {
+			throw new Error('wmgRC2UDPPrefix end not found');
+		}
+		var arrayLines = data.slice(0, arrayEnd).trim().split('\n');
+		var channels = {};
+		for (let line of arrayLines) {
+			let matches = line.match(/\s*'([a-z0-9_]+)'\s*=>\s*"#([a-z0-9\-\.]+)\\t"/);
+			if (matches && matches[1] && matches[2]) {
+				channels[ matches[1] ] = matches[2];
 			}
-			data = data.slice(arrayStart + before.length);
-			arrayEnd = data.indexOf(after);
-			if (arrayEnd === -1) {
-				return $.Deferred().reject(new Error('wmgRC2UDPPrefix end not found'));
-			}
-			arrayLines = data.slice(0, arrayEnd).trim().split('\n');
-			channels = {};
-			arrayLines.forEach(function (line) {
-				var matches = line.match(/\s*'([a-z0-9_]+)'\s*=>\s*"#([a-z0-9\-\.]+)\\t"/);
-				if (matches && matches[1] && matches[2]) {
-					channels[ matches[1] ] = matches[2];
-				}
-			});
-			return channels;
-		});
+		}
+		return channels;
 	};
 
 	/**
