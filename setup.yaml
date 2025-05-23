@@ -52,6 +52,7 @@ node @each:
       ## Add repos
       #
       cd /srv/cvn/git
+      git clone https://gerrit.wikimedia.org/r/labs/countervandalism/cvn-infrastructure infrastructure
       git clone https://gerrit.wikimedia.org/r/labs/countervandalism/cvn-clerkbot
       git clone https://gerrit.wikimedia.org/r/labs/countervandalism/stillalive
       #
