@@ -130,15 +130,16 @@ service www:
     #
     sudo ln -s /srv/cvn/git/infrastructure/crontab-config/cvndb-pull.cron /etc/cron.d/cvndb-pull
     #
-    ## Configure PHP
+    ## Configure PHP (e.g. /etc/php/8.2)
     #
-    sudo ln -s /srv/cvn/git/infrastructure/php-cvn.ini /etc/php/7.4/mods-available/cvn.ini
-    sudo ln -s /etc/php/7.4/mods-available/cvn.ini /etc/php/7.4/apache2/conf.d/50-cvn.ini
+    export CVN_PHP_ETCDIR=$(dirname $(dirname "$(php -r 'echo php_ini_loaded_file();')"));
+    sudo ln -sf /srv/cvn/git/infrastructure/php-cvn.ini $CVN_PHP_ETCDIR/mods-available/cvn.ini
+    sudo ln -sf $CVN_PHP_ETCDIR/mods-available/cvn.ini $CVN_PHP_ETCDIR/apache2/conf.d/50-cvn.ini
     #
     ## Configure webserver
     #
-    sudo ln -s /srv/cvn/git/infrastructure/apache-config/cvn.conf /etc/apache2/sites-available/cvn.conf
-    sudo ln -s /etc/apache2/sites-available/cvn.conf /etc/apache2/sites-enabled/100-cvn.conf
+    sudo ln -sf /srv/cvn/git/infrastructure/apache-config/cvn.conf /etc/apache2/sites-available/cvn.conf
+    sudo ln -sf /etc/apache2/sites-available/cvn.conf /etc/apache2/sites-enabled/100-cvn.conf
     sudo apachectl graceful
 
 service CVNBot:
