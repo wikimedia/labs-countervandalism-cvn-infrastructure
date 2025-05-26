@@ -1,8 +1,9 @@
--- MySQL dump 10.16  Distrib 10.1.26-MariaDB, for debian-linux-gnu (x86_64)
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19  Distrib 10.5.28-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: cvnclerkbot
 -- ------------------------------------------------------
--- Server version	10.1.26-MariaDB-0+deb9u1
+-- Server version	10.5.28-MariaDB-0+deb11u2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +22,7 @@
 
 DROP TABLE IF EXISTS `channels`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `channels` (
   `ch_name` varbinary(255) NOT NULL DEFAULT '',
   UNIQUE KEY `channels_chan` (`ch_name`)
@@ -53,7 +54,6 @@ INSERT INTO `channels` VALUES ('#cvn-simplewikis');
 INSERT INTO `channels` VALUES ('#cvn-staff');
 INSERT INTO `channels` VALUES ('#cvn-sw');
 INSERT INTO `channels` VALUES ('#cvn-sw-spam');
-INSERT INTO `channels` VALUES ('#cvn-unifications');
 INSERT INTO `channels` VALUES ('#cvn-wikidata');
 INSERT INTO `channels` VALUES ('#cvn-wikivoyage');
 INSERT INTO `channels` VALUES ('#cvn-wp-da');
@@ -82,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-14 20:52:57
+-- Dump completed on 2025-05-26 19:54:46
