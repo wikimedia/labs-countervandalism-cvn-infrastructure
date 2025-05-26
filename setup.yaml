@@ -29,6 +29,7 @@ node @each:
     - git
     - nano
     - vim
+    - cron
   # Remember:
   # * /data/project is an NFS mount shared between all servers.
   # * /srv is local to the individual server.
