@@ -159,7 +159,7 @@ service CVNBot:
     echo "deb https://download.mono-project.com/repo/debian stable-buster main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
     sudo apt-get update
     # Packages we need
-    sudo apt-get install -y mono-complete ca-certificates-mono
+    sudo apt-get install -y mono-complete
   - setup: |
     #
     ## Add repos
@@ -168,16 +168,6 @@ service CVNBot:
     git clone https://gerrit.wikimedia.org/r/labs/countervandalism/CVNBot
     cd /srv/cvn/services
     mkdir cvnbot
-    #
-    ## Import SSL certificates
-    #
-    # http://www.mono-project.com/docs/faq/security/
-    # https://github.com/duplicati/duplicati/wiki/SSL-TLS-support-in-Mono#generic-debian--ubuntu
-    # https://github.com/KSP-CKAN/CKAN/wiki/SSL-certificate-errors#removing-expired-lets-encrypt-certificates
-    #
-    sudo sed -i 's/^mozilla\/DST_Root_CA_X3.crt$/!mozilla\/DST_Root_CA_X3.crt/' /etc/ca-certificates.conf
-    sudo update-ca-certificates
-    sudo cert-sync /etc/ssl/certs/ca-certificates.crt
     #
     ## Verify that HTTPS is working correctly.
     ## You should get the HTML for enwiki's main page and not an exception.
