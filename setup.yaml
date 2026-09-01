@@ -1,6 +1,6 @@
 global @once:
   setup: |
-      ssh cvn-{name}.eqiad.wmflabs
+      ssh cvn-{name}.cvn.eqiad1.wikimedia.cloud
       umask 0002
       #
       ## Prepare directory structure on on NFS
@@ -25,16 +25,12 @@ node @each:
         [type=web]: No
         [type=appserver]: Yes
   # sudo apt-get install ..
-  packages:
-    - git
-    - nano
-    - vim
-    - cron
+  packages: git nano vim cron
   # Remember:
   # * /data/project is an NFS mount shared between all servers.
   # * /srv is local to the individual server.
   setup: |
-      $ ssh cvn-X.cvn.eqiad.wmflabs
+      $ ssh cvn-X.cvn.eqiad1.wikimedia.cloud
       #
       ## Ensure the shared "cvn.cvnservice" user exists. https://phabricator.wikimedia.org/T162945#4030092
       ## The below should return 1 without error.
@@ -99,22 +95,14 @@ node cvn-app12:
     - CVNClerkBot
 
 service stillalive:
-  - packages:
-    - php-cli
-    - php-mbstring # used by ulrichsg/getopt-php
+  # php-mbstring is used by ulrichsg/getopt-php
+  - packages: php-cli php-mbstring
   - setup: |
       # Add cron
       sudo ln -s /srv/cvn/git/infrastructure/crontab-config/stillalive.cron /etc/cron.d/stillalive
 
 service www:
-  - packages:
-    - apache2
-    - libapache2-mod-php
-    - php-apcu
-    - php-cli
-    - php-curl
-    - php-mysql
-    - php-sqlite3
+  - packages: apache2 libapache2-mod-php php-apcu php-cli php-curl php-mysql php-sqlite3
   - setup: |
     #
     ## Add repos
@@ -177,12 +165,7 @@ service CVNBot:
 service CVNClerkBot:
   # Browse repo:
   # https://gerrit.wikimedia.org/g/labs/countervandalism/cvn-clerkbot
-  - packages:
-    - python3
-    - mariadb-client
-    - mariadb-server
-    - python3-mysqldb
-    - python3-twisted
+  - packages: mariadb-server mariadb-client python3 python3-mysqldb python3-twisted
   - prepare:
     - database:
       - shell: |
