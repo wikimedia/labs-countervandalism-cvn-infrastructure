@@ -4,18 +4,43 @@ Setting up a new cluster or new server inside that cluster.
 
 ## Global (once)
 
+### NFS mount layout
+
 ```sh
 ssh ANYWHERE.cvn.eqiad1.wikimedia.cloud
 umask 0002
-#
-## Prepare directory structure on on NFS
-#
 cd /data/project
 sudo mkdir cvn-common
 sudo chgrp project-cvn cvn-common/
 sudo chmod 2775 cvn-common/
 mkdir cvn-common/backup/ cvn-common/dropbox/
 ```
+
+### Network egress
+
+All WMCS instances are assigned a dedicated and publicly-routable IPv6 address by default.
+
+We rely on this, because if we used a shared egress IP we would exceed Libera Chat connection limits and get throttled or denied ([T395274](https://phabricator.wikimedia.org/T395274)).
+
+### Network ingress
+
+New connections to Libera Chat are delayed on their end by several seconds, waiting for a possible response to an identd query. If we run our own Ident server that responds immediately to such query, we avoid this delay. See also https://en.wikipedia.org/wiki/Ident_protocol and the [oidentd package](https://packages.debian.org/stable/oidentd) we use for this.
+
+For this to work, we need to allow incoming traffic to reach port 113 on our servers, especially over IPv6.
+
+NOTE: While the security group interface in Horizon shows a "Type" column, when you use the "Add rule" modal there is no such field. Instead, the syntax you use in the Remote CIDR field is what makes it an IPV4 or IPv6 rule.
+
+In Horizon > Project `cvn` > Security Rules:
+* Add rule: Custom TCP rule
+  * Direction: Ingress
+  * Description: "IRC identd"
+  * Port: 113
+  * Remote CIDR: 0.0.0.0/0
+* Add rule: Custom TCP rule
+  * Direction: Ingress
+  * Description: "IRC identd"
+  * Port: 113
+  * Remote CIDR: ::/0
 
 ## Server specification
 
@@ -137,8 +162,10 @@ sudo ln -s /srv/cvn/git/infrastructure/bin/backup-wmflabs-node /etc/cron.hourly/
 ## Packages
 #
 # * php-mbstring is required by stillalive (via ulrichsg/getopt-php)
+# * python3 is required by cvn-clerkbot and CVNBot
+# * oidentd speeds up connections to Libera Chat
 #
-sudo apt-get install -y php-cli php-mbstring
+sudo apt-get install -y php-cli php-mbstring python3 oidentd
 #
 ## Add repos
 #
