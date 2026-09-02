@@ -52,7 +52,7 @@ sudo -- sudo -u cvn.cvnservice echo 1
 #
 ## Packages
 #
-sudo apt-get -y install git nano vim cron
+sudo apt-get -y install git nano vim cron rsync
 #
 ## Create local directory structure
 #
@@ -67,7 +67,6 @@ sudo chgrp cvn.cvnservice cvn/services
 #
 cd /srv/cvn/git
 git clone https://gerrit.wikimedia.org/r/labs/countervandalism/cvn-infrastructure infrastructure
-git clone https://gerrit.wikimedia.org/r/labs/countervandalism/cvn-clerkbot
 git clone https://gerrit.wikimedia.org/r/labs/countervandalism/stillalive
 #
 ## Configure profile.d
@@ -79,7 +78,6 @@ sudo ln -s /srv/cvn/git/infrastructure/environment-config/profile-d-umask-cvn.sh
 #
 sudo ln -s /srv/cvn/git/infrastructure/bin/stillalive-disable /usr/local/bin/stillalive-disable
 sudo ln -s /srv/cvn/git/infrastructure/bin/stillalive-enable /usr/local/bin/stillalive-enable
-
 #
 ## Configure stillalive
 #
@@ -135,23 +133,19 @@ sudo apachectl graceful
 ## Back up data via hourly cron
 #
 sudo ln -s /srv/cvn/git/infrastructure/bin/backup-wmflabs-node /etc/cron.hourly/cvn-backup-data
-
 #
 ## Packages
 #
 # * php-mbstring is required by stillalive (via ulrichsg/getopt-php)
 #
 sudo apt-get install -y php-cli php-mbstring
-
 #
 ## Add repos
 #
 cd /srv/cvn/git
 git clone https://gerrit.wikimedia.org/r/labs/countervandalism/CVNBot
-
 cd /srv/cvn/services
 mkdir cvnbot
-
 #
 ## Enable stillalive cron
 #
