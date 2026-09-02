@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-cd $(dirname $0)/..
-set -ex
-curl --fail 'https://noc.wikimedia.org/conf/dblists/large.dblist' > cvn-docroot/megatable/var/large.dblist
-curl --fail 'https://noc.wikimedia.org/conf/InitialiseSettings.php.txt' > cvn-docroot/megatable/var/InitialiseSettings.php.txt

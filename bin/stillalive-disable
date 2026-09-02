@@ -1,0 +1,3 @@
+#!/bin/bash -eu
+
+sudo rm /etc/cron.d/stillalive

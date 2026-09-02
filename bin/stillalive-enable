@@ -1,0 +1,3 @@
+#!/bin/bash -eu
+
+sudo ln -s /srv/cvn/git/infrastructure/crontab-config/stillalive.cron /etc/cron.d/stillalive
